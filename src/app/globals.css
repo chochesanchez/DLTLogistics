@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 0 87 184;    /* #0057B8 */
+    --color-secondary: 0 168 120;  /* #00A878 */
+  }
+
+  body {
+    @apply antialiased text-neutral-dark dark:text-neutral-light;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 font-semibold text-white bg-primary hover:bg-primary-dark transition-colors rounded-lg;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 font-semibold text-white bg-secondary hover:bg-secondary-dark transition-colors rounded-lg;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} 
