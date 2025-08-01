@@ -1,12 +1,7 @@
 import { NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
-import twilio from 'twilio'
 
 const prisma = new PrismaClient()
-const client = twilio(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-)
 
 export async function POST(request: Request) {
   try {
@@ -31,16 +26,13 @@ export async function POST(request: Request) {
       }
     })
 
-    // Send notification via WhatsApp to admin
-    await client.messages.create({
-      body: `New contact form submission:
-Name: ${data.name}
-Company: ${data.company || 'N/A'}
-Email: ${data.email}
-Phone: ${data.phone || 'N/A'}
-Message: ${data.message}`,
-      from: `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER}`,
-      to: `whatsapp:${process.env.ADMIN_WHATSAPP_NUMBER}`
+    // Send notification via WhatsApp to admin (temporarily disabled)
+    console.log('New contact form submission:', {
+      name: data.name,
+      company: data.company || 'N/A',
+      email: data.email,
+      phone: data.phone || 'N/A',
+      message: data.message
     })
 
     // Send confirmation email (placeholder)

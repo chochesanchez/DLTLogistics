@@ -1,11 +1,8 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import { Header } from '@/components/shared/Header'
 import { Footer } from '@/components/shared/Footer'
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'DLT Logistics - Last Mile & Distribution',
@@ -20,11 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="font-poppins">
         <Header />
-        <main className="min-h-screen bg-neutral-light dark:bg-neutral-dark">
-          {children}
-        </main>
+        {children}
         <Footer />
       </body>
     </html>

@@ -1,92 +1,138 @@
-import React from 'react'
+'use client'
+
+import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRightIcon } from '@heroicons/react/24/solid'
 
 export default function Home() {
-  return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-[80vh] bg-gradient-to-r from-primary to-primary-dark text-white">
-        <div className="absolute inset-0 bg-black/40">
-          {/* Add video background here later */}
-        </div>
-        
-        <div className="relative z-10 container mx-auto px-4 h-full flex flex-col items-center justify-center text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            From Warehouse to Doorstep
-            <span className="block text-2xl md:text-4xl mt-2">Fast. Visible. Green.</span>
-          </h1>
-          
-          {/* Tracking Input */}
-          <div className="w-full max-w-2xl mt-8">
-            <form action="/track" className="flex gap-2">
-              <input 
-                type="text"
-                name="trackingCode"
-                placeholder="Enter your tracking number"
-                className="flex-1 px-6 py-4 rounded-lg text-neutral-dark"
-                required
-              />
-              <button 
-                type="submit"
-                className="btn-secondary flex items-center gap-2 px-8"
-              >
-                Track
-                <ArrowRightIcon className="w-5 h-5" />
-              </button>
-            </form>
-          </div>
+  const services = [
+    {
+      title: 'Last-Mile Delivery',
+      description: 'Same-day and next-day delivery for parcels up to 100kg.',
+      image: '/images/Cargo Firm Depo Pic.jpg'
+    },
+    {
+      title: 'Warehousing',
+      description: 'Secure, accessible, and organized storage spaces.',
+      image: '/images/Intelligent Stereoscopic Storage Frame.png'
+    },
+    {
+      title: 'Inventory Management',
+      description: 'Precise and efficient stock control.',
+      image: '/images/Logistics Management Software Guide.jpg'
+    },
+    {
+      title: 'Fulfillment',
+      description: 'Complete e-commerce fulfillment solutions.',
+      image: '/images/Best Logistics Company in India.jpg'
+    }
+  ]
 
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-            <div>
-              <div className="text-4xl font-bold">99.7%</div>
-              <div className="text-sm opacity-80">On-Time Delivery</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold">4.8/5</div>
-              <div className="text-sm opacity-80">Customer Rating</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold">9</div>
-              <div className="text-sm opacity-80">Metro Areas</div>
+  return (
+    <div className='bg-white'>
+      {/* Hero Section */}
+      <div className='relative h-[600px] overflow-hidden'>
+        <Image
+          src='/images/White Truck Scenic Highway.png'
+          alt='DLT Logistics Hero'
+          fill
+          style={{ objectFit: 'cover' }}
+          priority
+        />
+        <div className='absolute inset-0 bg-black/40' />
+        <div className='relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex items-center'>
+          <div className='text-center md:text-left'>
+            <h1 className='text-6xl font-bold text-white mb-8'>
+              From Warehouse to Doorstep
+              <br />
+              <span className='text-[#FFCC00]'>Fast. Visible. Green.</span>
+            </h1>
+            <div className='grid grid-cols-3 gap-8 mt-12'>
+              <div className='text-center'>
+                <div className='text-4xl font-bold text-[#FFCC00]'>92.9%</div>
+                <div className='mt-2 text-white'>On-Time Delivery</div>
+              </div>
+              <div className='text-center'>
+                <div className='text-4xl font-bold text-[#FFCC00]'>4.8/5</div>
+                <div className='mt-2 text-white'>Customer Rating</div>
+              </div>
+              <div className='text-center'>
+                <div className='text-4xl font-bold text-[#FFCC00]'>9</div>
+                <div className='mt-2 text-white'>Metro Areas</div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Services Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className='py-24 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+        <h2 className='text-4xl font-bold text-center mb-16'>Our Services</h2>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12'>
+          {services.map((service, index) => (
+            <Link 
+              href={service.title === 'Fulfillment' ? '/services/fulfillment' : '/services'}
+              className='block'
+              key={index}
+            >
+              <div className='bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow'>
+                <div className='relative h-48 rounded-t-lg overflow-hidden'>
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+                <div className='p-6'>
+                  <h3 className='text-xl font-bold mb-4'>{service.title}</h3>
+                  <p className='text-gray-600'>{service.description}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Partners Section */}
+      <div className='py-24 bg-gray-50'>
+        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <h2 className='text-4xl font-bold text-center mb-16'>Trusted By Industry Leaders</h2>
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-8'>
             {[
-              {
-                title: 'Last-Mile Delivery',
-                description: 'Same-day and next-day delivery for parcels up to 100kg.',
-                icon: '🚚'
-              },
-              {
-                title: 'Real-time Tracking',
-                description: 'Track your shipments with live updates and proof of delivery.',
-                icon: '📍'
-              },
-              {
-                title: 'Green Commitment',
-                description: 'Route optimization and EV pilots for sustainable delivery.',
-                icon: '🌱'
-              }
-            ].map((service, index) => (
-              <div key={index} className="p-6 rounded-xl border border-gray-200 hover:border-primary transition-colors">
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
+              { name: 'Office Depot', image: '/images/partners/officedepotlogo.png' },
+              { name: 'Rockwell', image: '/images/partners/Rockwell Automation Logo.jpg' },
+              { name: 'Sanmina', image: '/images/partners/sanminalogo.png' },
+              { name: 'Embraco', image: '/images/partners/Embraco Logo.png' }
+            ].map((partner, index) => (
+              <div key={index} className='bg-white shadow-lg rounded-lg p-6 flex items-center justify-center'>
+                <div className='relative w-full h-20'>
+                  <Image
+                    src={partner.image}
+                    alt={partner.name}
+                    fill
+                    style={{ objectFit: 'contain' }}
+                    className='partner-logo'
+                  />
+                </div>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* CTA Section */}
+      <div className='py-24 bg-[#FFCC00]'>
+        <div className='mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center'>
+          <h2 className='text-4xl font-bold mb-8'>Ready to Optimize Your Logistics?</h2>
+          <p className='text-xl mb-12'>Get in touch with our team for a customized solution.</p>
+          <Link 
+            href='/contact' 
+            className='inline-block bg-white px-8 py-4 rounded-lg text-[#FFCC00] font-bold text-lg hover:bg-gray-100 transition-colors'
+          >
+            Contact Us
+          </Link>
+        </div>
+      </div>
     </div>
   )
-} 
+}

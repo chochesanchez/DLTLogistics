@@ -9,14 +9,14 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#0057B8', // DLT blue
-          dark: '#004494',
-          light: '#3389E3',
+          DEFAULT: '#FFCC00', // DLT yellow
+          dark: '#E6B800',
+          light: '#FFD633',
         },
         secondary: {
-          DEFAULT: '#00A878', // Eco green
-          dark: '#007A56',
-          light: '#33C19A',
+          DEFAULT: '#FFFFFF', // White
+          dark: '#F2F2F2',
+          light: '#FFFFFF',
         },
         neutral: {
           light: '#F2F4F8',
@@ -24,8 +24,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Inter', 'system-ui', 'sans-serif'],
+        poppins: ['Poppins', 'system-ui', 'sans-serif'],
+        sans: ['Poppins', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

@@ -1,115 +1,208 @@
-# DLT Logistics Web Platform
+# DLT Logistics Platform
 
-The last‑mile and domestic distribution arm of the Dasza group, delivering B2B, B2C and omnichannel parcels across México's main metropolitan areas.
-
-## Features
-
-- 🚚 Real-time package tracking
-- 📱 Responsive design for all devices
-- 🌍 Multi-language support (English/Spanish)
-- 📦 Package status updates
-- 📍 Live map integration
-- 📸 Delivery confirmation with photos
-- ✍️ Digital signature capture
-- 📱 WhatsApp/SMS notifications
-- ⭐ Driver rating system
-- 📊 Admin dashboard
+## Overview
+DLT Logistics is a modern web application built for DLT Last-Mile & Distribution S.A. de C.V., providing logistics and warehousing solutions across Mexico's main metropolitan areas. The platform offers real-time tracking, warehouse management, and last-mile delivery services.
 
 ## Tech Stack
 
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- Prisma (Database ORM)
-- MongoDB
-- Google Maps API
-- Twilio (WhatsApp/SMS)
-- Socket.io (Real-time updates)
+### Frontend
+- **Framework**: Next.js 15.4.5
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Custom components with Headless UI
+- **Icons**: Heroicons
+- **Maps Integration**: Google Maps API
 
-## Prerequisites
+### Backend
+- **Database**: MongoDB with Prisma ORM
+- **API**: REST API built with Next.js API routes
+- **Real-time Updates**: Socket.IO
+- **Authentication**: Next.js built-in auth
+- **Notifications**: Twilio (WhatsApp/SMS)
 
-- Node.js 18+
-- MongoDB database
-- Google Maps API key
-- Twilio account (for WhatsApp/SMS)
+### DevOps
+- **Containerization**: Docker
+- **Version Control**: Git
+- **Development Environment**: Node.js
+
+## Core Features
+
+### 1. Package Tracking System
+- Real-time tracking with live updates
+- Interactive map visualization
+- Status history and timeline
+- Proof of delivery system
+- WhatsApp/SMS notifications
+
+### 2. Warehouse Management
+- Inventory tracking and management
+- Storage space optimization
+- Cross-dock operations
+- Break-bulk services
+- Real-time stock updates
+
+### 3. Last-Mile Delivery
+- Same-day delivery service
+- Next-day delivery options
+- Route optimization
+- EV pilot program integration
+- Driver mobile app integration
+
+### 4. E-commerce Fulfillment
+- Order processing automation
+- Inventory synchronization
+- Shipping and handling
+- Returns processing
+- Multi-channel integration
+
+## Project Structure
+
+```
+WEBPAGE/
+├── src/
+│   ├── app/                    # Next.js app router pages
+│   │   ├── api/               # API routes
+│   │   ├── auth/              # Authentication pages
+│   │   ├── contact/           # Contact page
+│   │   ├── services/          # Services pages
+│   │   ├── technology/        # Technology pages
+│   │   └── track/             # Tracking functionality
+│   ├── components/
+│   │   ├── shared/            # Shared components
+│   │   └── ui/                # UI components
+│   ├── lib/                   # Utility functions
+│   ├── styles/                # Global styles
+│   └── types/                 # TypeScript types
+├── prisma/                    # Database schema
+├── public/                    # Static assets
+└── scripts/                   # Utility scripts
+```
 
 ## Getting Started
 
+### Prerequisites
+- Node.js 18.x or higher
+- MongoDB 6.x or higher
+- Docker (optional)
+
+### Installation
+
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/chochesanchez/veloxgo.git
-   cd veloxgo
-   ```
+\`\`\`bash
+git clone [repository-url]
+cd WEBPAGE
+\`\`\`
 
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
+\`\`\`bash
+npm install
+\`\`\`
 
 3. Set up environment variables:
-   ```bash
-   cp .env.example .env
-   ```
-   Edit `.env` with your configuration.
-
-4. Initialize the database:
-   ```bash
-   npm run db:push   # Create database schema
-   npm run db:init   # Add sample data
-   ```
-
-5. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-Visit [http://localhost:3000](http://localhost:3000) to see the application.
-
-## Environment Variables
+\`\`\`bash
+cp .env.example .env
+\`\`\`
 
 Required environment variables:
-
-```env
+\`\`\`env
 # Database
 DATABASE_URL="mongodb://localhost:27017/dlt"
 
 # Google Maps
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your_google_maps_api_key"
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your_key"
 
-# Twilio (WhatsApp/SMS)
-TWILIO_ACCOUNT_SID="your_twilio_account_sid"
-TWILIO_AUTH_TOKEN="your_twilio_auth_token"
+# Twilio
+TWILIO_ACCOUNT_SID="your_sid"
+TWILIO_AUTH_TOKEN="your_token"
 TWILIO_PHONE_NUMBER="+1234567890"
 TWILIO_WHATSAPP_NUMBER="+1234567890"
 
 # App Configuration
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 NEXT_PUBLIC_APP_NAME="DLT Logistics"
-```
+\`\`\`
 
-## Project Structure
+4. Configure MongoDB:
+\`\`\`bash
+# Start MongoDB as a replica set
+mongod --config mongod.conf
 
-```
-dlt-webpage/
-├── src/
-│   ├── app/                 # Next.js app directory
-│   │   ├── (auth)/         # Authentication routes
-│   │   ├── (main)/         # Main application routes
-│   │   ├── api/            # API routes
-│   │   └── layout.tsx      # Root layout
-│   ├── components/         # Reusable components
-│   │   ├── ui/            # UI components
-│   │   └── shared/        # Shared components
-│   ├── lib/               # Utility functions
-│   ├── styles/            # Global styles
-│   └── types/             # TypeScript types
-├── public/                # Static files
-│   ├── images/           # Image assets
-│   └── fonts/            # Font files
-├── prisma/               # Database schema
-├── tests/                # Test files
-└── package.json          # Dependencies
-```
+# Initialize the replica set
+mongosh --eval "rs.initiate()"
+\`\`\`
+
+5. Initialize the database:
+\`\`\`bash
+npm run db:push
+npm run db:init
+\`\`\`
+
+6. Start the development server:
+\`\`\`bash
+npm run dev
+\`\`\`
+
+### Docker Setup
+
+1. Build and start containers:
+\`\`\`bash
+docker-compose up --build
+\`\`\`
+
+## API Documentation
+
+### Track Package
+\`\`\`typescript
+GET /api/track/[code]
+Response: {
+  status: string;
+  estimatedDelivery: string;
+  currentLocation: {
+    lat: number;
+    lng: number;
+  };
+  statusHistory: Array<{
+    status: string;
+    timestamp: string;
+    location: string;
+  }>;
+}
+\`\`\`
+
+### Contact Form
+\`\`\`typescript
+POST /api/contact
+Body: {
+  name: string;
+  email: string;
+  message: string;
+  company?: string;
+}
+\`\`\`
+
+## Database Schema
+
+### Package
+- trackingNumber (unique)
+- status
+- currentLocation
+- estimatedDelivery
+- statusHistory
+- deliveryDetails
+
+### Courier
+- email (unique)
+- name
+- phone
+- currentLocation
+- activeDeliveries
+
+### Contact
+- name
+- email
+- message
+- company
+- createdAt
 
 ## Available Scripts
 
@@ -118,22 +211,43 @@ dlt-webpage/
 - `npm start` - Start production server
 - `npm run lint` - Run ESLint
 - `npm test` - Run tests
-- `npm run db:push` - Push database schema changes
-- `npm run db:init` - Initialize database with sample data
+- `npm run db:push` - Push database schema
+- `npm run db:init` - Initialize database
+
+## Deployment
+
+### Production Build
+\`\`\`bash
+npm run build
+npm start
+\`\`\`
+
+### Docker Production
+\`\`\`bash
+docker-compose -f docker-compose.prod.yml up -d
+\`\`\`
+
+## Testing
+
+Run tests:
+\`\`\`bash
+npm test
+\`\`\`
 
 ## Contributing
 
-1. Create a feature branch
-2. Commit changes
-3. Push to the branch
-4. Create a Pull Request
+1. Fork the repository
+2. Create a feature branch
+3. Commit changes
+4. Push to the branch
+5. Create a Pull Request
 
 ## License
 
-Private - All rights reserved
+© 2025 DLT Last-Mile & Distribution S.A. de C.V. All rights reserved.
 
 ## Contact
 
-For any inquiries, please contact:
-- Email: info@dlt.mx
-- Phone: +52 (81) 8368 2483 ext. 400 
+- **Head Office**: Shared campus with Dasza CEDIS – Apodaca, N.L.
+- **Phone**: +52 (81) 8368 2483 ext. 400
+- **Email**: info@dlt.mx 
