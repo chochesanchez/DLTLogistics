@@ -97,12 +97,16 @@ export default function Home() {
       <div className='py-24 bg-gray-50'>
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <h2 className='text-4xl font-bold text-center mb-16'>Trusted By Industry Leaders</h2>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-8'>
+          <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8'>
             {[
               { name: 'Office Depot', image: '/images/partners/Office Depot Logo.webp' },
               { name: 'Rockwell', image: '/images/partners/Rockwell Automation Logo.jpg' },
               { name: 'Sanmina', image: '/images/partners/sanminalogo.png' },
-              { name: 'Embraco', image: '/images/partners/Embraco Logo.png' }
+              { name: 'Embraco', image: '/images/partners/Embraco Logo.png' },
+              { name: 'Celestica', image: '/images/partners/Celestica Logo.png' },
+              { name: 'Soriana', image: '/images/partners/Soriana Logo.webp' },
+              { name: 'Walmart', image: '/images/partners/Walmart Logo 2008.png' },
+              { name: 'BBVA', image: '/images/partners/bbvalogo.png' }
             ].map((partner, index) => (
               <div key={index} className='bg-white shadow-lg rounded-lg p-6 flex items-center justify-center'>
                 <div className='relative w-full h-20'>
