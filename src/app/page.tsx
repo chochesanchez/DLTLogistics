@@ -99,7 +99,7 @@ export default function Home() {
           <h2 className='text-4xl font-bold text-center mb-16'>Trusted By Industry Leaders</h2>
           <div className='grid grid-cols-2 md:grid-cols-4 gap-8'>
             {[
-              { name: 'Office Depot', image: '/images/partners/officedepotlogo.png' },
+              { name: 'Office Depot', image: '/images/partners/Office Depot Logo.webp' },
               { name: 'Rockwell', image: '/images/partners/Rockwell Automation Logo.jpg' },
               { name: 'Sanmina', image: '/images/partners/sanminalogo.png' },
               { name: 'Embraco', image: '/images/partners/Embraco Logo.png' }
