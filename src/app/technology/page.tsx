@@ -151,7 +151,7 @@ export default function TechnologyPage() {
         {/* Stats Section */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">99.9%</div>
+            <div className="text-4xl font-bold text-primary mb-2">98.9%</div>
             <div className="text-gray-600">Platform Uptime</div>
           </div>
           <div className="text-center">

@@ -20,7 +20,7 @@ export default function FulfillmentPage() {
           <div className="max-w-3xl">
             <h1 className="text-4xl font-bold mb-6 text-white">Fulfillment Services</h1>
             <p className="text-lg text-gray-200">
-              At DLT Logistics, we understand that the success of your business depends on an agile, accurate, and customer-centric supply chain. That's why we offer comprehensive fulfillment solutions designed specifically for entrepreneurs, online stores, and e-commerce brands looking to scale their operations without logistical complications.
+              At DLT Logistics, we understand that the success of your business depends on an agile, accurate, and customer-centric supply chain. That&apos;s why we offer comprehensive fulfillment solutions designed specifically for entrepreneurs, online stores, and e-commerce brands looking to scale their operations without logistical complications.
             </p>
           </div>
         </div>

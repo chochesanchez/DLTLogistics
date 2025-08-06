@@ -3,11 +3,19 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { MagnifyingGlassIcon, GlobeAltIcon } from '@heroicons/react/24/outline'
 
 export function Header() {
   const router = useRouter()
   const [trackingNumber, setTrackingNumber] = useState('')
+  const [language, setLanguage] = useState('EN')
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false)
+
+  const languages = [
+    { code: 'EN', label: 'English' },
+    { code: 'ES', label: 'Español' },
+    { code: 'KO', label: '한국어' }
+  ]
 
   const handleTrackSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -46,7 +54,44 @@ export function Header() {
             >
               Contact
             </Link>
+            <Link 
+              href="/quote"
+              className="text-gray-600 hover:text-primary transition-colors"
+            >
+              Get Quote
+            </Link>
           </nav>
+
+          {/* Language Selector */}
+          <div className="relative">
+            <button
+              onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+              className="flex items-center gap-1 text-gray-600 hover:text-primary transition-colors"
+            >
+              <GlobeAltIcon className="h-5 w-5" />
+              <span>{language}</span>
+            </button>
+            
+            {showLanguageMenu && (
+              <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div className="py-1" role="menu" aria-orientation="vertical">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setLanguage(lang.code)
+                        setShowLanguageMenu(false)
+                      }}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      role="menuitem"
+                    >
+                      {lang.label} ({lang.code})
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Tracking Search */}
           <form onSubmit={handleTrackSubmit} className="hidden md:flex items-center">

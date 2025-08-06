@@ -10,7 +10,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">DLT Logistics</h3>
             <p className="text-gray-600 text-sm">
-              The last‑mile and domestic distribution arm of the Dasza group, delivering B2B, B2C and omnichannel parcels across México's main metropolitan areas.
+              The last‑mile and domestic distribution arm of the Dasza group, delivering B2B, B2C and omnichannel parcels across México&apos;s main metropolitan areas.
             </p>
           </div>
 

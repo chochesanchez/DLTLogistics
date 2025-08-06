@@ -48,7 +48,7 @@ export default function Home() {
             </h1>
             <div className='grid grid-cols-3 gap-8 mt-12'>
               <div className='text-center'>
-                <div className='text-4xl font-bold text-[#FFCC00]'>92.9%</div>
+                <div className='text-4xl font-bold text-[#FFCC00]'>97.9%</div>
                 <div className='mt-2 text-white'>On-Time Delivery</div>
               </div>
               <div className='text-center'>
@@ -67,25 +67,26 @@ export default function Home() {
       {/* Services Section */}
       <div className='py-24 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <h2 className='text-4xl font-bold text-center mb-16'>Our Services</h2>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
           {services.map((service, index) => (
             <Link 
-              href={service.title === 'Fulfillment' ? '/services/fulfillment' : '/services'}
-              className='block'
+              href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}
+              className='block h-full'
               key={index}
             >
-              <div className='bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow'>
-                <div className='relative h-48 rounded-t-lg overflow-hidden'>
+              <div className='bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow h-full flex flex-col'>
+                <div className='relative h-48 rounded-t-lg overflow-hidden flex-shrink-0'>
                   <Image
                     src={service.image}
                     alt={service.title}
                     fill
                     style={{ objectFit: 'cover' }}
+                    className='transition-transform duration-300 hover:scale-105'
                   />
                 </div>
-                <div className='p-6'>
-                  <h3 className='text-xl font-bold mb-4'>{service.title}</h3>
-                  <p className='text-gray-600'>{service.description}</p>
+                <div className='p-6 flex-grow flex flex-col'>
+                  <h3 className='text-xl font-bold mb-3'>{service.title}</h3>
+                  <p className='text-gray-600 flex-grow'>{service.description}</p>
                 </div>
               </div>
             </Link>
@@ -99,14 +100,16 @@ export default function Home() {
           <h2 className='text-4xl font-bold text-center mb-16'>Trusted By Industry Leaders</h2>
           <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8'>
             {[
+              // First row
+              { name: 'BBVA', image: '/images/partners/bbvalogo.png' },
               { name: 'Office Depot', image: '/images/partners/Office Depot Logo.webp' },
-              { name: 'Rockwell', image: '/images/partners/Rockwell Automation Logo.jpg' },
-              { name: 'Sanmina', image: '/images/partners/sanminalogo.png' },
-              { name: 'Embraco', image: '/images/partners/Embraco Logo.png' },
-              { name: 'Celestica', image: '/images/partners/Celestica Logo.png' },
-              { name: 'Soriana', image: '/images/partners/Soriana Logo.webp' },
               { name: 'Walmart', image: '/images/partners/Walmart Logo 2008.png' },
-              { name: 'BBVA', image: '/images/partners/bbvalogo.png' }
+              { name: 'Soriana', image: '/images/partners/Soriana Logo.webp' },
+              // Second row
+              { name: 'Rockwell', image: '/images/partners/Rockwell Automation Logo.jpg' },
+              { name: 'Embraco', image: '/images/partners/Embraco Logo.png' },
+              { name: 'Sanmina', image: '/images/partners/sanminalogo.png' },
+              { name: 'Celestica', image: '/images/partners/Celestica Logo.png' }
             ].map((partner, index) => (
               <div key={index} className='bg-white shadow-lg rounded-lg p-6 flex items-center justify-center'>
                 <div className='relative w-full h-20'>
