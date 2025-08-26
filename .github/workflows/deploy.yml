@@ -33,6 +33,7 @@ jobs:
     # Add deployment steps here based on your hosting provider
     # For example, if using Vercel:
     - name: Deploy to Vercel
+      if: ${{ secrets.VERCEL_TOKEN != '' }}
       run: |
         npm install -g vercel
         vercel deploy --prod --token ${{ secrets.VERCEL_TOKEN }}
