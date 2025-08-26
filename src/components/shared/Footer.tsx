@@ -63,8 +63,8 @@ export function Footer() {
               </li>
               <li className="text-gray-600">
                 <strong>Email:</strong><br />
-                <a href="mailto:info@dlt.mx" className="hover:text-primary">
-                  info@dlt.mx
+                <a href="mailto:dltmexico00@gmail.com" className="hover:text-primary">
+                  dltmexico00@gmail.com
                 </a>
               </li>
             </ul>

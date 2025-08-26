@@ -2,35 +2,41 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import Reveal from '@/components/ui/Reveal'
+ 
 
 export default function Home() {
   const services = [
     {
-      title: 'Last-Mile Delivery',
+      title: 'Last Mile',
+      path: 'last-mile',
       description: 'Same-day and next-day delivery for parcels up to 100kg.',
-      image: '/images/Cargo Firm Depo Pic.jpg'
+      image: '/images/new2.jpg'
     },
     {
-      title: 'Warehousing',
+      title: 'Storage',
+      path: 'storage',
       description: 'Secure, accessible, and organized storage spaces.',
       image: '/images/Intelligent Stereoscopic Storage Frame.png'
     },
     {
-      title: 'Inventory Management',
-      description: 'Precise and efficient stock control.',
-      image: '/images/Logistics Management Software Guide.jpg'
+      title: 'Retail',
+      path: 'retail',
+      description: 'Complete retail distribution solutions.',
+      image: '/images/new3.jpg'
     },
     {
       title: 'Fulfillment',
+      path: 'fulfillment',
       description: 'Complete e-commerce fulfillment solutions.',
-      image: '/images/Best Logistics Company in India.jpg'
+      image: '/images/new1.jpg'
     }
   ]
 
   return (
     <div className='bg-white'>
       {/* Hero Section */}
-      <div className='relative h-[600px] overflow-hidden'>
+      <div className='relative h-[620px] overflow-hidden'>
         <Image
           src='/images/White Truck Scenic Highway.png'
           alt='DLT Logistics Hero'
@@ -38,39 +44,44 @@ export default function Home() {
           style={{ objectFit: 'cover' }}
           priority
         />
-        <div className='absolute inset-0 bg-black/40' />
-        <div className='relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex items-center'>
-          <div className='text-center md:text-left'>
-            <h1 className='text-6xl font-bold text-white mb-8'>
-              From Warehouse to Doorstep
-              <br />
-              <span className='text-[#FFCC00]'>Fast. Visible. Green.</span>
-            </h1>
-            <div className='grid grid-cols-3 gap-8 mt-12'>
-              <div className='text-center'>
-                <div className='text-4xl font-bold text-[#FFCC00]'>97.9%</div>
-                <div className='mt-2 text-white'>On-Time Delivery</div>
-              </div>
-              <div className='text-center'>
-                <div className='text-4xl font-bold text-[#FFCC00]'>4.8/5</div>
-                <div className='mt-2 text-white'>Customer Rating</div>
-              </div>
-              <div className='text-center'>
-                <div className='text-4xl font-bold text-[#FFCC00]'>9</div>
-                <div className='mt-2 text-white'>Metro Areas</div>
-              </div>
-            </div>
+        <div className='absolute inset-0 bg-black/45' />
+        <div className='relative z-10 mx-auto max-w-6xl px-6 h-full flex items-center justify-center text-center'>
+          <div>
+            <Reveal as='h1' className='text-white font-bold text-5xl md:text-6xl leading-tight mb-6'>
+              Complete Logistics Solutions
+            </Reveal>
+            <Reveal as='p' className='text-white/90 text-xl md:text-2xl'>
+              <span className='text-[#FFCC00] font-bold'>Storage. Distribution. Fulfillment.</span>
+            </Reveal>
           </div>
+        </div>
+      </div>
+
+      {/* KPI section separated for cleaner composition */}
+      <div className='bg-white'>
+        <div className='max-w-6xl mx-auto px-6 py-12 grid grid-cols-3 gap-6 text-center'>
+          <Reveal>
+            <div className='text-4xl font-bold text-[#FFCC00]'>97.9%</div>
+            <div className='mt-1 text-gray-700'>On-Time Delivery</div>
+          </Reveal>
+          <Reveal delayMs={120}>
+            <div className='text-4xl font-bold text-[#FFCC00]'>4.8/5</div>
+            <div className='mt-1 text-gray-700'>Customer Rating</div>
+          </Reveal>
+          <Reveal delayMs={200}>
+            <div className='text-4xl font-bold text-[#FFCC00]'>9</div>
+            <div className='mt-1 text-gray-700'>Metro Areas</div>
+          </Reveal>
         </div>
       </div>
 
       {/* Services Section */}
       <div className='py-24 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-        <h2 className='text-4xl font-bold text-center mb-16'>Our Services</h2>
+        <Reveal as='h2' className='text-4xl font-bold text-center mb-16'>Our Services</Reveal>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
           {services.map((service, index) => (
             <Link 
-              href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}
+              href={`/services/${service.path}`}
               className='block h-full'
               key={index}
             >
@@ -84,10 +95,10 @@ export default function Home() {
                     className='transition-transform duration-300 hover:scale-105'
                   />
                 </div>
-                <div className='p-6 flex-grow flex flex-col'>
+                <Reveal className='p-6 flex-grow flex flex-col'>
                   <h3 className='text-xl font-bold mb-3'>{service.title}</h3>
                   <p className='text-gray-600 flex-grow'>{service.description}</p>
-                </div>
+                </Reveal>
               </div>
             </Link>
           ))}
@@ -97,7 +108,7 @@ export default function Home() {
       {/* Partners Section */}
       <div className='py-24 bg-gray-50'>
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-          <h2 className='text-4xl font-bold text-center mb-16'>Trusted By Industry Leaders</h2>
+          <Reveal as='h2' className='text-4xl font-bold text-center mb-16'>Trusted By Industry Leaders</Reveal>
           <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8'>
             {[
               // First row
@@ -130,13 +141,13 @@ export default function Home() {
       {/* CTA Section */}
       <div className='py-24 bg-[#FFCC00]'>
         <div className='mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center'>
-          <h2 className='text-4xl font-bold mb-8'>Ready to Optimize Your Logistics?</h2>
-          <p className='text-xl mb-12'>Get in touch with our team for a customized solution.</p>
+          <Reveal as='h2' className='text-4xl font-bold mb-8'>Ready to Optimize Your Logistics?</Reveal>
+          <Reveal as='p' className='text-xl mb-12' delayMs={120}>Get in touch with our team for a customized solution.</Reveal>
           <Link 
-            href='/contact' 
+            href='/quote' 
             className='inline-block bg-white px-8 py-4 rounded-lg text-[#FFCC00] font-bold text-lg hover:bg-gray-100 transition-colors'
           >
-            Contact Us
+            Get Quote
           </Link>
         </div>
       </div>

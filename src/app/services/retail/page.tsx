@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
+import PageHeader from '@/components/ui/PageHeader'
 import { BuildingStorefrontIcon, TruckIcon, QrCodeIcon, ClipboardDocumentCheckIcon, ChartBarIcon } from '@heroicons/react/24/outline'
 
 export default function RetailPage() {
@@ -35,25 +36,15 @@ export default function RetailPage() {
 
   return (
     <div className="bg-white min-h-screen">
-      {/* Hero Section with Background */}
-      <div className="relative h-[400px] overflow-hidden">
-        <Image
-          src="/images/Best Logistics Company in India.jpg"
-          alt="Retail Logistics"
-          fill
-          style={{ objectFit: 'cover' }}
-          priority
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl font-bold mb-6 text-white">Retail Logistics Solutions</h1>
-            <p className="text-lg text-gray-200">
-              At DLT Logistics, we drive the logistics operations for brands selling through physical stores, retail chains, bank branches, and specialized points of sale. We understand retail channel challenges: tight schedules, precise deliveries, regulatory compliance, and impeccable product presentation.
-            </p>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        title="Retail Logistics Solutions"
+        image="/images/new3.jpg"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Services', href: '/services' },
+          { label: 'Retail' }
+        ]}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Features Grid */}
@@ -73,36 +64,48 @@ export default function RetailPage() {
         {/* Additional Information */}
         <div className="bg-gray-50 rounded-2xl p-8 md:p-12">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">
-              Why Choose Our Retail Solutions?
-            </h2>
+            <h2 className="text-3xl font-bold mb-8 text-center">Why Choose Our Retail Solutions?</h2>
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold mb-3">🏢 Retail Expertise</h3>
+                <h3 className="text-xl font-semibold mb-3">Retail Expertise</h3>
                 <p className="text-gray-600">
                   Years of experience serving major retail chains and understanding their unique requirements and processes.
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">📦 Value-Added Services</h3>
+                <h3 className="text-xl font-semibold mb-3">Value-Added Services</h3>
                 <p className="text-gray-600">
                   Complete solution including storage, preparation, distribution, and reverse logistics for retail operations.
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">🔄 Flexible Operations</h3>
+                <h3 className="text-xl font-semibold mb-3">Flexible Operations</h3>
                 <p className="text-gray-600">
                   Adaptable to different retail formats, from large chains to specialized stores and banking networks.
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">📊 Performance Tracking</h3>
+                <h3 className="text-xl font-semibold mb-3">Performance Tracking</h3>
                 <p className="text-gray-600">
                   Comprehensive reporting and KPI monitoring to ensure service level agreements are met consistently.
                 </p>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="mt-2 bg-[#FFCC00] rounded-lg p-8 text-center">
+          <h2 className="text-2xl font-bold mb-4">Ready to optimize your fulfillment operations?</h2>
+          <p className="mb-8">Get in touch with our team for a customized solution.</p>
+          <a
+            href="/quote"
+            className="inline-block bg-white px-8 py-4 rounded-lg text-[#FFCC00] font-bold text-lg hover:bg-gray-100 transition-colors"
+          >
+            Get Quote
+          </a>
         </div>
       </div>
     </div>

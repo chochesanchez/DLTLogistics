@@ -1,12 +1,14 @@
+import PageHeader from '@/components/ui/PageHeader'
 import React from 'react'
 import { MapPinIcon, PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline'
 
 export default function ContactPage() {
   return (
-    <div className="py-12 bg-white">
-      <div className="container mx-auto px-4">
+    <div className="bg-white">
+      <PageHeader title="Contact" />
+      <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
+          <h2 className="text-3xl font-bold text-center mb-8">Get in Touch</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -119,8 +121,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-medium">Email</h3>
                     <p className="text-gray-600">
-                      <a href="mailto:info@dlt.mx" className="hover:text-primary">
-                        info@dlt.mx
+                                      <a href="mailto:dltmexico00@gmail.com" className="hover:text-primary">
+                  dltmexico00@gmail.com
                       </a>
                     </p>
                   </div>
@@ -134,6 +136,29 @@ export default function ContactPage() {
                   Saturday: 9:00 AM - 2:00 PM<br />
                   Sunday: Closed
                 </p>
+              </div>
+
+              {/* Location (Google Maps) */}
+              <div className="mt-8 pt-8 border-t">
+                <h3 className="text-2xl font-semibold mb-4">Location</h3>
+                <div className="space-y-2 text-gray-700">
+                  <p className="font-medium">Oatey SCS</p>
+                  <p>760A, Av. Miguel Alemán, El Milagro, 66634 Cdad. Apodaca, N.L.</p>
+                  <p>Plus code: QR53+XP Cdad. Apodaca, Nuevo León</p>
+                  <p>
+                    Phone: <a className="hover:text-primary" href="tel:+528125114553">81 2511 4553</a>
+                  </p>
+                  <div className="mt-4">
+                    <a
+                      href="https://maps.app.goo.gl/rijzrzc3vV5gdQ1X6?g_st=iw"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-secondary inline-block"
+                    >
+                      Open in Google Maps
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

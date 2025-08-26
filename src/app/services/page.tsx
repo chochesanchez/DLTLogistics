@@ -1,13 +1,7 @@
+import PageHeader from '@/components/ui/PageHeader'
 import React from 'react'
 import Link from 'next/link'
-import {
-  TruckIcon,
-  ClockIcon,
-  BuildingStorefrontIcon,
-  ArrowPathIcon,
-  CubeIcon,
-  WrenchScrewdriverIcon
-} from '@heroicons/react/24/outline'
+import { TruckIcon, ClockIcon, BuildingStorefrontIcon, ArrowPathIcon, CubeIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
 
 const services = [
   {
@@ -80,62 +74,36 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <div className="py-12 bg-white">
-      <div className="container mx-auto px-4">
-        {/* Hero Section */}
+    <div className="bg-white">
+      <PageHeader title="Our Services" />
+      <div className="container mx-auto px-4 py-16">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h1 className="text-4xl font-bold mb-6">Our Services</h1>
+          <h2 className="text-3xl font-bold mb-6">What we do</h2>
           <p className="text-xl text-gray-600">
-            Comprehensive logistics solutions tailored to your business needs,
-            from last-mile delivery to complete supply chain management.
+            Comprehensive logistics solutions tailored to your business needs, from last-mile delivery to complete supply chain management.
           </p>
         </div>
 
-        {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div
-              key={index}
-              className="bg-white border border-gray-200 rounded-xl p-6 hover:border-primary transition-colors"
-            >
+            <div key={index} className="bg-white border border-gray-200 rounded-xl p-6 hover:border-primary transition-colors">
               <service.icon className="w-12 h-12 text-primary mb-4" />
-              
-              <h3 className="text-xl font-semibold mb-3">
-                {service.title}
-              </h3>
-              
-              <p className="text-gray-600 mb-6">
-                {service.description}
-              </p>
-
-              <ul className="space-y-2">
-                {service.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center text-sm text-gray-600">
-                    <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2" />
-                    {feature}
-                  </li>
+              <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+              <p className="text-gray-600 mb-6">{service.description}</p>
+              <ul className="space-y-2 text-gray-600">
+                {service.features.map((f, i) => (
+                  <li key={i}>• {f}</li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <h2 className="text-2xl font-semibold mb-4">
-            Ready to optimize your logistics?
-          </h2>
-          <p className="text-gray-600 mb-8">
-            Contact us to discuss how we can help streamline your distribution.
-          </p>
-          <Link
-            href="/contact"
-            className="btn-primary inline-block"
-          >
-            Get Started
-          </Link>
+        <div className="text-center mt-16">
+          <Link href="/quote" className="btn-primary inline-block">Get Quote</Link>
         </div>
       </div>
     </div>
   )
-} 
+}
+

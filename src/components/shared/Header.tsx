@@ -2,20 +2,22 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+// Static import so the logo is bundled and works in production even if it's outside /public
+import logoSrc from '@/../IMAGES/DLT Logistics LOGO.png'
 import { useRouter } from 'next/navigation'
-import { MagnifyingGlassIcon, GlobeAltIcon } from '@heroicons/react/24/outline'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 export function Header() {
   const router = useRouter()
   const [trackingNumber, setTrackingNumber] = useState('')
-  const [language, setLanguage] = useState('EN')
-  const [showLanguageMenu, setShowLanguageMenu] = useState(false)
+  // language menu removed
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const languageMenuRef = React.useRef<HTMLDivElement>(null)
 
-  const languages = [
-    { code: 'EN', label: 'English' },
-    { code: 'ES', label: 'Español' },
-    { code: 'KO', label: '한국어' }
-  ]
+  // no-op: language menu removed
+
+  
 
   const handleTrackSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -30,98 +32,84 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
+            <Image
+              src={logoSrc}
+              alt="DLT Logistics Logo"
+              width={36}
+              height={36}
+              className="mr-2 h-9 w-9 object-contain"
+              priority
+            />
             <span className="text-2xl font-bold text-primary">DLT</span>
             <span className="text-2xl font-light text-gray-600">Logistics</span>
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-8">
             <Link 
-              href="/services"
-              className="text-gray-600 hover:text-primary transition-colors"
+              href="/about"
+              className="text-gray-700 hover:text-primary transition-colors"
             >
-              Services
+              About us
             </Link>
-            <Link 
-              href="/technology"
-              className="text-gray-600 hover:text-primary transition-colors"
-            >
-              Technology
-            </Link>
-            <Link 
-              href="/contact"
-              className="text-gray-600 hover:text-primary transition-colors"
-            >
-              Contact
-            </Link>
-            <Link 
-              href="/quote"
-              className="text-gray-600 hover:text-primary transition-colors"
-            >
-              Get Quote
-            </Link>
+            <Link href="/services" className="text-gray-700 hover:text-primary transition-colors">Services</Link>
+            <Link href="/quote" className="text-gray-700 hover:text-primary transition-colors">Get Quote</Link>
+            <Link href="/contact" className="text-gray-700 hover:text-primary transition-colors">Contact</Link>
           </nav>
 
-          {/* Language Selector */}
-          <div className="relative">
-            <button
-              onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-              className="flex items-center gap-1 text-gray-600 hover:text-primary transition-colors"
-            >
-              <GlobeAltIcon className="h-5 w-5" />
-              <span>{language}</span>
-            </button>
-            
-            {showLanguageMenu && (
-              <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                <div className="py-1" role="menu" aria-orientation="vertical">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        setLanguage(lang.code)
-                        setShowLanguageMenu(false)
-                      }}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      role="menuitem"
-                    >
-                      {lang.label} ({lang.code})
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+          {/* Language removed */}
 
-          {/* Tracking Search */}
-          <form onSubmit={handleTrackSubmit} className="hidden md:flex items-center">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Track your package"
-                value={trackingNumber}
-                onChange={(e) => setTrackingNumber(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            </div>
-            <button
-              type="submit"
-              className="ml-2 btn-primary"
-            >
-              Track
-            </button>
-          </form>
+          {/* Tracking hidden per request */}
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden p-2">
-            {/* Add mobile menu implementation later */}
+          <button 
+            className="md:hidden p-2"
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+          >
             <span className="sr-only">Open menu</span>
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
+
+        {/* Mobile Menu */}
+        {showMobileMenu && (
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              <Link 
+                href="/about"
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50"
+                onClick={() => setShowMobileMenu(false)}
+              >
+                About us
+              </Link>
+              {/* Language removed in mobile */}
+              <Link 
+                href="/services"
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50"
+                onClick={() => setShowMobileMenu(false)}
+              >
+                Services
+              </Link>
+              <Link 
+                href="/contact"
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50"
+                onClick={() => setShowMobileMenu(false)}
+              >
+                Contact
+              </Link>
+              <Link 
+                href="/quote"
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50"
+                onClick={() => setShowMobileMenu(false)}
+              >
+                Get Quote
+              </Link>
+            </div>
+            {/* Tracking UI removed on mobile */}
+          </div>
+        )}
       </div>
     </header>
   )

@@ -49,7 +49,7 @@ export function MapComponent({ center, zoom = 12 }: MapComponentProps) {
       <Marker
         position={center}
         icon={{
-          url: '/images/delivery-marker.png',
+          url: '/images/delivery-marker.svg',
           scaledSize: new window.google.maps.Size(40, 40)
         }}
       />

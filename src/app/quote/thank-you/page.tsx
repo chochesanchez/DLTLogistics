@@ -20,7 +20,7 @@ export default function ThankYouPage() {
             </p>
             <div className="text-gray-600">
               <p>Phone: <a href="tel:+528183682483" className="text-primary hover:underline">+52 (81) 8368 2483 ext. 400</a></p>
-              <p>Email: <a href="mailto:info@dlt.mx" className="text-primary hover:underline">info@dlt.mx</a></p>
+              <p>Email: <a href="mailto:dltmexico00@gmail.com" className="text-primary hover:underline">dltmexico00@gmail.com</a></p>
             </div>
           </div>
           <div className="mt-8">

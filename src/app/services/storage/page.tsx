@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
+import PageHeader from '@/components/ui/PageHeader'
 import { BuildingOffice2Icon, ArrowsPointingOutIcon, ClockIcon, ShieldCheckIcon, CubeIcon } from '@heroicons/react/24/outline'
 
 export default function StoragePage() {
@@ -35,25 +36,15 @@ export default function StoragePage() {
 
   return (
     <div className="bg-white min-h-screen">
-      {/* Hero Section with Background */}
-      <div className="relative h-[400px] overflow-hidden">
-        <Image
-          src="/images/Intelligent Stereoscopic Storage Frame.png"
-          alt="Storage Solutions"
-          fill
-          style={{ objectFit: 'cover' }}
-          priority
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl font-bold mb-6 text-white">Storage Solutions</h1>
-            <p className="text-lg text-gray-200">
-              At DLT Logistics, we offer efficient, secure, and customized storage solutions for each client&apos;s specific needs. Our facilities are strategically located in Apodaca, Nuevo León, a key industrial zone for logistics in northern Mexico.
-            </p>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        title="Storage Solutions"
+        image="/images/new4.jpg"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Services', href: '/services' },
+          { label: 'Storage' }
+        ]}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Features Grid */}
@@ -78,31 +69,45 @@ export default function StoragePage() {
             </h2>
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold mb-3">📍 Strategic Location</h3>
+                <h3 className="text-xl font-semibold mb-3">Strategic Location</h3>
                 <p className="text-gray-600">
                   Our facilities in Apodaca provide easy access to major highways and industrial areas.
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">🔒 Enhanced Security</h3>
+                <h3 className="text-xl font-semibold mb-3">Enhanced Security</h3>
                 <p className="text-gray-600">
                   Each loading and unloading area is equipped with cameras focused directly on the trailer space, allowing us to record and monitor every movement during merchandise reception or collection in real-time.
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">💻 Advanced Systems</h3>
+                <h3 className="text-xl font-semibold mb-3">Advanced Systems</h3>
                 <p className="text-gray-600">
                   Modern WMS technology for precise inventory control and real-time visibility.
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">🔄 Operational Flexibility</h3>
+                <h3 className="text-xl font-semibold mb-3">Operational Flexibility</h3>
                 <p className="text-gray-600">
                   Adaptable storage solutions for different product types and handling requirements.
                 </p>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="mt-2 bg-[#FFCC00] rounded-lg p-8 text-center">
+          <h2 className="text-2xl font-bold mb-4">Ready to optimize your fulfillment operations?</h2>
+          <p className="mb-8">Get in touch with our team for a customized solution.</p>
+          <a
+            href="/quote"
+            className="inline-block bg-white px-8 py-4 rounded-lg text-[#FFCC00] font-bold text-lg hover:bg-gray-100 transition-colors"
+          >
+            Get Quote
+          </a>
         </div>
       </div>
     </div>
