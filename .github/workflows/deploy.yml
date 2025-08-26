@@ -9,6 +9,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: production
+    # Only run deploy when all required secrets are present
+    if: >-
+      ${{ github.ref == 'refs/heads/main'
+          && secrets.VERCEL_TOKEN != ''
+          && secrets.DATABASE_URL != ''
+          && secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY != ''
+          && secrets.NEXT_PUBLIC_APP_URL != '' }}
 
     steps:
     - uses: actions/checkout@v4
