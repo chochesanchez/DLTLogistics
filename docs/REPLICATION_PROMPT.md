@@ -1,71 +1,58 @@
-## Replication Prompt (Dasza 3PL)
+## Replication Prompt (for a new 3PL site with same design)
 
-Goal: Build a new marketing site for Dasza 3PL with the same frontend structure, layout system, and interactions as the DLT Logistics website, but with Dasza 3PL branding, colors, imagery, and content.
+Goal: Create a new marketing website with the exact same frontend structure, components, typography rhythm, animations, and page composition as this DLT Logistics site, but with new branding (colors, logo) and content (copy, images) for "Dasza 3PL".
 
-### Context for the Assistant
+Instructions for the implementer (paste into your AI/dev brief):
 
-- Framework: Next.js (App Router) with TypeScript and Tailwind CSS
-- Reuse design system: Page headers with hero image, clean typography, generous whitespace, subtle fade‑up transitions, and consistent section spacing
-- Preserve component architecture and file structure from the reference project
-- Do NOT copy DLT content; replace with Dasza 3PL information and assets
+1) Tech baseline
+- Use Next.js (App Router), TypeScript, Tailwind CSS.
+- Replicate the component/file structure exactly.
+- Reuse the `PageHeader` and `Reveal` components for consistent headers and subtle text transitions.
 
-### Exact Instructions
+2) Pages to implement
+- `/` Home: hero with overlay, KPIs, services grid (4 cards), partner logos.
+- `/about` About: hero image, company intro, value props, logo lockup inline with title.
+- `/services` Services overview: hero image, four services cards linking to detail pages.
+- `/services/{last-mile|retail|storage|fulfillment}` Detail pages: hero image, intro, features grid, "Why choose us", bottom CTA banner.
+- `/contact` Contact: hero image, contact form, company location block with map link.
+- `/quote` Quote form and `/quote/thank-you` confirmation page.
 
-1) Project Setup
-- Create a new Next.js (App Router) + TypeScript project
-- Install Tailwind, Heroicons, Prisma, and Testing Library (match versions from reference if possible)
-- Configure ESLint with Next.js config
+3) Components
+- `components/shared/Header`: brand logo + text lockup, nav links (About, Services, Get Quote, Contact), mobile menu.
+- `components/shared/Footer`: company info + quick links.
+- `components/ui/PageHeader`: accepts `title`, optional `subtitle`, optional `image`, optional `breadcrumbs`.
+- `components/ui/Reveal`: intersection observer fade-up wrapper; use around hero texts, section headings, KPIs, cards.
+- `components/ui/MapComponent`: Google Map with custom marker (optional in contact page).
 
-2) Structure
-- Replicate the following directories and components:
-```
-src/app/layout.tsx
-src/app/page.tsx
-src/app/about/page.tsx
-src/app/contact/page.tsx
-src/app/quote/page.tsx
-src/app/quote/thank-you/page.tsx
-src/app/services/page.tsx
-src/app/services/{last-mile,retail,storage,fulfillment}/page.tsx
+4) Design system
+- Keep typography scale, spacing, and section rhythm identical to the source project.
+- Replace color tokens in Tailwind config or via utility classes to match Dasza 3PL branding.
+- Keep logos/icons/images brand-appropriate while preserving layout and aspect ratios.
+- Maintain consistent card sizes for services grid.
 
-src/components/shared/Header.tsx
-src/components/shared/Footer.tsx
-src/components/ui/PageHeader.tsx
-src/components/ui/Reveal.tsx
-src/components/ui/MapComponent.tsx
+5) Content & assets
+- All images must live under `public/images/` with lowercase filenames; update all references accordingly.
+- Replace textual content per Dasza 3PL copy deck. Avoid emojis in headings.
+- Update KPI figures and partner logos ordering as required by the new brand.
 
-src/app/api/contact/route.ts
-prisma/schema.prisma (Contact model at minimum)
-```
+6) SEO
+- Mirror metadata in `src/app/layout.tsx`: title, description, keywords, Open Graph/Twitter, canonical, structured data (Organization).
+- Provide `icon.png`/`favicon.png` in `public/` for the new brand.
 
-3) Design & UX
-- Use the clean layout patterns: centered hero titles, readable line lengths, section headers with subtle fades, card grids with consistent sizes, and a CTA at the bottom of service pages
-- Recreate subtle `Reveal` animations (fade + translateY) on headings and section intros
-- Maintain mobile responsiveness and the mobile menu
+7) QA checklist
+- Mobile nav opens/closes.
+- Hero text sizes are appropriate on small screens.
+- All service cards link correctly to their detail pages (no 404s).
+- CTA buttons say "Get Quote" and point to `/quote`.
+- All images load in production (case-sensitive paths verified).
+- Lighthouse pass for basic SEO and performance.
 
-4) Branding
-- Replace fonts/colors with Dasza 3PL brand tokens
-- Replace all images (ensure they live under `public/images/` and are referenced with lowercase paths)
-- Update SEO metadata in `app/layout.tsx` (title, description, Open Graph, canonical) and JSON‑LD Organization schema
+8) Env variables
+- `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` if using map.
+- Remove any i18n configs; default to English.
 
-5) Data & API
-- Keep `POST /api/contact` route; store contact data in MongoDB via Prisma
-- Update environment variables: `DATABASE_URL`, `NEXT_PUBLIC_APP_URL`, etc.
-
-6) Quality
-- Run ESLint and fix issues (watch for unescaped apostrophes in JSX)
-- Run tests; add simple render tests for pages/components
-
-7) Deployment
-- Deploy to Vercel; set environment variables in the project settings
-- Validate production images and case‑sensitive paths
-
-### Acceptance Criteria
-
-- Visual structure matches the reference: page headers, spacing, typography scale, and transitions
-- All primary pages exist and are linked from the header and mobile menu
-- Service detail pages share the same structure and end with a CTA
-- Contact form persists to MongoDB and responds successfully
-- No broken images or 404s; all images under `/public/images/`
+Deliverables
+- A GitHub repo with the same structure, runnable with `npm install && npm run dev`.
+- Updated branding and content for Dasza 3PL.
 
 

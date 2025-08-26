@@ -3,6 +3,10 @@
 ## Overview
 DLT Logistics is a modern web application built for DLT Last-Mile & Distribution S.A. de C.V., providing logistics and warehousing solutions across Mexico's main metropolitan areas. The platform offers real-time tracking, warehouse management, and last-mile delivery services.
 
+## Documentation
+- See `docs/ARCHITECTURE.md` for architecture and structure.
+- See `docs/REPLICATION_PROMPT.md` to replicate the same design in a new project.
+
 ## Tech Stack
 
 ### Frontend
@@ -88,23 +92,23 @@ WEBPAGE/
 ### Installation
 
 1. Clone the repository:
-```bash
+\`\`\`bash
 git clone [repository-url]
 cd WEBPAGE
-```
+\`\`\`
 
 2. Install dependencies:
-```bash
+\`\`\`bash
 npm install
-```
+\`\`\`
 
 3. Set up environment variables:
-```bash
+\`\`\`bash
 cp .env.example .env
-```
+\`\`\`
 
 Required environment variables:
-```env
+\`\`\`env
 # Database
 DATABASE_URL="mongodb://localhost:27017/dlt"
 
@@ -120,39 +124,39 @@ TWILIO_WHATSAPP_NUMBER="+1234567890"
 # App Configuration
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 NEXT_PUBLIC_APP_NAME="DLT Logistics"
-```
+\`\`\`
 
 4. Configure MongoDB:
-```bash
+\`\`\`bash
 # Start MongoDB as a replica set
 mongod --config mongod.conf
 
 # Initialize the replica set
 mongosh --eval "rs.initiate()"
-```
+\`\`\`
 
 5. Initialize the database:
-```bash
+\`\`\`bash
 npm run db:push
 npm run db:init
-```
+\`\`\`
 
 6. Start the development server:
-```bash
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
 ### Docker Setup
 
 1. Build and start containers:
-```bash
+\`\`\`bash
 docker-compose up --build
-```
+\`\`\`
 
 ## API Documentation
 
 ### Track Package
-```typescript
+\`\`\`typescript
 GET /api/track/[code]
 Response: {
   status: string;
@@ -167,10 +171,10 @@ Response: {
     location: string;
   }>;
 }
-```
+\`\`\`
 
 ### Contact Form
-```typescript
+\`\`\`typescript
 POST /api/contact
 Body: {
   name: string;
@@ -178,7 +182,7 @@ Body: {
   message: string;
   company?: string;
 }
-```
+\`\`\`
 
 ## Database Schema
 
@@ -217,27 +221,22 @@ Body: {
 ## Deployment
 
 ### Production Build
-```bash
+\`\`\`bash
 npm run build
 npm start
-```
+\`\`\`
 
 ### Docker Production
-```bash
+\`\`\`bash
 docker-compose -f docker-compose.prod.yml up -d
-```
+\`\`\`
 
 ## Testing
 
 Run tests:
-```bash
+\`\`\`bash
 npm test
-```
-
-## Additional Documentation
-
-- `docs/ARCHITECTURE.md` — Frontend and backend architecture overview
-- `docs/REPLICATION_PROMPT.md` — Reusable prompt/checklist to replicate this project’s design/structure
+\`\`\`
 
 ## Contributing
 
@@ -255,4 +254,4 @@ npm test
 
 - **Head Office**: Shared campus with Dasza CEDIS – Apodaca, N.L.
 - **Phone**: +52 (81) 8368 2483 ext. 400
-- **Email**: dltmexico00@gmail.com 
+- **Email**: info@dlt.mx 

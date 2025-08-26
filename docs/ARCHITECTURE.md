@@ -1,105 +1,87 @@
 ## Architecture Overview
 
-This document describes the frontend and backend architecture of the DLT Logistics website and provides guidance to replicate the same structure and design for future projects (e.g., Dasza 3PL).
+This repository contains the marketing website for DLT Logistics built with Next.js (App Router) and Tailwind CSS. It focuses on clear content, consistent design, lightweight animations, and SEO best practices. Operational features like package tracking and authenticated dashboards are intentionally hidden/disabled in this version.
 
-### High‑Level
+### High-level
+- Frontend: Next.js (App Router), React, TypeScript, Tailwind CSS
+- Server routes: Next.js API routes (contact form only)
+- Assets: All images served from `public/` (case sensitive paths)
+- SEO: Metadata, Open Graph/Twitter tags, canonical URL, favicon/app icon
+- DX: ESLint + Jest + TS, simple scripts, optional Docker for local infra
 
-- Next.js App Router with TypeScript
-- Tailwind CSS for styling
-- Reusable UI components: `Header`, `Footer`, `PageHeader`, `Reveal`
-- MongoDB via Prisma (contact submissions)
-- Minimal API surface: `POST /api/contact`
-- Hosting: Vercel
-
-### Frontend Structure
-
+### Repository Layout
 ```
-src/
-  app/
-    layout.tsx         # Root layout (SEO metadata, structured data, header/footer)
-    page.tsx           # Home page
-    about/page.tsx     # About us
-    contact/page.tsx   # Contact
-    quote/page.tsx     # Quote Request form
-    quote/thank-you/   # Confirmation page
-    services/          # Services overview and detail pages
-      page.tsx
-      last-mile/page.tsx
-      retail/page.tsx
-      storage/page.tsx
-      fulfillment/page.tsx
-    api/contact/route.ts # Contact endpoint
-
-  components/
-    shared/
-      Header.tsx
-      Footer.tsx
-    ui/
-      PageHeader.tsx   # Reusable page hero with optional image and breadcrumbs
-      Reveal.tsx       # IntersectionObserver-based fade-up animation
-      MapComponent.tsx # Contact page map
-
-  lib/
-    notifications.ts   # Placeholder for future integrations
-
-public/
-  images/              # Case-sensitive; use lowercase paths
-  favicon.png
-```
-
-### Styling & Design System
-
-- Tailwind CSS utilities with a few composed classes in `globals.css` (`section-container`, `hero-section`, `card`, `partner-logo`)
-- Typography and spacing mirror the clean layout of EGA reference pages
-- Subtle entrance animations via `Reveal` component (fade + translateY)
-- Consistent `PageHeader` across all top-level pages and service details
-
-### Routing & Navigation
-
-- Top nav order: About us, Services, Get Quote, Contact
-- Mobile menu mirrors desktop links
-- Hidden/unused pages can remain in code but are not linked
-
-### Images
-
-- All image paths standardized under `/public/images/` and referenced with lowercase paths to avoid production case-sensitivity issues
-- Service pages accept a header image via `PageHeader`
-
-### Backend & Data
-
-- Prisma models include `Contact` (used in production) and `Package`, `Courier`, `StatusHistory`, `Rating` (prepared for potential tracking feature)
-- `POST /api/contact` validates, persists to MongoDB, and logs a notification placeholder
-
-### SEO
-
-- `src/app/layout.tsx` defines `metadata` (Open Graph/Twitter), canonical, and an Organization JSON‑LD block
-- Favicon/app icon configured at `/favicon.png`
-
-### Environment Variables
-
-```
-DATABASE_URL="mongodb://localhost:27017/dlt"
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your_key"
-NEXT_PUBLIC_APP_URL="http://localhost:3000"
-NEXT_PUBLIC_APP_NAME="DLT Logistics"
+WEBPAGE/
+├─ public/                     # Static assets (images, icons, fonts)
+│  └─ images/                  # All images live here (lowercase paths)
+├─ src/
+│  ├─ app/                     # Next.js App Router pages
+│  │  ├─ api/
+│  │  │  └─ contact/route.ts   # Contact form endpoint (server route)
+│  │  ├─ about/page.tsx        # About page (uses PageHeader)
+│  │  ├─ contact/page.tsx      # Contact page (uses PageHeader)
+│  │  ├─ services/
+│  │  │  ├─ page.tsx           # Services overview (uses PageHeader)
+│  │  │  ├─ fulfillment/page.tsx
+│  │  │  ├─ last-mile/page.tsx
+│  │  │  ├─ retail/page.tsx
+│  │  │  └─ storage/page.tsx   # Service detail pages (consistent structure + CTA)
+│  │  ├─ layout.tsx            # Root layout + global SEO metadata
+│  │  ├─ globals.css           # Tailwind and custom layers/utilities
+│  │  └─ page.tsx              # Home page (hero, KPIs, services, partners)
+│  ├─ components/
+│  │  ├─ shared/
+│  │  │  ├─ Header.tsx         # Top navigation, logo, mobile menu
+│  │  │  └─ Footer.tsx         # Footer with contact info
+│  │  └─ ui/
+│  │     ├─ PageHeader.tsx     # Reusable page hero header with optional image/breadcrumbs
+│  │     ├─ Reveal.tsx         # IntersectionObserver-based fade-up animation wrapper
+│  │     ├─ MapComponent.tsx   # Google Map with custom marker
+│  │     ├─ DeliveryStatus.tsx # (UI only)
+│  │     ├─ DeliveryDetails.tsx# (UI only)
+│  │     └─ RatingModal.tsx    # (UI only)
+│  ├─ lib/
+│  │  └─ notifications.ts      # Twilio SMS/WhatsApp utility (optional)
+│  ├─ types/                   # (Reserved)
+│  └─ styles/                  # (Reserved)
+├─ prisma/                     # Prisma schema (not required for static site)
+├─ scripts/                    # Utility scripts
+├─ jest.config.js              # Jest config
+├─ jest.setup.js               # Testing setup
+├─ tailwind.config.js          # Tailwind config
+├─ tsconfig.json               # TypeScript config
+└─ package.json                # Scripts and dependencies
 ```
 
-### Testing & Linting
+### Frontend Patterns
+- Page hero consistency: `PageHeader` provides a clean, consistent header across pages with optional hero image + breadcrumbs.
+- Content rhythm: Sections follow consistent spacing and typography scales inspired by the referenced clean design.
+- Animations: `Reveal` adds subtle fade-up on entry using IntersectionObserver; used for hero text, section headings, KPIs, and cards.
+- Services: Overview grid on home/services links to detail pages. Detail pages share a standard layout: intro, features grid, "Why choose us", and a bottom CTA banner.
+- Assets: All image paths are normalized to lowercase under `public/images/` to avoid production case-sensitivity issues.
 
-- Jest + Testing Library for unit/integration tests
-- ESLint with Next.js config; avoid unescaped apostrophes in JSX to prevent lint errors
+### Server/API
+- Contact endpoint: `POST /api/contact` receives contact form submissions. Extend with transport (email, webhook, CRM) as needed.
+- Other endpoints (e.g., tracking) are intentionally not exposed in this build.
 
-### Deployment
+### Optional Integrations
+- Twilio notifications (`src/lib/notifications.ts`) provide SMS/WhatsApp templates; not required for the static site flow.
+- Prisma + MongoDB present for future expansion; not used by current pages.
 
-- Prefer GitHub → Vercel integration or run `vercel --prod`
-- Ensure images exist in `public/images/` with exact matching filenames and lowercase paths
+### Environment Variables (minimal)
+- `NEXT_PUBLIC_APP_URL` (optional, used by notifications)
+- `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` (required if using `MapComponent`)
+- Twilio variables (optional): `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_PHONE_NUMBER`, `TWILIO_WHATSAPP_NUMBER`
 
-### Replication Notes
+### Build & Deploy
+- Dev: `npm run dev`
+- Build: `npm run build`
+- Start: `npm start`
+- CI/CD: GitHub Actions/Vercel can be connected to build on push to `main`.
 
-When cloning this structure for a new brand:
-- Copy `components/ui/PageHeader.tsx` and `components/ui/Reveal.tsx` unchanged
-- Keep layout and SEO structure in `app/layout.tsx`; update brand metadata and URLs
-- Replace images under `public/images/` and update references
-- Update brand colors in Tailwind config or utility classes as needed
+### Notes
+- i18n and language middleware were removed per product direction; English-only baseline.
+- Mobile nav and hero typography were tuned for small screens.
+- KPI values and partners ordering are maintained in `src/app/page.tsx`.
 
 
