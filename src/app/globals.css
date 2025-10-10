@@ -47,6 +47,33 @@
   .partner-logo {
     @apply w-40 h-20 object-contain transition-all duration-300;
   }
+
+  /* card styling for partner items to match bg */
+  .partner-card {
+    @apply bg-white rounded-2xl p-6 flex items-center justify-center border border-gray-100;
+    /* very soft dual shadow to avoid dark bands near bottom on gray backgrounds */
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03), 0 8px 16px rgba(15, 23, 42, 0.05);
+    background-clip: padding-box;
+  }
+
+  /* marquee styles for partners */
+  .partners-marquee-viewport {
+    @apply overflow-hidden relative;
+    padding-top: 8px;
+    padding-bottom: 16px; /* extra breathing room so lower shadows blend into bg */
+  }
+  .partners-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    width: max-content;
+    will-change: transform;
+    animation: marquee-ltr 50s linear infinite;
+  }
+  @keyframes marquee-ltr {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0%); }
+  }
 }
 
 @layer utilities {
@@ -64,5 +91,10 @@
   .reveal-visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* prevent KPI wrap clipping on small screens */
+  .nowrap {
+    white-space: nowrap;
   }
 } 

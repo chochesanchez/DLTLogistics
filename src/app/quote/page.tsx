@@ -41,9 +41,32 @@ export default function QuotePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData)
-    // Redirect to thank you page or show success message
+    const payload: Record<string, unknown> = {
+      formType: 'quote',
+      name: formData.name,
+      company: formData.business,
+      email: formData.email,
+      phone: formData.phone,
+      address: formData.address,
+      message: formData.comments,
+      product: formData.productType,
+      quantity: formData.quantity,
+      frequency: formData.frequency,
+      destinations: formData.destinations,
+      timing: formData.deliveryTiming,
+      storage: formData.storage,
+      transportConditions: formData.transportConditions,
+      additionalServices: formData.additionalServices,
+    }
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+    } catch (err) {
+      // no-op; we still take user to thank you page
+    }
     router.push('/quote/thank-you')
   }
 

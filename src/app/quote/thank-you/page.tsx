@@ -19,8 +19,8 @@ export default function ThankYouPage() {
               If you have any immediate questions, please don&apos;t hesitate to contact us:
             </p>
             <div className="text-gray-600">
-              <p>Phone: <a href="tel:+528183682483" className="text-primary hover:underline">+52 (81) 8368 2483 ext. 400</a></p>
-              <p>Email: <a href="mailto:dltmexico00@gmail.com" className="text-primary hover:underline">dltmexico00@gmail.com</a></p>
+              <p>Phone: <a href="tel:+528119161086" className="text-primary hover:underline">+52 811916 1086</a></p>
+              <p>Email: <a href="mailto:jmsanchez@dasza.com" className="text-primary hover:underline">jmsanchez@dasza.com</a></p>
             </div>
           </div>
           <div className="mt-8">

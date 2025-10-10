@@ -1,6 +1,7 @@
 import PageHeader from '@/components/ui/PageHeader'
 import React from 'react'
 import { MapPinIcon, PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline'
+import BusinessContactForm from '@/components/ui/BusinessContactForm'
 
 export default function ContactPage() {
   return (
@@ -8,84 +9,12 @@ export default function ContactPage() {
       <PageHeader title="Contact" />
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8">Get in Touch</h2>
+          <h2 className="text-3xl font-bold text-center mb-8">Contact us</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div>
-              <form action="/api/contact" method="POST" className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    className="input-field"
-                    placeholder="Your name"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    className="input-field"
-                    placeholder="Your company name"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="input-field"
-                    placeholder="you@company.com"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="input-field"
-                    placeholder="+52 (81) 1234 5678"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    required
-                    className="input-field"
-                    placeholder="How can we help you?"
-                  />
-                </div>
-
-                <button type="submit" className="w-full btn-primary">
-                  Send Message
-                </button>
-              </form>
+              <BusinessContactForm />
             </div>
 
             {/* Contact Information */}
@@ -109,8 +38,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-medium">Phone</h3>
                     <p className="text-gray-600">
-                      <a href="tel:+528183682483" className="hover:text-primary">
-                        +52 (81) 8368 2483 ext. 400
+                      <a href="tel:+528119161086" className="hover:text-primary">
+                        +52 811916 1086
                       </a>
                     </p>
                   </div>
@@ -121,8 +50,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-medium">Email</h3>
                     <p className="text-gray-600">
-                                      <a href="mailto:dltmexico00@gmail.com" className="hover:text-primary">
-                  dltmexico00@gmail.com
+                      <a href="mailto:jmsanchez@dasza.com" className="hover:text-primary">
+                        jmsanchez@dasza.com
                       </a>
                     </p>
                   </div>
@@ -146,7 +75,7 @@ export default function ContactPage() {
                   <p>760A, Av. Miguel Alemán, El Milagro, 66634 Cdad. Apodaca, N.L.</p>
                   <p>Plus code: QR53+XP Cdad. Apodaca, Nuevo León</p>
                   <p>
-                    Phone: <a className="hover:text-primary" href="tel:+528125114553">81 2511 4553</a>
+                    Phone: <a className="hover:text-primary" href="tel:+528119161086">+52 811916 1086</a>
                   </p>
                   <div className="mt-4">
                     <a

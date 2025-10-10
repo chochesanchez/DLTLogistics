@@ -23,11 +23,7 @@ export function Footer() {
                   Services
                 </Link>
               </li>
-              <li>
-                <Link href="/technology" className="text-gray-600 hover:text-primary">
-                  Technology
-                </Link>
-              </li>
+              {/* Technology hidden until ready */}
               <li>
                 <Link href="/contact" className="text-gray-600 hover:text-primary">
                   Contact Us
@@ -57,14 +53,14 @@ export function Footer() {
               </li>
               <li className="text-gray-600">
                 <strong>Phone:</strong><br />
-                <a href="tel:+528183682483" className="hover:text-primary">
-                  +52 (81) 8368 2483 ext. 400
+                <a href="tel:+528119161086" className="hover:text-primary">
+                  +52 811916 1086
                 </a>
               </li>
               <li className="text-gray-600">
                 <strong>Email:</strong><br />
-                <a href="mailto:dltmexico00@gmail.com" className="hover:text-primary">
-                  dltmexico00@gmail.com
+                <a href="mailto:jmsanchez@dasza.com" className="hover:text-primary">
+                  jmsanchez@dasza.com
                 </a>
               </li>
             </ul>

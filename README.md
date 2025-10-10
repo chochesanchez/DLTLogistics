@@ -253,5 +253,5 @@ npm test
 ## Contact
 
 - **Head Office**: Shared campus with Dasza CEDIS – Apodaca, N.L.
-- **Phone**: +52 (81) 8368 2483 ext. 400
-- **Email**: info@dlt.mx 
+- **Phone**: +52 811916 1086
+- **Email**: jmsanchez@dasza.com
