@@ -19,8 +19,18 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
+                <Link href="/about" className="text-gray-600 hover:text-primary">
+                  About us
+                </Link>
+              </li>
+              <li>
                 <Link href="/services" className="text-gray-600 hover:text-primary">
                   Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/quote" className="text-gray-600 hover:text-primary">
+                  Get Quote
                 </Link>
               </li>
               {/* Technology hidden until ready */}

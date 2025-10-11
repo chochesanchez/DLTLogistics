@@ -7,9 +7,35 @@ import ContactForm from '@/components/ui/ContactForm'
 import BusinessContactForm from '@/components/ui/BusinessContactForm'
 import logoSrc from '@/../IMAGES/DLT Logistics LOGO.png'
 import whirlpoolLogo from '@/../IMAGES/Whirlpool Logo.png'
+import carrierLogo from '@/../IMAGES/Carrier Corporation Logo copy.png'
+import magnaLogo from '@/../IMAGES/Magna Logo copy.png'
+import usMotorsLogo from '@/../IMAGES/US Motors Logo copy.webp'
+import rxnLogo from '@/../IMAGES/RXN logo copy.png'
+import regalBeloitLogo from '@/../IMAGES/Regal Beloit Logo copy.png'
+import fluidmasterLogo from '@/../IMAGES/fluidmaster logo copy.png'
+import tuopuLogo from '@/../IMAGES/Tuopu Group Logo copy.jpeg'
+import superiorIndustriesLogo from '@/../IMAGES/superior industries logo copy.png'
+import dubaiLogo from '@/../IMAGES/Dubai Logo Dark copy.png'
+import dometicLogo from '@/../IMAGES/Dometic Logo copy.webp'
+import erdMetalCanadaLogo from '@/../IMAGES/erd-metal-canada logo copy.png'
+import nskJapanLogo from '@/../IMAGES/NSK Japan Logo copy.webp'
+import autozoneLogo from '@/../IMAGES/Autozone Logo copy.png'
+import motoradLogo from '@/../IMAGES/MotoRad Logo copy.webp'
+import metalsaLogo from '@/../IMAGES/Metalsa Logo copy.avif'
+import pilgrimsLogo from '@/../IMAGES/Pilgrims Logo copy.png'
+import muntersLogo from '@/../IMAGES/Munters Logo copy.webp'
+import nordicLogo from '@/../IMAGES/nordic logo copy.jpg'
+import terniumLogo from '@/../IMAGES/Ternium Logo copy.png'
+import magnesitasLogo from '@/../IMAGES/Magnesitas Logo copy.png'
+import mitsubaLogo from '@/../IMAGES/Mitsuba Corporation Logo copy.png'
+import elematecLogo from '@/../IMAGES/elematec logo copy.gif'
+import daimlerTrucksLogo from '@/../IMAGES/Daimler Trucks Logo copy.png'
+import conmetLogo from '@/../IMAGES/Conmet Logo copy.png'
+import toyotaLogo from '@/../IMAGES/Toyota Logo copy.png'
 // Using pure CSS marquee for smoothness; user pan was causing micro-jitters
 import heroTruck from '@/../IMAGES/hero-truck.png'
 import React from 'react'
+import { ShieldCheckIcon, ChartBarIcon, TruckIcon } from '@heroicons/react/24/outline'
  
 
 export default function Home() {
@@ -78,8 +104,8 @@ export default function Home() {
               <div className='mt-1 text-gray-700 text-xs'>Customer Rating</div>
             </div>
             <div className='bg-white rounded-lg shadow-sm px-5 py-4 text-center'>
-              <div className='text-2xl font-extrabold text-[#FFCC00]'>+20,000</div>
-              <div className='mt-1 text-gray-700 text-xs'>Metro Areas</div>
+              <div className='text-2xl font-extrabold text-[#FFCC00]'>+200,000</div>
+              <div className='mt-1 text-gray-700 text-xs'>square feet areas</div>
             </div>
           </div>
         </div>
@@ -94,8 +120,8 @@ export default function Home() {
             <div className='mt-1 text-gray-700'>Customer Rating</div>
           </div>
           <div>
-            <div className='text-4xl font-bold text-[#FFCC00]'>+20,000</div>
-            <div className='mt-1 text-gray-700'>Metro Areas</div>
+            <div className='text-4xl font-bold text-[#FFCC00]'>+200,000</div>
+            <div className='mt-1 text-gray-700'>square feet areas</div>
           </div>
         </div>
       </div>
@@ -160,17 +186,67 @@ export default function Home() {
                 { name: 'Embraco', image: '/images/partners/Embraco Logo.png' },
                 { name: 'Sanmina', image: '/images/partners/sanminalogo.png' },
                 { name: 'Celestica', image: '/images/partners/Celestica Logo.png' },
-              { name: 'Whirlpool', image: (whirlpoolLogo as unknown as string) },
+                { name: 'Whirlpool', image: (whirlpoolLogo as unknown as string) },
+                { name: 'Carrier', image: (carrierLogo as unknown as string) },
+                { name: 'Magna', image: (magnaLogo as unknown as string) },
+                { name: 'US Motors', image: (usMotorsLogo as unknown as string) },
+                { name: 'RXN', image: (rxnLogo as unknown as string) },
+                { name: 'Regal Beloit', image: (regalBeloitLogo as unknown as string) },
+                { name: 'Fluidmaster', image: (fluidmasterLogo as unknown as string) },
+                { name: 'Tuopu Group', image: (tuopuLogo as unknown as string) },
+                { name: 'Superior Industries', image: (superiorIndustriesLogo as unknown as string) },
+                { name: 'Dubai', image: (dubaiLogo as unknown as string) },
+                { name: 'Dometic', image: (dometicLogo as unknown as string) },
+                { name: 'ERD Metal Canada', image: (erdMetalCanadaLogo as unknown as string) },
+                { name: 'NSK Japan', image: (nskJapanLogo as unknown as string) },
+                { name: 'AutoZone', image: (autozoneLogo as unknown as string) },
+                { name: 'MotoRad', image: (motoradLogo as unknown as string) },
+                { name: 'Metalsa', image: (metalsaLogo as unknown as string) },
+                { name: 'Pilgrim’s', image: (pilgrimsLogo as unknown as string) },
+                { name: 'Munters', image: (muntersLogo as unknown as string) },
+                { name: 'Nordic', image: (nordicLogo as unknown as string) },
+                { name: 'Ternium', image: (terniumLogo as unknown as string) },
+                { name: 'Magnesitas', image: (magnesitasLogo as unknown as string) },
+                { name: 'Mitsuba', image: (mitsubaLogo as unknown as string) },
+                { name: 'Elematec', image: (elematecLogo as unknown as string) },
+                { name: 'Daimler Trucks', image: (daimlerTrucksLogo as unknown as string) },
+                { name: 'ConMet', image: (conmetLogo as unknown as string) },
+                { name: 'Toyota', image: (toyotaLogo as unknown as string) },
               // duplicate for seamless loop
-               { name: 'BBVA', image: '/images/partners/bbvalogo.png' },
-               { name: 'Office Depot', image: '/images/partners/Office Depot Logo.webp' },
-               { name: 'Walmart', image: '/images/partners/Walmart Logo 2008.png' },
-               { name: 'Soriana', image: '/images/partners/Soriana Logo.webp' },
-               { name: 'Rockwell', image: '/images/partners/Rockwell Automation Logo.jpg' },
-               { name: 'Embraco', image: '/images/partners/Embraco Logo.png' },
-               { name: 'Sanmina', image: '/images/partners/sanminalogo.png' },
-               { name: 'Celestica', image: '/images/partners/Celestica Logo.png' },
-               { name: 'Whirlpool', image: (whirlpoolLogo as unknown as string) },
+                 { name: 'BBVA', image: '/images/partners/bbvalogo.png' },
+                 { name: 'Office Depot', image: '/images/partners/Office Depot Logo.webp' },
+                 { name: 'Walmart', image: '/images/partners/Walmart Logo 2008.png' },
+                 { name: 'Soriana', image: '/images/partners/Soriana Logo.webp' },
+                 { name: 'Rockwell', image: '/images/partners/Rockwell Automation Logo.jpg' },
+                 { name: 'Embraco', image: '/images/partners/Embraco Logo.png' },
+                 { name: 'Sanmina', image: '/images/partners/sanminalogo.png' },
+                 { name: 'Celestica', image: '/images/partners/Celestica Logo.png' },
+                 { name: 'Whirlpool', image: (whirlpoolLogo as unknown as string) },
+                 { name: 'Carrier', image: (carrierLogo as unknown as string) },
+                 { name: 'Magna', image: (magnaLogo as unknown as string) },
+                 { name: 'US Motors', image: (usMotorsLogo as unknown as string) },
+                 { name: 'RXN', image: (rxnLogo as unknown as string) },
+                 { name: 'Regal Beloit', image: (regalBeloitLogo as unknown as string) },
+                 { name: 'Fluidmaster', image: (fluidmasterLogo as unknown as string) },
+                 { name: 'Tuopu Group', image: (tuopuLogo as unknown as string) },
+                 { name: 'Superior Industries', image: (superiorIndustriesLogo as unknown as string) },
+                 { name: 'Dubai', image: (dubaiLogo as unknown as string) },
+                 { name: 'Dometic', image: (dometicLogo as unknown as string) },
+                 { name: 'ERD Metal Canada', image: (erdMetalCanadaLogo as unknown as string) },
+                 { name: 'NSK Japan', image: (nskJapanLogo as unknown as string) },
+                 { name: 'AutoZone', image: (autozoneLogo as unknown as string) },
+                 { name: 'MotoRad', image: (motoradLogo as unknown as string) },
+                 { name: 'Metalsa', image: (metalsaLogo as unknown as string) },
+                 { name: 'Pilgrim’s', image: (pilgrimsLogo as unknown as string) },
+                 { name: 'Munters', image: (muntersLogo as unknown as string) },
+                 { name: 'Nordic', image: (nordicLogo as unknown as string) },
+                 { name: 'Ternium', image: (terniumLogo as unknown as string) },
+                 { name: 'Magnesitas', image: (magnesitasLogo as unknown as string) },
+                 { name: 'Mitsuba', image: (mitsubaLogo as unknown as string) },
+                 { name: 'Elematec', image: (elematecLogo as unknown as string) },
+                 { name: 'Daimler Trucks', image: (daimlerTrucksLogo as unknown as string) },
+                 { name: 'ConMet', image: (conmetLogo as unknown as string) },
+                 { name: 'Toyota', image: (toyotaLogo as unknown as string) },
               ].map((partner, index) => (
                 <div key={index} className='partner-card'>
                   <div className='relative w-40 h-20'>
@@ -178,13 +254,45 @@ export default function Home() {
                       src={partner.image}
                       alt={partner.name}
                       fill
-                      style={{ objectFit: 'contain' }}
+                      sizes='160px'
+                      style={{ objectFit: 'contain', backgroundColor: 'white' }}
                       className='partner-logo'
                     />
                   </div>
                 </div>
               ))}
             </div>
+          </div>
+          <div className='mt-4 text-right'>
+            <Link href='/about#partners' className='inline-block text-[#FFCC00] font-semibold hover:underline text-base md:text-lg'>See all →</Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Why us */}
+      <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16'>
+        <Reveal as='h2' className='text-4xl font-bold text-center mb-10'>Why us</Reveal>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+          <div className='rounded-xl border border-gray-300/40 bg-white shadow-sm p-6 text-center'>
+            <div className='mx-auto h-12 w-12 grid place-items-center text-[#FFCC00] mb-3'>
+              <ShieldCheckIcon className='h-8 w-8 md:h-10 md:w-10' />
+            </div>
+            <div className='font-semibold mb-1'>Operational excellence</div>
+            <p className='text-gray-600 text-sm'>Disciplined processes, traceability and KPI‑driven performance across every lane.</p>
+          </div>
+          <div className='rounded-xl border border-gray-300/40 bg-white shadow-sm p-6 text-center'>
+            <div className='mx-auto h-12 w-12 grid place-items-center text-[#FFCC00] mb-3'>
+              <ChartBarIcon className='h-8 w-8 md:h-10 md:w-10' />
+            </div>
+            <div className='font-semibold mb-1'>Visibility & control</div>
+            <p className='text-gray-600 text-sm'>Real‑time information, inventory and SLA metrics to support informed decisions.</p>
+          </div>
+          <div className='rounded-xl border border-gray-300/40 bg-white shadow-sm p-6 text-center'>
+            <div className='mx-auto h-12 w-12 grid place-items-center text-[#FFCC00] mb-3'>
+              <TruckIcon className='h-8 w-8 md:h-10 md:w-10' />
+            </div>
+            <div className='font-semibold mb-1'>End‑to‑end logistics</div>
+            <p className='text-gray-600 text-sm'>Storage, distribution and fulfillment integrated to your operation and systems.</p>
           </div>
         </div>
       </div>
@@ -206,7 +314,7 @@ export default function Home() {
       {/* Contact Us Section (before footer) */}
       <div className='bg-white py-16 md:py-20'>
         <div className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
-          <Reveal as='h2' className='text-4xl font-bold text-center mb-3'>How can we help you?</Reveal>
+          <Reveal as='h2' className='text-4xl font-bold text-center mb-3'>Contact us</Reveal>
           <Reveal as='p' className='text-center text-gray-700 mb-8'>Every business is unique. Tell us about your needs and we will find the solutions.</Reveal>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto'>
             <div>

@@ -83,7 +83,9 @@ export default function RootLayout({
       </head>
       <body className="font-poppins">
         <Header />
-        {children}
+        <div className="pt-16">
+          {children}
+        </div>
         <Footer />
         {/* Floating WhatsApp Button */}
         <a

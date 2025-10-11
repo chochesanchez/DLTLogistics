@@ -69,7 +69,7 @@ export function Header() {
             </Link>
             <Link href="/services" className="text-gray-700 hover:text-primary transition-colors">Services</Link>
             <Link href="/quote" className="text-gray-700 hover:text-primary transition-colors">Get Quote</Link>
-            <Link href="/contact" className="inline-flex items-center px-4 py-2 rounded-lg bg-[#FFCC00] text-white font-semibold hover:bg-[#E6B800] transition-colors">Contact us</Link>
+            <Link href="/contact" className="inline-flex items-center px-4 py-2 rounded-lg bg-[#FFCC00] text-black font-semibold hover:bg-[#E6B800] transition-colors">Contact us</Link>
           </nav>
 
           {/* Language removed */}
@@ -116,7 +116,7 @@ export function Header() {
               </Link>
               <Link 
                 href="/contact"
-                className="block px-3 py-2 rounded-md text-base font-semibold text-white bg-[#FFCC00] hover:bg-[#E6B800] text-center"
+                className="block px-3 py-2 rounded-md text-base font-semibold text-black bg-[#FFCC00] hover:bg-[#E6B800] text-center"
                 onClick={() => setShowMobileMenu(false)}
                 style={{ lineHeight: '2.25rem' }}
               >
