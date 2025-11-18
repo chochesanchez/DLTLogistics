@@ -1,154 +1,0 @@
-We are a third party logistics
-    Service Company to
- Manufacturing Industries
- Established in México and
-          Suppliers
-Our services are part of the
-Supply Chain of the company.
-- Logistics / Shipping
-- Customs Brokerage
-- Transportation by Rail or Land
-- Warehousing
-- Inventory Control / VMI
-- Industrial IMMEX
- LOCATIONS
-- Mty / Apodaca.       120,000 SQF
-- Apodaca Kalos.         50,000
-  SQF
-- Querétaro / Shelter 70,000 SQF
-- Manzanillo. Customs Of ces
-- Partnerships
-- Laredo / Altamira / Lázaro
-  Cardenas
-       fi
-CENTRACORE / QUERETARO
-      INDUSTRIAL
-Re-work / Pick and Pack
-                                           IMMEX
-               LOTTE SENDS THE             NO VAT
-               PRODUCT
-               TO IMMEX DASZA              NO DUTIES
-
-
-                                           DASZA CHARGES FOR :
-                                           - CUSTOMS FEE,
-                                           - WAREHOUSES
-                                           -IMMEX SERVICES
-                       DASZA SENDS THE
-CUSTOMER               PRODUCTS
-PAYS                    TO CUSTOMER WITH
-$$ TO LOTTE            IMMEX
-
-
-              MANUFACTURING INDUSTRIE MEXICO
-                                                              Immex Process / CONMET - DAIMLER
-
-                                                                      MONTERREY DASZA        VIRTUAL
-                                                                      Bonded Warehouse       Transference to Daimler
-          CONMET
-                                      MANZANILLO
-          China / Mexico                                                                     Final Customer
-                                      PORT
-          QUINDAO                                                                            must have an
-                                                                                             IMMEX or Fiscal
-                                                                                             Program
-          ORIGIN / PRIOR ARRIVAL      CUSTOMS BROKER                  Bonded Inventory       Custom Broker
-          • Shipping Company          LICENSE 6078 JMSA               Control                • Monthly Export V1
-                                      • Previous Recognition          • SAP                    Pedimento from DASZA
-          • ETA MANZANILLO, Mex.
-                                      • Declaration Form              • Microsoft Dynamics   • Monthly Import V1
-                                      • Pedimento / Immex             • Millennium Aduanas     Pedimento
-          DOCUMENTS
-                                                                      • Microsip             • From WHIRLPOOL
-          • Bill of lading to DASZA
-                                      DASZA 3PL LOGISTICS
-          • Invoice                   IMPORTS AS CONSIGNEE
-          • Quantity                                                                         DASZA Reports to the
-          • Technical Data                                                                   Mexican Government
-          • Speci cation Data                                                                DAIMLER takes full
-          • Certi cate Of Origin                                                             responsibility
-                                       Freight DASZA Logistics
-                                       Altamira
-                                       MANZANILLO
-                                                to Monterrey
-                                                      to Monterrey
-fi
-
-
-
-
-     fi
-                                                                 Immex Process / EMBRACO - WHIRLPOOL
-
-          EMBRACO /NIDEC                ALTAMIRA                         MONTERREY DASZA        VIRTUAL
-          Brasil / Mexico               PORT                             Bonded Warehouse       Transference to Whirlpool
-
-
-                                                                                                Final Customer
-                                                                                                must have an
-                                                                                                IMMEX or Fiscal
-                                                                                                Program
-          ORIGIN / PRIOR ARRIVAL        CUSTOMS BROKER                   Bonded Inventory       Custom Broker
-          • Shipping Company            LICENSE 6078 JMSA                Control                • Monthly Export V1
-                                        • Previous Recognition           • SAP                    Pedimento from DASZA
-          • ETA Altamira, Tamps, Mex.
-                                        • Declaration Form               • Microsoft Dynamics   • Monthly Import V1
-                                        • Pedimento / Immex              • Millennium Aduanas     Pedimento
-          DOCUMENTS
-                                                                         • Microsip             • From WHIRLPOOL
-          • Bill of lading to DASZA
-                                        DASZA 3PL LOGISTICS
-          • Invoice                     IMPORTS AS CONSIGNEE
-          • Quantity                                                                            DASZA Reports to the
-          • Technical Data                                                                      Mexican Government
-          • Speci cation Data                                                                   WHIRLPOOL takes full
-          • Certi cate Of Origin                                                                responsibility
-                                         Freight DASZA Logistics
-                                         Altamira to Monterrey
-fi
-
-
-
-
-     fi
-                              Implementation / Project
-                              Management
-
-
-
-
-•   OEA
-•   SAP / Oracle / D System
-•   IMMEX AAA
-•   Logistics
-•   Customs
-•   Trade Compliance
-•   Procurement Planning.
-•   Safety Stocks
-•   Performance Indicators
-     TMEC / Bene ts
-     - Corporate Social
-     Responsibilities
-
-fi
-                                         SC
-                                         SERVICES
-
-                                  CEDIS APODACA
-                                   120,000 SQF
-                                   Calle D 502, 504, 505, 507
-                                   Calle G 501
-                                   Parque Ind Almacentro
-                                   50,000 SQF Kalos.
-       JOSE MANUEL SANCHEZ A.      Apodaca NL
-       jmsanchez@dasza.com
-                                  CEDIS QUERÉTARO
-       Calzada del Valle 255 2A    70,000 SQF
-       Col del Valle               Cam San Idelfonso 6A
-       San Pedro 66220             Parque Ind Finsa
-                                   Querétaro, Qro
-  TEL + 52 (81) 8368 2483         OFFICE MANZANILLO
-  CEL + 52 (81) 1916 1086         CUSTOMS BROKER 6078
-SKYPE jmdasza1                    TORRE PUERTO
-       www.dasza.com
-
