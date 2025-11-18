@@ -3,8 +3,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-// Static import so the logo is bundled and works in production even if it's outside /public
-import logoSrc from '@/../IMAGES/DLT Logistics LOGO.png'
 import { useRouter } from 'next/navigation'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
@@ -48,7 +46,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src={logoSrc}
+              src="/images/DLT Logistics LOGO.png"
               alt="DLT Logistics Logo"
               width={36}
               height={36}
