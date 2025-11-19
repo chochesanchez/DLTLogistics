@@ -3,7 +3,9 @@ import { Resend } from 'resend'
 import { z } from 'zod'
 import { createClient } from '@supabase/supabase-js'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Lazily configure Resend so builds (e.g. CI) don't fail when the API key is missing
+const resendApiKey = process.env.RESEND_API_KEY
+const resend = resendApiKey ? new Resend(resendApiKey) : null
 
 const baseSchema = z.object({
   formType: z.enum(['contact', 'quote']),
@@ -99,14 +101,18 @@ export async function POST(request: Request) {
       .map(r => r.trim())
       .filter(Boolean)
 
-    await resend.emails.send({
-      from: process.env.EMAIL_FROM as string,
-      to: (recipients.length ? recipients : (process.env.EMAIL_TO as string)) as any,
-      subject,
-      html,
-      text,
-      reply_to: parsed.email,
-    })
+    if (resend) {
+      await resend.emails.send({
+        from: process.env.EMAIL_FROM as string,
+        to: (recipients.length ? recipients : (process.env.EMAIL_TO as string)) as any,
+        subject,
+        html,
+        text,
+        reply_to: parsed.email,
+      })
+    } else {
+      console.warn('Resend API key is not configured; skipping email send.')
+    }
 
     // Persist to Supabase if envs are present
     if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE) {
