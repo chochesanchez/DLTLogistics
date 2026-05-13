@@ -1,139 +1,127 @@
-### Project documentation (DLT Logistics website)
+![DLT Logistics Logo](public/images/DLT%20Logistics%20LOGO.png)
 
-- Overview
-    - Public site for DLT Logistics (marketing + lead capture)
-    - Live domains: [dltlogistics.com.mx](http://dltlogistics.com.mx/) (prod), dltlogistics.vercel.app (prod alias)
-    - Hosting/CI: Vercel (team scope: Common Org). Use project dashboard for deployments/logs/settings [Project dashboard](https://vercel.com/docs/projects/project-dashboard) and [Project overview](https://vercel.com/docs/projects/overview)
-- Core user journeys
-    - Learn services (Last Mile, Storage, Retail, Fulfillment)
-    - View “Trusted by Industry Leaders”
-    - Submit “Contact us” or “Get Quote” forms
-    - Reach support via WhatsApp floating button
-- Key features
-    - Sticky top navigation; “Contact us” emphasized
-    - Hero with bottom-anchored image
-    - KPI widgets (97.9%, 4.8/5, +20,000)
-    - “We are” intro aligned to grid; logo above copy; “Learn more...” link to About
-    - Services grid with responsive cards
-    - Trusted by Industry Leaders marquee (CSS loop, left-to-right, duplicated logos for seamless motion)
-    - WhatsApp floating button (link: https://wa.link/5trkad)
-    - Footer with Quick Links (Technology temporarily hidden)
-- Pages and primary files
-    - Home: src/app/page.tsx
-    - About: src/app/about/page.tsx
-    - Services (index + subpages): src/app/services
-    - Quote: src/app/quote/page.tsx and src/app/quote/thank-you/page.tsx
-    - Contact: src/app/contact/page.tsx
-    - API (email): src/app/api/contact/route.ts
-- Forms and email pipeline
-    - Both Contact and Quote submit to /api/contact via JSON
-    - Validation: Zod; honeypot field website
-    - Email provider: Resend
-    - Subject lines:
-        - Contact: “New CONTACT message — [name]”
-        - Quote: “New QUOTE request — [company or name]”
-    - Body: HTML table of all non-empty fields; includes plain-text alternative
-    - Reply-To: submitter email
-    - Optional persistence (if envs present): Supabase inserts to web_form_submissions
-- Content locations
-    - Logos and images: public/images and IMAGES/
-    - Partner logos list: inline in src/app/page.tsx (duplicated for seamless marquee)
-- Environment variables (Prod & Preview)
-    - RESEND_API_KEY
-    - EMAIL_FROM (verified sender on your domain)
-    - EMAIL_TO
-    - Optional: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE
-    - Optional map key: NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-- Deployment (CLI)
-    - vercel whoami
-    - vercel link --project dltlogistics --yes --scope commonorg
-    - vercel --prod --yes --scope commonorg
-    - Manage/inspect in the dashboard [Deployments tab](https://vercel.com/docs/projects/project-dashboard)
-- Operations
-    - Runtime logs and redeploy from Vercel dashboard [Runtime logs docs](https://vercel.com/docs/projects/project-dashboard)
-    - If Outlook/Hotmail junking: add sender/domain to Safe Senders, ensure SPF/DKIM/DMARC, and consider disabling tracking in Resend
-- Accessibility and SEO
-    - next/image with alt text, semantic headings
-    - Metadata in src/app/layout.tsx (OpenGraph/Twitter)
-    - Color contrast on KPI and buttons meets typical AA
-- Known toggles
-    - Technology link hidden in footer (easy re-enable)
+# DLT Logistics Website
 
-### Technical reference (stack, architecture, and ops)
+**Live:** [dltlogistics.com.mx](http://dltlogistics.com.mx/)
+**Preview:** dltlogistics.vercel.app  
+**Hosting:** Vercel (Common Org scope)
 
-- Tech stack
-    - Next.js (App Router), React 18, TypeScript
-    - Tailwind CSS; custom utilities in src/app/globals.css
-    - Email: Resend
-    - Optional persistence: Supabase (server-side SDK)
-    - Tooling: ESLint (next config), Jest, ts-node (scripts), Prisma present but not required by email flow
-    - Hosting: Vercel; GitHub Actions workflow (deploy.yml) supports token-based deploys
-- Repository layout (top-level)
-    - src/app
-        - page.tsx (home), about/, services/, quote/, contact/, api/contact/route.ts
-        - layout.tsx, globals.css
-    - src/components
-        - shared/Header.tsx, shared/Footer.tsx
-        - ui/Modal.tsx, ui/ContactForm.tsx (simple email form), ui/BusinessContactForm.tsx (current contact form with solutions), ui/PartnersMarquee.tsx (not used when CSS marquee is active)
-    - public/images (web assets)
-    - IMAGES/ (imported static images)
-    - .github/workflows (ci/deploy)
-    - tailwind.config.js, postcss.config.js, tsconfig.json, jest.config.js
-- Commands
-    - npm run dev (local)
-    - npm run build; npm start
-    - npm run lint; npm test
-    - vercel dev (optional local with Vercel envs)
-    - vercel --prod --yes --scope commonorg (prod deploy)
-- Environment variables
-    - RESEND_API_KEY: Resend API key (verify domain, use forms@… sender)
-    - EMAIL_FROM: sender on verified domain (e.g., [forms@dltlogistics.com.mx](mailto:forms@dltlogistics.com.mx))
-    - EMAIL_TO: destination (comma-separated supported)
-    - NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE (optional persistence)
-    - NEXT_PUBLIC_GOOGLE_MAPS_API_KEY (optional)
-    - Set in Vercel Project Settings; changes take effect on next deployment [Project settings](https://vercel.com/docs/projects/overview)
-- Email API (src/app/api/contact/route.ts)
-    - Accepts JSON and form POSTs
-    - Schemas:
-        - Common: formType ('contact'|'quote'), name, email, phone?, company?, message?
-        - Quote extras: product?, quantity?, volume?, weight?, photoUrl?, hsCode?, origin?, port?, frequency?, destinations?, timing?, address?, storage?, transportConditions?, additionalServices?, solutions?
-    - Honeypot: website (silently accepted if filled)
-    - Sends Resend email (HTML + text); reply_to set to submitter
-    - If Supabase envs exist: inserts payload to web_form_submissions table
-- Marquee (Trusted by leaders)
-    - Production path uses pure CSS loop for smooth GPU compositing:
-        - .partners-marquee-track with animation marquee-ltr (translateX(-50%) → 0%)
-        - Logos duplicated in the array to create a continuous loop
-    - If you prefer a code-driven marquee, ui/PartnersMarquee.tsx implements a right-to-left auto-scroll with drag-to-pause, sub-pixel accumulation and wrapping (currently not mounted)
-- Styling and utilities (src/app/globals.css)
-    - partner-card box shadow and color balance for clean edges
-    - partners-marquee-viewport padding for shadow fade
-    - responsive spacing reductions across sections (KPI, About, Services, CTA, Contact)
-    - nowrap helper for metric text
-- Navigation
-    - Sticky header (blurred background); desktop nav order: About us, Services, Get Quote, Contact us (button)
-    - Mobile sheet with contact button emphasized
-- Forms
-    - BusinessContactForm.tsx (English): first/last name, email, phone, postal code, company, title, multi-select solutions (checkbox dropdown), message.
-    - Home and Contact pages mount BusinessContactForm
-    - Quote page maps legacy fields to API schema
-    - Honeypot field website included on submit
-- Performance
-    - next/image everywhere for responsive/optimized assets
-    - CSS-only marquee reduces JS work on mobile
-    - will-change applied to marquee track for stable compositing
-- CI/CD and operations
-    - GitHub workflow .github/workflows/deploy.yml supports token-based “vercel deploy --prod”
-    - For manual deploys use CLI; monitor via Vercel dashboard [Deployments tab](https://vercel.com/docs/projects/project-dashboard)
-    - Logs and runtime inspection available in the dashboard [Runtime logs](https://vercel.com/docs/projects/project-dashboard)
-- Security and deliverability
-    - Resend requires SPF/DKIM/DMARC on the sender domain; avoid open/click tracking if Outlook deliverability issues persist
-    - Honeypot reduces bot submissions; consider reCAPTCHA v3 if spam increases
-- Notes and toggles
-    - Footer “Technology” link hidden (commented) until content ready
-    - ui/PartnersMarquee.tsx retained for experimentation but not currently mounted in prod (CSS loop in use)
-    - Prisma dependency is present but not used by the email flow; safe to remove if not needed elsewhere
-- Suggested next steps
-    - Add analytics/insights in Vercel’s dashboard [Speed Insights](https://vercel.com/docs/projects/project-dashboard)
-    - Add monitoring for email delivery (Resend webhooks or dashboard)
-    - Integrate Supabase persistence in production if you want a permanent submissions archive
+---
+
+## Overview
+
+DLT Logistics’ public website serves as a marketing and lead capture platform, enabling users to:
+
+- Explore services (Last Mile, Storage, Retail, Fulfillment)
+- View trusted partners and industry leaders
+- Submit “Contact Us” or “Get Quote” forms
+- Reach support via WhatsApp
+
+---
+
+## Features
+
+- **Sticky Navigation:** Prominent “Contact Us” button
+- **Hero Section:** Bottom-anchored image, KPIs (97.9%, 4.8/5, +20,000)
+- **Responsive Services Grid:** With cards for each service
+- **Trusted by Industry Leaders:** Seamless CSS marquee with partner logos
+- **WhatsApp Button:** Floating, direct link ([wa.link/5trkad](https://wa.link/5trkad))
+- **Accessible & SEO-Ready:** Semantic headings, alt text, OpenGraph/Twitter metadata
+
+---
+
+## Pages
+
+- **Home:** `src/app/page.tsx`
+- **About:** `src/app/about/page.tsx`
+- **Services:** `src/app/services/`
+- **Quote:** `src/app/quote/page.tsx`, `src/app/quote/thank-you/page.tsx`
+- **Contact:** `src/app/contact/page.tsx`
+- **API (Email):** `src/app/api/contact/route.ts`
+
+---
+
+## Forms & Email Pipeline
+
+- **Forms:** Contact & Quote forms submit to `/api/contact` (JSON)
+- **Validation:** Zod, honeypot field for spam
+- **Email:** Sent via Resend (HTML + text, reply-to submitter)
+- **Optional:** Persists to Supabase if envs present
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js (App Router), React 18, TypeScript
+- **Styling:** Tailwind CSS
+- **Email:** Resend
+- **Persistence:** Supabase (optional)
+- **Tooling:** ESLint, Jest, ts-node
+- **CI/CD:** Vercel, GitHub Actions
+
+---
+
+## Repository Structure
+
+- `src/app/` — Main pages, API routes, layout, global styles
+- `src/components/` — Shared UI (Header, Footer, Modal, BusinessContactForm, etc.)
+- `public/images/` — Web assets and partner logos
+- `.github/workflows/` — CI/CD workflows
+
+---
+
+## Environment Variables
+
+Set these in Vercel Project Settings:
+
+- `RESEND_API_KEY` — Resend API key
+- `EMAIL_FROM` — Verified sender (e.g., forms@dltlogistics.com.mx)
+- `EMAIL_TO` — Destination email(s)
+- `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE` — (Optional) Supabase
+- `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` — (Optional) Google Maps
+
+---
+
+## Development
+
+```bash
+npm install
+npm run dev         # Local dev server (http://localhost:3001)
+
+npm start
+npm run lint
+```
+
+**Deploy:**
+
+```bash
+vercel --prod --yes --scope commonorg
+```
+
+Or use the [Vercel dashboard](https://vercel.com/docs/projects/project-dashboard).
+
+---
+
+## Operations & Notes
+
+- **Logs & Deploys:** Managed via Vercel dashboard
+- **Accessibility:** Color contrast, alt text, semantic HTML
+- **Security:** SPF/DKIM/DMARC required for email; honeypot for bots
+- **Footer “Technology” link:** Hidden until content is ready
+
+---
+
+## Assets
+
+- Logos and images: `public/images/`
+- Partner logos: `public/images/partners/`
+
+---
+
+## License
+
+This project is proprietary and not open source.
+
+---
+
+For questions or support, use the Contact form or WhatsApp button on the site. - GitHub workflow .github/workflows/deploy.yml supports token-based “vercel deploy --prod”
