@@ -59,13 +59,18 @@ export default function QuotePage() {
       additionalServices: formData.additionalServices,
     }
     try {
-      await fetch('/api/contact', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
-    } catch (err) {
-      // no-op; we still take user to thank you page
+      if (!res.ok) {
+        alert('Sorry, your quote request could not be sent. Please try again or contact us by WhatsApp.')
+        return
+      }
+    } catch {
+      alert('Sorry, your quote request could not be sent. Please check your connection and try again.')
+      return
     }
     router.push('/quote/thank-you')
   }

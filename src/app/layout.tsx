@@ -30,9 +30,6 @@ export const metadata: Metadata = {
       'Storage. Distribution. Fulfillment. Reliable logistics services in Mexico.',
     images: ['/favicon.png'],
   },
-  alternates: {
-    canonical: '/',
-  },
   icons: {
     icon: '/favicon.png',
   },
@@ -44,12 +41,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
+    <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="DLT Logistics - Last Mile & Distribution" />
-        <link rel="icon" href="/favicon.png" />
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger

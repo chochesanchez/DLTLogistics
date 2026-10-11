@@ -32,12 +32,15 @@ export default function BusinessContactForm() {
         // When multiple selection is enabled, collect all selected options explicitly
         const payload: Record<string, unknown> = Object.fromEntries(fd.entries())
         payload.solutions = selected
-        await fetch('/api/contact', {
+        const res = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         })
-        setOpen(true)
+        if (res.ok) setOpen(true)
+        else alert('Sorry, your message could not be sent. Please try again or contact us by WhatsApp.')
+      } catch {
+        alert('Sorry, your message could not be sent. Please check your connection and try again.')
       } finally {
         setSubmitting(false)
       }
