@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
 import { createClient } from '@supabase/supabase-js'
+import { locationFromHeaders } from '@/lib/geo'
 
 // Lazily configure Resend so builds (e.g. CI) don't fail when the API key is missing
 const resendApiKey = process.env.RESEND_API_KEY
@@ -19,7 +20,24 @@ const baseSchema = z.object({
   lastName: z.string().optional(),
   postalCode: z.string().optional(),
   title: z.string().optional(),
+  phoneCountry: z.string().optional(),
 })
+
+// Friendly labels for the notification email, in display order.
+const LABELS: Record<string, string> = {
+  name: 'Name',
+  lastName: 'Last name',
+  email: 'Email',
+  phone: 'Phone',
+  phoneCountry: 'Phone country',
+  location: 'Location (approx.)',
+  company: 'Company',
+  title: 'Title',
+  postalCode: 'Postal code',
+  address: 'Address',
+  solutions: 'Interested in',
+  message: 'Message',
+}
 
 function escapeHtml(s: string): string {
   return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string)
@@ -74,22 +92,29 @@ export async function POST(request: Request) {
       console.error('Form validation failed:', result.error.flatten())
       return NextResponse.json({ ok: false, error: 'Invalid form data' }, { status: 400 })
     }
-    const parsed = result.data
+    // Approximate location from the visitor's IP (set by Vercel), never from the client.
+    const parsed = { ...result.data, location: locationFromHeaders(request.headers) }
 
     // Honeypot: silently accept to avoid giving bots signal
     if (parsed.website) return NextResponse.json({ ok: true })
 
     const subject =
       parsed.formType === 'quote'
-        ? `New QUOTE request — ${parsed.company ?? parsed.name}`
-        : `New CONTACT message — ${parsed.name}`
+        ? `New quote request — ${parsed.company || parsed.name}`
+        : `New contact request — ${parsed.name}${parsed.company ? ` (${parsed.company})` : ''}`
 
-    const rows = Object.entries(parsed)
-      .filter(([key, value]) => Boolean(value) && !['website'].includes(key))
+    const label = (key: string) => LABELS[key] ?? key.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase())
+    const display = (value: unknown) => (Array.isArray(value) ? value.join(', ') : String(value))
+    const order = Object.keys(LABELS)
+    const fields = Object.entries(parsed)
+      .filter(([key, value]) => !['website', 'formType'].includes(key) && (Array.isArray(value) ? value.length > 0 : Boolean(value)))
+      .sort(([a], [b]) => (order.indexOf(a) === -1 ? 99 : order.indexOf(a)) - (order.indexOf(b) === -1 ? 99 : order.indexOf(b)))
+
+    const rows = fields
       .map(
         ([key, value]) =>
-          `<tr><td style="padding:6px 10px;border-bottom:1px solid #eee"><b>${escapeHtml(key)}</b></td><td style="padding:6px 10px;border-bottom:1px solid #eee">${escapeHtml(
-            String(value),
+          `<tr><td style="padding:6px 10px;border-bottom:1px solid #eee"><b>${escapeHtml(label(key))}</b></td><td style="padding:6px 10px;border-bottom:1px solid #eee">${escapeHtml(
+            display(value),
           ).replace(/\n/g, '<br/>')}</td></tr>`,
       )
       .join('')
@@ -103,10 +128,7 @@ export async function POST(request: Request) {
     `
 
     // Plain-text version (improves deliverability for providers like Outlook/Hotmail)
-    const text = Object.entries(parsed)
-      .filter(([key, value]) => Boolean(value) && !['website'].includes(key))
-      .map(([key, value]) => `${key}: ${String(value)}`)
-      .join('\n')
+    const text = [subject, '', ...fields.map(([key, value]) => `${label(key)}: ${display(value)}`)].join('\n')
 
     // Allow comma-separated multiple recipients in EMAIL_TO
     const recipients = (process.env.EMAIL_TO || '')
