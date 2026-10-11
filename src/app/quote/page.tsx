@@ -95,21 +95,21 @@ export default function QuotePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="bg-dlt-paper py-12 md:py-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-center mb-8">Distribution Services Quote Request</h1>
-          <p className="text-gray-600 text-center mb-8">
+        <div className="bg-white rounded-lg border border-dlt-line p-6 sm:p-10">
+          <h1 className="font-display text-5xl md:text-6xl font-extrabold leading-[0.95] mb-4">Get a quote</h1>
+          <p className="text-dlt-muted text-lg mb-10 max-w-2xl">
             Please complete the following fields to receive a personalized quote for your distribution needs. We will contact you as soon as possible with the details.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Basic Information */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold">Basic Information</h2>
+              <h2 className="font-display text-2xl font-bold pb-2 border-b border-dlt-line">Basic Information</h2>
               
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name *</label>
+                <label htmlFor="name" className="block text-sm font-semibold">Name *</label>
                 <input
                   type="text"
                   id="name"
@@ -117,12 +117,12 @@ export default function QuotePage() {
                   required
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 />
               </div>
 
               <div>
-                <label htmlFor="business" className="block text-sm font-medium text-gray-700">Business/Company *</label>
+                <label htmlFor="business" className="block text-sm font-semibold">Business/Company *</label>
                 <input
                   type="text"
                   id="business"
@@ -130,12 +130,12 @@ export default function QuotePage() {
                   required
                   value={formData.business}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email *</label>
+                <label htmlFor="email" className="block text-sm font-semibold">Email *</label>
                 <input
                   type="email"
                   id="email"
@@ -143,12 +143,12 @@ export default function QuotePage() {
                   required
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 />
               </div>
 
               <div>
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address *</label>
+                <label htmlFor="address" className="block text-sm font-semibold">Address *</label>
                 <input
                   type="text"
                   id="address"
@@ -156,29 +156,29 @@ export default function QuotePage() {
                   required
                   value={formData.address}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 />
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number</label>
+                <label htmlFor="phone" className="block text-sm font-semibold">Phone Number</label>
                 <input
                   type="tel"
                   id="phone"
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 />
               </div>
             </div>
 
             {/* Product Information */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold">Product Information</h2>
+              <h2 className="font-display text-2xl font-bold pb-2 border-b border-dlt-line">Product Information</h2>
               
               <div>
-                <label htmlFor="productType" className="block text-sm font-medium text-gray-700">Product Type *</label>
+                <label htmlFor="productType" className="block text-sm font-semibold">Product Type *</label>
                 <input
                   type="text"
                   id="productType"
@@ -187,12 +187,12 @@ export default function QuotePage() {
                   placeholder="e.g., Electronics, food, textiles, etc."
                   value={formData.productType}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 />
               </div>
 
               <div>
-                <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">Product Quantity *</label>
+                <label htmlFor="quantity" className="block text-sm font-semibold">Product Quantity *</label>
                 <input
                   type="text"
                   id="quantity"
@@ -201,24 +201,24 @@ export default function QuotePage() {
                   placeholder="e.g., Number of units, total weight, volume, etc."
                   value={formData.quantity}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 />
               </div>
             </div>
 
             {/* Service Requirements */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold">Service Requirements</h2>
+              <h2 className="font-display text-2xl font-bold pb-2 border-b border-dlt-line">Service Requirements</h2>
               
               <div>
-                <label htmlFor="frequency" className="block text-sm font-medium text-gray-700">Service Frequency *</label>
+                <label htmlFor="frequency" className="block text-sm font-semibold">Service Frequency *</label>
                 <select
                   id="frequency"
                   name="frequency"
                   required
                   value={formData.frequency}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 >
                   <option value="one-time">One-time</option>
                   <option value="weekly">Weekly</option>
@@ -228,7 +228,7 @@ export default function QuotePage() {
               </div>
 
               <div>
-                <label htmlFor="destinations" className="block text-sm font-medium text-gray-700">Shipping Destinations *</label>
+                <label htmlFor="destinations" className="block text-sm font-semibold">Shipping Destinations *</label>
                 <textarea
                   id="destinations"
                   name="destinations"
@@ -237,19 +237,19 @@ export default function QuotePage() {
                   value={formData.destinations}
                   onChange={handleInputChange}
                   rows={3}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 />
               </div>
 
               <div>
-                <label htmlFor="storage" className="block text-sm font-medium text-gray-700">Storage Requirements *</label>
+                <label htmlFor="storage" className="block text-sm font-semibold">Storage Requirements *</label>
                 <select
                   id="storage"
                   name="storage"
                   required
                   value={formData.storage}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 >
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
@@ -257,7 +257,7 @@ export default function QuotePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Transport Conditions *</label>
+                <label className="block text-sm font-semibold mb-2">Transport Conditions *</label>
                 <div className="space-y-2">
                   {['fragile', 'hazardous', 'none', 'other'].map((condition) => (
                     <div key={condition} className="flex items-center">
@@ -268,10 +268,10 @@ export default function QuotePage() {
                         value={condition}
                         checked={formData.transportConditions.includes(condition)}
                         onChange={handleCheckboxChange}
-                        className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+                        className="h-4 w-4 accent-dlt-ink"
                       />
                       <label htmlFor={`transport-${condition}`} className="ml-2 block text-sm text-gray-700">
-                        {condition.charAt(0).toUpperCase() + condition.slice(1)} handling
+                        {condition === 'none' ? 'No special handling' : condition === 'other' ? 'Other' : `${condition.charAt(0).toUpperCase() + condition.slice(1)} handling`}
                       </label>
                     </div>
                   ))}
@@ -279,14 +279,14 @@ export default function QuotePage() {
               </div>
 
               <div>
-                <label htmlFor="deliveryTiming" className="block text-sm font-medium text-gray-700">Delivery Timing *</label>
+                <label htmlFor="deliveryTiming" className="block text-sm font-semibold">Delivery Timing *</label>
                 <select
                   id="deliveryTiming"
                   name="deliveryTiming"
                   required
                   value={formData.deliveryTiming}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 >
                   <option value="24h">24-hour delivery</option>
                   <option value="48h">48-hour delivery</option>
@@ -297,7 +297,7 @@ export default function QuotePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Additional Services</label>
+                <label className="block text-sm font-semibold mb-2">Additional Services</label>
                 <div className="space-y-2">
                   {['tracking', 'packaging', 'insurance', 'other'].map((service) => (
                     <div key={service} className="flex items-center">
@@ -308,7 +308,7 @@ export default function QuotePage() {
                         value={service}
                         checked={formData.additionalServices.includes(service)}
                         onChange={handleCheckboxChange}
-                        className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+                        className="h-4 w-4 accent-dlt-ink"
                       />
                       <label htmlFor={`service-${service}`} className="ml-2 block text-sm text-gray-700">
                         {service === 'tracking' ? 'Real-time tracking'
@@ -322,7 +322,7 @@ export default function QuotePage() {
               </div>
 
               <div>
-                <label htmlFor="comments" className="block text-sm font-medium text-gray-700">Additional Comments</label>
+                <label htmlFor="comments" className="block text-sm font-semibold">Additional Comments</label>
                 <textarea
                   id="comments"
                   name="comments"
@@ -330,7 +330,7 @@ export default function QuotePage() {
                   onChange={handleInputChange}
                   rows={4}
                   placeholder="Provide any additional information relevant to your quote request"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+                  className="mt-1.5 input-field"
                 />
               </div>
             </div>
@@ -338,7 +338,7 @@ export default function QuotePage() {
             <div className="pt-4">
               <button
                 type="submit"
-                className="w-full bg-primary text-white py-3 px-6 rounded-lg hover:bg-primary-dark transition-colors"
+                className="w-full btn-primary"
               >
                 Submit Quote Request
               </button>

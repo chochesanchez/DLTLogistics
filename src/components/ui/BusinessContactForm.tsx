@@ -156,7 +156,7 @@ export default function BusinessContactForm() {
           </div>
         )}
 
-        <button type="submit" className="w-full btn-primary disabled:opacity-60" disabled={submitting}>{submitting ? 'Sending…' : 'Send'}</button>
+        <button type="submit" className="w-full btn-primary disabled:opacity-60" disabled={submitting}>{submitting ? 'Sending…' : 'Send message'}</button>
       </form>
 
       <Modal open={open} onClose={() => setOpen(false)} title="Thank you!">

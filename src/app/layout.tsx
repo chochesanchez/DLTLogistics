@@ -3,10 +3,14 @@ import type { Metadata } from 'next'
 import { Header } from '@/components/shared/Header'
 import { Footer } from '@/components/shared/Footer'
 import './globals.css'
+import { Barlow, Barlow_Condensed } from 'next/font/google'
+
+const barlow = Barlow({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-barlow', display: 'swap' })
+const barlowCondensed = Barlow_Condensed({ subsets: ['latin'], weight: ['600', '700', '800'], variable: '--font-barlow-condensed', display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dltlogistics.com.mx'),
-  title: 'DLT Logistics — Last‑Mile & Distribution in Mexico',
+  title: { default: 'DLT Logistics | Storage, fulfillment and last-mile delivery in Monterrey', template: '%s | DLT Logistics' },
   description:
     "DLT Logistics is the last‑mile and domestic distribution arm of the Dasza group, delivering B2B, B2C and omnichannel parcels across Mexico's main metropolitan areas.",
   keywords:
@@ -18,7 +22,7 @@ export const metadata: Metadata = {
     url: '/',
     siteName: 'DLT Logistics',
     images: [
-      { url: '/favicon.png', width: 256, height: 256, alt: 'DLT Logistics' },
+      { url: '/images/site/truck-road.jpg', width: 2000, height: 1333, alt: 'DLT Logistics truck on the road' },
     ],
     locale: 'en_US',
     type: 'website',
@@ -28,7 +32,7 @@ export const metadata: Metadata = {
     title: 'DLT Logistics — Last‑Mile & Distribution in Mexico',
     description:
       'Storage. Distribution. Fulfillment. Reliable logistics services in Mexico.',
-    images: ['/favicon.png'],
+    images: ['/images/site/truck-road.jpg'],
   },
   icons: {
     icon: '/favicon.png',
@@ -41,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${barlow.variable} ${barlowCondensed.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -74,15 +78,13 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-poppins">
+      <body>
         <Header />
-        <div className="pt-16">
-          {children}
-        </div>
+        <main>{children}</main>
         <Footer />
         {/* Floating WhatsApp Button */}
         <a
-          href="https://wa.link/5trkad"
+          href="https://wa.me/5218119161086"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"

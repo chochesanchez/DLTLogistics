@@ -22,10 +22,19 @@ module.exports = {
           light: '#F2F4F8',
           dark: '#1C1C1E',
         },
+        // Redesign tokens (brand yellow unchanged)
+        dlt: {
+          yellow: '#FFCC00',
+          yellowDark: '#E6B800',
+          ink: '#1C1C1E',
+          paper: '#F2F4F8',
+          line: '#E1E4EA',
+          muted: '#5B6070',
+        },
       },
       fontFamily: {
-        poppins: ['Poppins', 'system-ui', 'sans-serif'],
-        sans: ['Poppins', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-barlow)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-barlow-condensed)', 'var(--font-barlow)', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

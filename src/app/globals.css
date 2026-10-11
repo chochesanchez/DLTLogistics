@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,25 +9,26 @@
   }
 
   body {
-    @apply bg-white font-poppins text-neutral-900;
+    @apply bg-white font-sans text-dlt-ink antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-poppins font-bold;
+  :focus-visible {
+    outline: 2px solid #1C1C1E;
+    outline-offset: 2px;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 font-semibold text-black bg-[#FFCC00] hover:bg-[#E6B800] transition-colors rounded-lg;
+    @apply inline-flex items-center justify-center h-12 px-6 font-semibold text-dlt-ink bg-dlt-yellow hover:bg-dlt-yellowDark transition-colors rounded-md;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 font-semibold text-black bg-white border-2 border-[#FFCC00] hover:bg-[#FFCC00] transition-colors rounded-lg;
+    @apply inline-flex items-center justify-center h-12 px-6 font-semibold text-dlt-ink bg-white border-2 border-dlt-ink hover:bg-dlt-ink hover:text-white transition-colors rounded-md;
   }
 
   .input-field {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFCC00] focus:border-transparent;
+    @apply block w-full h-12 px-3.5 border border-dlt-line rounded-md bg-white text-dlt-ink placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-dlt-yellow focus:border-dlt-ink;
   }
 
   .section-container {
@@ -101,3 +100,36 @@
     white-space: nowrap;
   }
 } 
+/* Hero delivery tracker: the truck drives the lane once, stops light up in order */
+@keyframes truck-drive {
+  from { left: 0%; }
+  to { left: 100%; }
+}
+@keyframes lane-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes stop-on {
+  from { background-color: #fff; color: #9AA0AC; border-color: #E1E4EA; }
+  to { background-color: #1C1C1E; color: #FFCC00; border-color: #1C1C1E; }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+.tracker-truck { animation: truck-drive 4.2s cubic-bezier(.55,.05,.35,1) 0.6s both; }
+.tracker-fill { transform-origin: left; animation: lane-fill 4.2s cubic-bezier(.55,.05,.35,1) 0.6s both; }
+.tracker-stop { animation: stop-on 0.3s ease-out both; }
+.tracker-reveal { animation: fade-in 0.4s ease-out both; }
+
+/* Lane markings used as a divider motif */
+.lane-dashes {
+  background-image: repeating-linear-gradient(90deg, #FFCC00 0 48px, transparent 48px 96px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .tracker-truck, .tracker-fill, .tracker-stop, .tracker-reveal { animation: none !important; }
+  .tracker-truck { left: 100%; }
+  .tracker-stop { background-color: #1C1C1E; color: #FFCC00; border-color: #1C1C1E; }
+}

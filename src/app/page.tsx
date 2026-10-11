@@ -1,310 +1,142 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
-import Reveal from '@/components/ui/Reveal'
+import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import BusinessContactForm from '@/components/ui/BusinessContactForm'
-// Using pure CSS marquee for smoothness; user pan was causing micro-jitters
-import React from 'react'
-import { ShieldCheckIcon, ChartBarIcon, TruckIcon } from '@heroicons/react/24/outline'
- 
+import DeliveryTracker from '@/components/home/DeliveryTracker'
+import ClientLogos from '@/components/home/ClientLogos'
+import { COMPANY, FLOW, KPIS, SERVICES } from '@/content/site'
 
 export default function Home() {
-  const services = [
-    {
-      title: 'Last Mile',
-      path: 'last-mile',
-      description: 'Same-day and next-day delivery for parcels up to 100kg.',
-      image: '/images/new2.jpg'
-    },
-    {
-      title: 'Storage',
-      path: 'storage',
-      description: 'Secure, accessible, and organized storage spaces.',
-      image: '/images/Intelligent Stereoscopic Storage Frame.png'
-    },
-    {
-      title: 'Retail',
-      path: 'retail',
-      description: 'Complete retail distribution solutions.',
-      image: '/images/new3.jpg'
-    },
-    {
-      title: 'Fulfillment',
-      path: 'fulfillment',
-      description: 'Complete e-commerce fulfillment solutions.',
-      image: '/images/new1.jpg'
-    }
-  ]
-
   return (
-    <div className='bg-white'>
-      {/* Hero Section */}
-      <div className='relative h-[620px] overflow-hidden'>
-        <Image
-          src="/images/hero-truck.png"
-          alt='DLT Logistics Hero'
-          fill
-          style={{ objectFit: 'cover', objectPosition: 'center bottom' }}
-          priority
-        />
-        <div className='absolute inset-0 bg-black/45' />
-        <div className='relative z-10 mx-auto max-w-6xl px-6 h-full flex items-center justify-center text-center'>
-          <div>
-            <Reveal as='h1' className='text-white font-bold text-5xl md:text-6xl leading-tight mb-6'>
-              Complete Logistics Solutions
-            </Reveal>
-            <Reveal as='p' className='text-white/90 text-xl md:text-2xl'>
-              <span className='text-[#FFCC00] font-bold'>Storage. Distribution. Fulfillment.</span>
-            </Reveal>
-          </div>
-        </div>
-      </div>
-
-      {/* KPI section: vertical widgets on mobile, 3-column on md+ */}
-      <div className='bg-white'>
-        {/* Mobile vertical widgets */}
-        <div className='sm:hidden max-w-6xl mx-auto px-4 py-8'>
-          <div className='flex flex-col gap-3'>
-            <div className='bg-white rounded-lg shadow-sm px-5 py-4 text-center'>
-              <div className='text-2xl font-extrabold text-[#FFCC00]'>97.9%</div>
-              <div className='mt-1 text-gray-700 text-xs'>On-Time Delivery</div>
-            </div>
-            <div className='bg-white rounded-lg shadow-sm px-5 py-4 text-center'>
-              <div className='text-2xl font-extrabold text-[#FFCC00]'>4.8/5</div>
-              <div className='mt-1 text-gray-700 text-xs'>Customer Rating</div>
-            </div>
-            <div className='bg-white rounded-lg shadow-sm px-5 py-4 text-center'>
-              <div className='text-2xl font-extrabold text-[#FFCC00]'>+200,000</div>
-              <div className='mt-1 text-gray-700 text-xs'>square feet areas</div>
+    <>
+      {/* Hero */}
+      <section className="bg-dlt-yellow overflow-hidden">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 pt-12 md:pt-20 pb-14 md:pb-20 grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-6">
+            <h1 className="font-display text-[3.4rem] leading-[0.92] sm:text-7xl lg:text-[5.6rem] font-extrabold tracking-tight">
+              From our shelves to your customer’s door.
+            </h1>
+            <p className="mt-6 text-lg md:text-xl leading-relaxed max-w-xl">
+              DLT stores, picks, packs and delivers for brands and manufacturers across the Monterrey metro area — same-day or next-day, with proof on every delivery.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/quote" className="inline-flex items-center h-12 px-6 rounded-md bg-dlt-ink text-white font-semibold hover:bg-black transition-colors">
+                Get a quote
+              </Link>
+              <Link href="/services" className="inline-flex items-center h-12 px-6 rounded-md border-2 border-dlt-ink font-semibold hover:bg-dlt-ink hover:text-white transition-colors">
+                See our services
+              </Link>
             </div>
           </div>
-        </div>
-        {/* Desktop grid */}
-        <div className='hidden sm:grid max-w-6xl mx-auto px-6 py-12 grid-cols-3 gap-6 text-center'>
-          <div>
-            <div className='text-4xl font-bold text-[#FFCC00]'>97.9%</div>
-            <div className='mt-1 text-gray-700'>On-Time Delivery</div>
-          </div>
-          <div>
-            <div className='text-4xl font-bold text-[#FFCC00]'>4.8/5</div>
-            <div className='mt-1 text-gray-700'>Customer Rating</div>
-          </div>
-          <div>
-            <div className='text-4xl font-bold text-[#FFCC00]'>+200,000</div>
-            <div className='mt-1 text-gray-700'>square feet areas</div>
+          <div className="lg:col-span-6 lg:pl-6">
+            <DeliveryTracker />
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* About Us Inline Section */}
-      <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 pb-10'>
-        <div className='text-gray-700'>
-          <div className='mt-2 flex items-center gap-2 justify-center'>
-            <Image src='/images/DLT Logistics LOGO.png' alt='DLT Logistics Logo' width={40} height={40} className='h-10 w-10 object-contain' />
-            <span className='text-3xl md:text-4xl font-extrabold text-[#FFCC00]'>DLT</span>
-            <span className='text-3xl md:text-4xl font-extrabold text-gray-800'>Logistics</span>
-          </div>
-          <p className='mt-3 text-lg md:text-xl leading-8'>Serving manufacturing industries in México, suppliers rely on us to handle their physical products, operational information and inventory control. We build long‑term partnerships with the manufacturing sector and operate as an extension of your team.</p>
-          <div className='text-left mt-2'>
-            <Link href='/about' className='text-[#FFCC00] font-semibold hover:underline'>Learn more...</Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Services Section */}
-      <div className='py-14 md:py-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-        <Reveal as='h2' className='text-4xl font-bold text-center mb-10 md:mb-14'>Our Services</Reveal>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
-          {services.map((service, index) => (
-            <Link 
-              href={`/services/${service.path}`}
-              className='block h-full'
-              key={index}
-            >
-              <div className='bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow h-full flex flex-col'>
-                <div className='relative h-48 rounded-t-lg overflow-hidden flex-shrink-0'>
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    className='transition-transform duration-300 hover:scale-105'
-                  />
-                </div>
-                <Reveal className='p-6 flex-grow flex flex-col'>
-                  <h3 className='text-xl font-bold mb-3'>{service.title}</h3>
-                  <p className='text-gray-600 flex-grow'>{service.description}</p>
-                </Reveal>
-              </div>
-            </Link>
+      {/* Road band with KPIs */}
+      <section className="bg-dlt-ink text-white">
+        <div className="h-1.5 lane-dashes" aria-hidden />
+        <dl className="mx-auto max-w-7xl px-5 sm:px-8 py-8 grid sm:grid-cols-3 gap-6">
+          {KPIS.map((k) => (
+            <div key={k.label} className="flex items-baseline gap-3">
+              <dt className="sr-only">{k.label}</dt>
+              <dd className="font-display text-4xl md:text-5xl font-bold text-dlt-yellow tabular-nums whitespace-nowrap">{k.value}</dd>
+              <dd className="text-white/75 leading-tight">{k.label}</dd>
+            </div>
           ))}
-        </div>
-      </div>
+        </dl>
+      </section>
 
-      {/* Partners Section */}
-      <div className='py-24 bg-gray-50'>
-        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-          <Reveal as='h2' className='text-4xl font-bold text-center mb-12'>Trusted By Industry Leaders</Reveal>
-          <div className='partners-marquee-viewport'>
-            <div className='partners-marquee-track'>
-              {[
-                { name: 'BBVA', image: '/images/partners/bbvalogo.png' },
-                { name: 'Office Depot', image: '/images/partners/Office Depot Logo.webp' },
-                { name: 'Walmart', image: '/images/partners/Walmart Logo 2008.png' },
-                { name: 'Soriana', image: '/images/partners/Soriana Logo.webp' },
-                { name: 'Rockwell', image: '/images/partners/Rockwell Automation Logo.jpg' },
-                { name: 'Embraco', image: '/images/partners/Embraco Logo.png' },
-                { name: 'Sanmina', image: '/images/partners/sanminalogo.png' },
-                { name: 'Celestica', image: '/images/partners/Celestica Logo.png' },
-                { name: 'Whirlpool', image: '/images/partners/Whirlpool Logo.png' },
-                { name: 'Carrier', image: '/images/partners/Carrier Corporation Logo.png' },
-                { name: 'Magna', image: '/images/partners/Magna Logo.png' },
-                { name: 'US Motors', image: '/images/partners/US Motors Logo.webp' },
-                { name: 'RXN', image: '/images/partners/RXN logo.png' },
-                { name: 'Regal Beloit', image: '/images/partners/Regal Beloit Logo.png' },
-                { name: 'Fluidmaster', image: '/images/partners/fluidmaster logo.png' },
-                { name: 'Tuopu Group', image: '/images/partners/Tuopu Group Logo.jpeg' },
-                { name: 'Superior Industries', image: '/images/partners/superior industries logo.png' },
-                { name: 'Dubai', image: '/images/partners/Dubai Logo Dark.png' },
-                { name: 'Dometic', image: '/images/partners/Dometic Logo.webp' },
-                { name: 'ERD Metal Canada', image: '/images/partners/erd-metal-canada logo.png' },
-                { name: 'NSK Japan', image: '/images/partners/NSK Japan Logo.webp' },
-                { name: 'AutoZone', image: '/images/partners/Autozone Logo.png' },
-                { name: 'MotoRad', image: '/images/partners/MotoRad Logo.webp' },
-                { name: 'Metalsa', image: '/images/partners/Metalsa Logo.avif' },
-                { name: "Pilgrim's", image: '/images/partners/Pilgrims Logo.png' },
-                { name: 'Munters', image: '/images/partners/Munters Logo.webp' },
-                { name: 'Nordic', image: '/images/partners/nordic logo.jpg' },
-                { name: 'Ternium', image: '/images/partners/Ternium Logo.png' },
-                { name: 'Magnesitas', image: '/images/partners/Magnesitas Logo.png' },
-                { name: 'Mitsuba', image: '/images/partners/Mitsuba Corporation Logo.png' },
-                { name: 'Elematec', image: '/images/partners/elematec logo.gif' },
-                { name: 'Daimler Trucks', image: '/images/partners/Daimler Trucks Logo.png' },
-                { name: 'ConMet', image: '/images/partners/Conmet Logo.png' },
-                { name: 'Toyota', image: '/images/partners/Toyota Logo.png' },
-              // duplicate for seamless loop
-                 { name: 'BBVA', image: '/images/partners/bbvalogo.png' },
-                 { name: 'Office Depot', image: '/images/partners/Office Depot Logo.webp' },
-                 { name: 'Walmart', image: '/images/partners/Walmart Logo 2008.png' },
-                 { name: 'Soriana', image: '/images/partners/Soriana Logo.webp' },
-                 { name: 'Rockwell', image: '/images/partners/Rockwell Automation Logo.jpg' },
-                 { name: 'Embraco', image: '/images/partners/Embraco Logo.png' },
-                 { name: 'Sanmina', image: '/images/partners/sanminalogo.png' },
-                 { name: 'Celestica', image: '/images/partners/Celestica Logo.png' },
-                 { name: 'Whirlpool', image: '/images/partners/Whirlpool Logo.png' },
-                 { name: 'Carrier', image: '/images/partners/Carrier Corporation Logo.png' },
-                 { name: 'Magna', image: '/images/partners/Magna Logo.png' },
-                 { name: 'US Motors', image: '/images/partners/US Motors Logo.webp' },
-                 { name: 'RXN', image: '/images/partners/RXN logo.png' },
-                 { name: 'Regal Beloit', image: '/images/partners/Regal Beloit Logo.png' },
-                 { name: 'Fluidmaster', image: '/images/partners/fluidmaster logo.png' },
-                 { name: 'Tuopu Group', image: '/images/partners/Tuopu Group Logo.jpeg' },
-                 { name: 'Superior Industries', image: '/images/partners/superior industries logo.png' },
-                 { name: 'Dubai', image: '/images/partners/Dubai Logo Dark.png' },
-                 { name: 'Dometic', image: '/images/partners/Dometic Logo.webp' },
-                 { name: 'ERD Metal Canada', image: '/images/partners/erd-metal-canada logo.png' },
-                 { name: 'NSK Japan', image: '/images/partners/NSK Japan Logo.webp' },
-                 { name: 'AutoZone', image: '/images/partners/Autozone Logo.png' },
-                 { name: 'MotoRad', image: '/images/partners/MotoRad Logo.webp' },
-                 { name: 'Metalsa', image: '/images/partners/Metalsa Logo.avif' },
-                 { name: "Pilgrim's", image: '/images/partners/Pilgrims Logo.png' },
-                 { name: 'Munters', image: '/images/partners/Munters Logo.webp' },
-                 { name: 'Nordic', image: '/images/partners/nordic logo.jpg' },
-                 { name: 'Ternium', image: '/images/partners/Ternium Logo.png' },
-                 { name: 'Magnesitas', image: '/images/partners/Magnesitas Logo.png' },
-                 { name: 'Mitsuba', image: '/images/partners/Mitsuba Corporation Logo.png' },
-                 { name: 'Elematec', image: '/images/partners/elematec logo.gif' },
-                 { name: 'Daimler Trucks', image: '/images/partners/Daimler Trucks Logo.png' },
-                 { name: 'ConMet', image: '/images/partners/Conmet Logo.png' },
-                 { name: 'Toyota', image: '/images/partners/Toyota Logo.png' },
-              ].map((partner, index) => (
-                <div key={index} className='partner-card'>
-                  <div className='relative w-40 h-20'>
-                    <Image
-                      src={partner.image}
-                      alt={partner.name}
-                      fill
-                      sizes='160px'
-                      style={{ objectFit: 'contain', backgroundColor: 'white' }}
-                      className='partner-logo'
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className='mt-4 text-right'>
-            <Link href='/about#partners' className='inline-block text-[#FFCC00] font-semibold hover:underline text-base md:text-lg'>See all →</Link>
-          </div>
+      {/* Services */}
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 py-20 md:py-28">
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
+          <h2 className="font-display text-5xl md:text-6xl font-bold leading-[0.95] max-w-xl">What we do</h2>
+          <p className="text-lg text-dlt-muted max-w-md">Use one service or all four. Your inventory, orders and deliveries stay in one place.</p>
         </div>
-      </div>
+        <ul className="border-t-2 border-dlt-ink">
+          {SERVICES.map((s) => (
+            <li key={s.slug} className="border-b border-dlt-line">
+              <Link href={`/services/${s.slug}`} className="group grid grid-cols-1 sm:grid-cols-[1fr_auto] md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)_auto] gap-x-8 gap-y-2 items-center py-7">
+                <span className="font-display text-3xl md:text-5xl font-bold group-hover:underline decoration-dlt-yellow decoration-[6px] underline-offset-[6px]">{s.name}</span>
+                <span className="hidden md:block text-lg text-dlt-muted leading-relaxed">{s.summary}</span>
+                <span className="relative hidden sm:block h-20 w-32 md:h-24 md:w-40 rounded-md overflow-hidden row-span-2 md:row-span-1">
+                  <Image src={s.image} alt="" fill sizes="160px" className="object-cover" />
+                </span>
+                <span className="md:hidden text-dlt-muted leading-relaxed">{s.summary}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      {/* Why us */}
-      <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16'>
-        <Reveal as='h2' className='text-4xl font-bold text-center mb-10'>Why us</Reveal>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-          <div className='rounded-xl border border-gray-300/40 bg-white shadow-sm p-6 text-center'>
-            <div className='mx-auto h-12 w-12 grid place-items-center text-[#FFCC00] mb-3'>
-              <ShieldCheckIcon className='h-8 w-8 md:h-10 md:w-10' />
-            </div>
-            <div className='font-semibold mb-1'>Operational excellence</div>
-            <p className='text-gray-600 text-sm'>Disciplined processes, traceability and KPI‑driven performance across every lane.</p>
-          </div>
-          <div className='rounded-xl border border-gray-300/40 bg-white shadow-sm p-6 text-center'>
-            <div className='mx-auto h-12 w-12 grid place-items-center text-[#FFCC00] mb-3'>
-              <ChartBarIcon className='h-8 w-8 md:h-10 md:w-10' />
-            </div>
-            <div className='font-semibold mb-1'>Visibility & control</div>
-            <p className='text-gray-600 text-sm'>Real‑time information, inventory and SLA metrics to support informed decisions.</p>
-          </div>
-          <div className='rounded-xl border border-gray-300/40 bg-white shadow-sm p-6 text-center'>
-            <div className='mx-auto h-12 w-12 grid place-items-center text-[#FFCC00] mb-3'>
-              <TruckIcon className='h-8 w-8 md:h-10 md:w-10' />
-            </div>
-            <div className='font-semibold mb-1'>End‑to‑end logistics</div>
-            <p className='text-gray-600 text-sm'>Storage, distribution and fulfillment integrated to your operation and systems.</p>
-          </div>
+      {/* How it works */}
+      <section id="how-it-works" className="scroll-mt-20 bg-dlt-ink text-white">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 py-20 md:py-28">
+          <h2 className="font-display text-5xl md:text-6xl font-bold leading-[0.95] max-w-2xl">How an order moves with DLT</h2>
+          <ol className="mt-14 grid gap-10 md:grid-cols-5 md:gap-6 relative">
+            <span className="hidden md:block absolute left-0 right-0 top-[22px] h-1 lane-dashes" aria-hidden />
+            {FLOW.map((f, i) => (
+              <li key={f.title} className="relative grid grid-cols-[3rem_1fr] md:block gap-4">
+                <span className="relative z-10 grid place-items-center h-12 w-12 rounded-full bg-dlt-yellow text-dlt-ink font-display text-2xl font-bold">
+                  {i + 1}
+                </span>
+                <span>
+                  <span className="block md:mt-6 font-display text-2xl font-bold">{f.title}</span>
+                  <span className="block mt-2 text-white/70 leading-relaxed">{f.text}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
         </div>
-      </div>
+      </section>
 
-      {/* CTA Section */}
-      <div className='py-16 md:py-20 bg-[#FFCC00]'>
-        <div className='mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center'>
-          <Reveal as='h2' className='text-4xl font-bold mb-8'>Ready to Optimize Your Logistics?</Reveal>
-          <Reveal as='p' className='text-xl mb-12' delayMs={120}>Get in touch with our team for a customized solution.</Reveal>
-          <Link 
-            href='/quote' 
-            className='inline-block bg-white px-8 py-4 rounded-lg text-[#FFCC00] font-bold text-lg hover:bg-gray-100 transition-colors'
-          >
-            Get Quote
-          </Link>
+      {/* Photos + Dasza group */}
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 py-20 md:py-28 grid lg:grid-cols-12 gap-6">
+        <div className="lg:col-span-7 relative aspect-[16/10] rounded-lg overflow-hidden">
+          <Image src="/images/site/truck-road.jpg" alt="Delivery truck on a highway" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
         </div>
-      </div>
-
-      {/* Contact Us Section (before footer) */}
-      <div className='bg-white py-16 md:py-20'>
-        <div className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
-          <Reveal as='h2' className='text-4xl font-bold text-center mb-3'>Contact us</Reveal>
-          <Reveal as='p' className='text-center text-gray-700 mb-8'>Every business is unique. Tell us about your needs and we will find the solutions.</Reveal>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto'>
-            <div>
-              <BusinessContactForm />
-            </div>
-            <div className='bg-gray-50 p-8 rounded-lg'>
-              <h3 className='text-2xl font-semibold mb-4'>Talk to our team</h3>
-              <p className='text-gray-700 mb-6'>We usually respond within one business day.</p>
-              <div className='space-y-3 text-gray-700'>
-                <p><span className='font-medium'>Phone:</span> <a href='tel:+528119161086' className='hover:text-primary'>+52 811916 1086</a></p>
-                <p><span className='font-medium'>Email:</span> <a href='mailto:jmsanchez@dasza.com' className='hover:text-primary'>jmsanchez@dasza.com</a></p>
-                <p>
-                  <span className='font-medium'>WhatsApp:</span> <a href='https://wa.link/5trkad' target='_blank' rel='noopener noreferrer' className='hover:text-primary'>Chat with us</a>
-                </p>
-              </div>
-            </div>
+        <div className="lg:col-span-5 grid gap-6">
+          <div className="relative aspect-[16/9] rounded-lg overflow-hidden">
+            <Image src="/images/site/warehouse-yellow.jpg" alt="Warehouse floor with racked inventory" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+          </div>
+          <div className="rounded-lg bg-dlt-paper p-6 md:p-8">
+            <h2 className="font-display text-3xl font-bold leading-tight">Importing? We’re part of the Dasza group.</h2>
+            <p className="mt-3 text-dlt-muted leading-relaxed">
+              Dasza 3PL handles customs, IMMEX and bonded warehousing — DLT takes it the last mile. One team from the port to your customer.
+            </p>
+            <a href={COMPANY.daszaUrl} className="mt-5 inline-flex items-center gap-2 font-semibold underline decoration-dlt-yellow decoration-[3px] underline-offset-4">
+              Visit Dasza 3PL <ArrowRightIcon className="h-4 w-4" aria-hidden />
+            </a>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      {/* Clients */}
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 pb-20 md:pb-28">
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
+          <h2 className="font-display text-4xl md:text-5xl font-bold leading-[0.95] max-w-2xl">Brands and manufacturers we work with</h2>
+          <Link href="/about#clients" className="font-semibold underline decoration-dlt-yellow decoration-[3px] underline-offset-4">See all clients</Link>
+        </div>
+        <ClientLogos limit={12} />
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="bg-dlt-paper">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 py-20 md:py-28 grid lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-4">
+            <h2 className="font-display text-5xl md:text-6xl font-bold leading-[0.95]">Let’s talk deliveries</h2>
+            <p className="mt-5 text-lg text-dlt-muted leading-relaxed">We reply within one business day.</p>
+            <ul className="mt-8 space-y-3 text-lg">
+              <li><a href={COMPANY.phoneHref} className="font-semibold whitespace-nowrap hover:underline">{COMPANY.phone}</a></li>
+              <li><a href={`mailto:${COMPANY.email}`} className="hover:underline">{COMPANY.email}</a></li>
+            </ul>
+          </div>
+          <div className="lg:col-span-8 rounded-lg bg-white border border-dlt-line p-6 sm:p-8">
+            <BusinessContactForm />
+          </div>
+        </div>
+      </section>
+    </>
   )
 }
