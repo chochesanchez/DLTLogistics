@@ -108,19 +108,19 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
       </section>
 
-      {/* Photos + Dasza group */}
-      <section className="mx-auto max-w-7xl px-5 sm:px-8 py-20 md:py-28 grid lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-7 relative aspect-[16/10] rounded-lg overflow-hidden">
-          <Image src="/images/site/dlt-warehouse.jpg" alt={t.meta.ogAlt} fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
-        </div>
-        <div className="lg:col-span-5 grid gap-6 content-between">
-          <div className="relative aspect-[16/9] rounded-lg overflow-hidden">
+      {/* Photos + Dasza group: one grid, both columns end on the same line */}
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 py-20 md:py-28">
+        <div className="grid gap-6 lg:grid-cols-12 lg:grid-rows-2 lg:h-[600px]">
+          <div className="relative aspect-[4/3] lg:aspect-auto lg:col-span-7 lg:row-span-2 rounded-lg overflow-hidden">
+            <Image src="/images/site/warehouse-yellow.jpg" alt={t.meta.ogAlt} fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
+          </div>
+          <div className="relative aspect-[16/9] lg:aspect-auto lg:col-span-5 rounded-lg overflow-hidden">
             <Image src="/images/site/truck-road.jpg" alt={t.home.photoAlts[0]} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
           </div>
-          <div className="rounded-lg bg-dlt-paper p-6 md:p-8">
-            <h2 className="font-display text-3xl font-bold leading-tight">{t.home.groupTitle}</h2>
-            <p className="mt-3 text-dlt-muted leading-relaxed">{t.home.groupText}</p>
-            <div className="mt-5"><TextButton href={COMPANY.daszaUrl} external>{t.home.groupCta}</TextButton></div>
+          <div className="lg:col-span-5 rounded-lg bg-dlt-paper p-6 md:p-8 flex flex-col justify-center">
+            <h2 className="font-display text-3xl md:text-4xl font-bold leading-tight">{t.home.groupTitle}</h2>
+            <p className="mt-3 text-dlt-muted leading-relaxed max-w-md">{t.home.groupText}</p>
+            <div className="mt-6"><TextButton href={COMPANY.daszaUrl} external>{t.home.groupCta}</TextButton></div>
           </div>
         </div>
       </section>

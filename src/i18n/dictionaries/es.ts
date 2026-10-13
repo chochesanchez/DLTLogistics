@@ -6,7 +6,7 @@ export const es: Dict = {
     title: 'DLT Logistics | Almacenaje, fulfillment y entregas de última milla en Monterrey',
     description:
       'DLT Logistics almacena, surte, empaca y entrega para marcas y manufactureras en el área metropolitana de Monterrey, con entregas el mismo día o al día siguiente. Parte del grupo Dasza.',
-    ogAlt: 'Almacén de DLT Logistics en Apodaca, Nuevo León',
+    ogAlt: 'Piso de almacén con inventario en racks listo para distribución',
   },
   nav: {
     services: 'Servicios',
@@ -49,7 +49,7 @@ export const es: Dict = {
   },
   home: {
     identity: 'DLT Logistics, parte del grupo Dasza en Monterrey, México',
-    heroTitle: 'De nuestros anaqueles a la puerta de tu cliente.',
+    heroTitle: 'De nuestras bodegas a la puerta de tu cliente.',
     heroText:
       'Almacenamos, surtimos, empacamos y entregamos para marcas y manufactureras en el área metropolitana de Monterrey, el mismo día o al día siguiente, con prueba de cada entrega.',
     servicesTitle: 'Lo que hacemos',
@@ -158,7 +158,7 @@ export const es: Dict = {
     metaDescription: 'DLT Logistics es el brazo de almacenaje, distribución y última milla del grupo Dasza, al servicio de marcas y manufactureras en Monterrey.',
     title: 'Una extensión de tu equipo',
     lead: 'Marcas, cadenas y manufactureras en México confían en DLT para manejar sus productos, sus pedidos y la información detrás de ellos.',
-    heroAlt: 'Almacén de DLT Logistics en Apodaca, Nuevo León',
+    heroAlt: 'Vista aérea de andenes de un almacén de distribución',
     p1: 'Ofrecemos almacenaje, fulfillment, distribución a retail y entregas de última milla que se adaptan a tu negocio y a tus números de parte. Nuestros equipos se encargan de la operación diaria y dan a tu dirección la visibilidad necesaria para tomar decisiones.',
     p2: 'Trabajamos con tus sistemas y estructuras de datos actuales, así que empezar con DLT no implica cambiar la forma en que opera tu empresa.',
     groupTitle: 'Parte del grupo Dasza',
