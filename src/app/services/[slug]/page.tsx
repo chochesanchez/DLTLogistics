@@ -25,7 +25,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     <>
       <PageIntro title={service.name} lead={service.summary} image={service.image} crumbs={[{ href: '/', label: 'Home' }, { href: '/services', label: 'Services' }]}>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/quote" className="inline-flex items-center h-12 px-6 rounded-md bg-dlt-ink text-white font-semibold hover:bg-black">Get a quote</Link>
+          <Link href="/quote" className="inline-flex items-center h-12 px-6 rounded-md bg-dlt-yellow text-dlt-ink font-semibold hover:bg-dlt-yellowDark">Get a quote</Link>
           <Link href="/contact" className="inline-flex items-center h-12 px-6 rounded-md border-2 border-dlt-ink font-semibold hover:bg-dlt-ink hover:text-white">Talk to our team</Link>
         </div>
       </PageIntro>

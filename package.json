@@ -13,6 +13,7 @@
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@supabase/supabase-js": "^2.45.4",
+    "framer-motion": "^12.23.12",
     "next": "15.5.27",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -29,5 +30,9 @@
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
+  },
+  "overrides": {
+    "motion-dom": "12.23.12",
+    "motion-utils": "12.23.6"
   }
 }

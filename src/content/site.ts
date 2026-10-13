@@ -12,9 +12,9 @@ export const COMPANY = {
 }
 
 // These figures were on the previous site and have no source in the company documents — confirm before keeping.
-export const KPIS = [
-  { value: '97.9%', label: 'on-time delivery' },
-  { value: '4.8/5', label: 'customer rating' },
+export const KPIS: { value: string; label: string; count?: boolean }[] = [
+  { value: '97.9%', label: 'on-time delivery', count: true },
+  { value: '4.8/5', label: 'customer rating', count: true },
   { value: 'Same day', label: 'delivery in the Monterrey metro area' },
 ]
 
@@ -90,32 +90,42 @@ export const SERVICES: Service[] = [
   },
 ]
 
-// Same list as the previous site; "Magna" removed (DASZA's documents show the client is Magnesitas Navarras, kept below).
+// Client logos — same list and order as the original site.
 export const CLIENT_LOGOS: { name: string; src: string }[] = [
+  { name: 'BBVA', src: 'bbvalogo.png' },
+  { name: 'Office Depot', src: 'Office Depot Logo.webp' },
   { name: 'Walmart', src: 'Walmart Logo 2008.png' },
   { name: 'Soriana', src: 'Soriana Logo.webp' },
-  { name: 'Office Depot', src: 'Office Depot Logo.webp' },
-  { name: 'AutoZone', src: 'Autozone Logo.png' },
-  { name: 'BBVA', src: 'bbvalogo.png' },
-  { name: 'Whirlpool', src: 'Whirlpool Logo.png' },
-  { name: 'Embraco', src: 'Embraco Logo.png' },
-  { name: 'Toyota', src: 'Toyota Logo.png' },
-  { name: 'Daimler Truck', src: 'Daimler Trucks Logo.png' },
-  { name: 'ConMet', src: 'Conmet Logo.png' },
-  { name: 'Metalsa', src: 'Metalsa Logo.avif' },
-  { name: 'Ternium', src: 'Ternium Logo.png' },
-  { name: 'Magnesitas Navarras', src: 'Magnesitas Logo.png' },
-  { name: 'Carrier', src: 'Carrier Corporation Logo.png' },
   { name: 'Rockwell Automation', src: 'Rockwell Automation Logo.jpg' },
-  { name: 'Celestica', src: 'Celestica Logo.png' },
+  { name: 'Embraco', src: 'Embraco Logo.png' },
   { name: 'Sanmina', src: 'sanminalogo.png' },
-  { name: 'NSK', src: 'NSK Japan Logo.webp' },
-  { name: 'Dometic', src: 'Dometic Logo.webp' },
+  { name: 'Celestica', src: 'Celestica Logo.png' },
+  { name: 'Whirlpool', src: 'Whirlpool Logo.png' },
+  { name: 'Carrier', src: 'Carrier Corporation Logo.png' },
+  { name: 'Magna', src: 'Magna Logo.png' },
+  { name: 'US Motors', src: 'US Motors Logo.webp' },
+  { name: 'RXN', src: 'RXN logo.png' },
+  { name: 'Regal Beloit', src: 'Regal Beloit Logo.png' },
   { name: 'Fluidmaster', src: 'fluidmaster logo.png' },
+  { name: 'Tuopu Group', src: 'Tuopu Group Logo.jpeg' },
+  { name: 'Superior Industries', src: 'superior industries logo.png' },
+  { name: 'Dubal', src: 'Dubai Logo Dark.png' },
+  { name: 'Dometic', src: 'Dometic Logo.webp' },
+  { name: 'ERD Metal', src: 'erd-metal-canada logo.png' },
+  { name: 'NSK', src: 'NSK Japan Logo.webp' },
+  { name: 'AutoZone', src: 'Autozone Logo.png' },
+  { name: 'MotoRad', src: 'MotoRad Logo.webp' },
+  { name: 'Metalsa', src: 'Metalsa Logo.avif' },
+  { name: 'Pilgrim’s', src: 'Pilgrims Logo.png' },
   { name: 'Munters', src: 'Munters Logo.webp' },
   { name: 'Nordic', src: 'nordic logo.jpg' },
+  { name: 'Ternium', src: 'Ternium Logo.png' },
+  { name: 'Magnesitas Navarras', src: 'Magnesitas Logo.png' },
   { name: 'Mitsuba', src: 'Mitsuba Corporation Logo.png' },
-  { name: 'US Motors', src: 'US Motors Logo.webp' },
+  { name: 'Elematec', src: 'elematec logo.gif' },
+  { name: 'Daimler Truck', src: 'Daimler Trucks Logo.png' },
+  { name: 'ConMet', src: 'Conmet Logo.png' },
+  { name: 'Toyota', src: 'Toyota Logo.png' },
 ]
 
 export const logoSrc = (file: string) => encodeURI(`/images/partners/${file}`)

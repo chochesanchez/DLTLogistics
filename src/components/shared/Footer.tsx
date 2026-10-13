@@ -15,7 +15,7 @@ export function Footer() {
           <div className="mx-auto max-w-7xl px-5 sm:px-8 py-14 grid md:grid-cols-[1fr_auto] gap-6 items-center">
             <h2 className="font-display text-4xl md:text-5xl font-bold leading-[0.95] max-w-2xl">Tell us what you ship. We’ll plan the route.</h2>
             <div className="flex flex-wrap gap-3">
-              <Link href="/quote" className="inline-flex items-center h-12 px-6 rounded-md bg-dlt-ink text-white font-semibold hover:bg-black">Get a quote</Link>
+              <Link href="/quote" className="inline-flex items-center h-12 px-6 rounded-md bg-dlt-ink text-white font-semibold hover:bg-dlt-muted">Get a quote</Link>
               <a href={COMPANY.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center h-12 px-6 rounded-md border-2 border-dlt-ink font-semibold hover:bg-dlt-ink hover:text-white">WhatsApp us</a>
             </div>
           </div>

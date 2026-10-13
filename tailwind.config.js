@@ -26,7 +26,7 @@ module.exports = {
         dlt: {
           yellow: '#FFCC00',
           yellowDark: '#E6B800',
-          ink: '#1C1C1E',
+          ink: '#3D424A',
           paper: '#F2F4F8',
           line: '#E1E4EA',
           muted: '#5B6070',

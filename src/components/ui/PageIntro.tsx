@@ -17,11 +17,11 @@ export default function PageIntro({
   children?: React.ReactNode
 }) {
   return (
-    <section className="bg-dlt-yellow">
+    <section className="bg-white">
       <div className={`mx-auto max-w-7xl px-5 sm:px-8 py-12 md:py-16 grid gap-10 items-center ${image ? 'lg:grid-cols-12' : ''}`}>
         <div className={image ? 'lg:col-span-6' : 'max-w-3xl'}>
           {crumbs && (
-            <nav aria-label="Breadcrumb" className="mb-5 text-sm">
+            <nav aria-label="Breadcrumb" className="mb-5 text-sm text-dlt-muted">
               <ol className="flex flex-wrap gap-2">
                 {crumbs.map((c, i) => (
                   <li key={c.href} className="flex items-center gap-2">
@@ -33,16 +33,16 @@ export default function PageIntro({
             </nav>
           )}
           <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.92] tracking-tight">{title}</h1>
-          {lead && <p className="mt-5 text-lg md:text-xl leading-relaxed max-w-xl">{lead}</p>}
+          {lead && <p className="mt-5 text-lg md:text-xl leading-relaxed max-w-xl text-dlt-muted">{lead}</p>}
           {children}
         </div>
         {image && (
-          <div className="lg:col-span-6 relative aspect-[16/10] rounded-lg overflow-hidden border-2 border-dlt-ink">
+          <div className="lg:col-span-6 relative aspect-[16/10] rounded-lg overflow-hidden">
             <Image src={image} alt="" fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </div>
         )}
       </div>
-      <div className="h-1.5 bg-dlt-ink" aria-hidden />
+      <div className="h-1.5 lane-dashes" aria-hidden />
     </section>
   )
 }

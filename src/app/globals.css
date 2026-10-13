@@ -13,7 +13,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid #1C1C1E;
+    outline: 2px solid #3D424A;
     outline-offset: 2px;
   }
 }
@@ -111,7 +111,7 @@
 }
 @keyframes stop-on {
   from { background-color: #fff; color: #9AA0AC; border-color: #E1E4EA; }
-  to { background-color: #1C1C1E; color: #FFCC00; border-color: #1C1C1E; }
+  to { background-color: #3D424A; color: #FFCC00; border-color: #3D424A; }
 }
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(4px); }
@@ -131,5 +131,15 @@
   html { scroll-behavior: auto; }
   .tracker-truck, .tracker-fill, .tracker-stop, .tracker-reveal { animation: none !important; }
   .tracker-truck { left: 100%; }
-  .tracker-stop { background-color: #1C1C1E; color: #FFCC00; border-color: #1C1C1E; }
+  .tracker-stop { background-color: #3D424A; color: #FFCC00; border-color: #3D424A; }
+}
+
+/* Map labels stay readable on phones; minor cities hide to avoid clutter */
+@media (max-width: 640px) {
+  .map-label { font-size: 24px; }
+  .map-label-strong { font-size: 28px; }
+  .map-label-minor { display: none; }
+}
+.lane-dashes-v {
+  background-image: repeating-linear-gradient(180deg, #FFCC00 0 28px, transparent 28px 56px);
 }

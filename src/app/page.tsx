@@ -3,33 +3,37 @@ import Link from 'next/link'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import BusinessContactForm from '@/components/ui/BusinessContactForm'
 import DeliveryTracker from '@/components/home/DeliveryTracker'
-import ClientLogos from '@/components/home/ClientLogos'
-import { COMPANY, FLOW, KPIS, SERVICES } from '@/content/site'
+import LogoMarquee from '@/components/home/LogoMarquee'
+import ExportMap from '@/components/home/ExportMap'
+import OrderFlow from '@/components/home/OrderFlow'
+import CountUp from '@/components/motion/CountUp'
+import { COMPANY, KPIS, SERVICES } from '@/content/site'
 
 export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-dlt-yellow overflow-hidden">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 pt-12 md:pt-20 pb-14 md:pb-20 grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-6">
-            <h1 className="font-display text-[3.4rem] leading-[0.92] sm:text-7xl lg:text-[5.6rem] font-extrabold tracking-tight">
+      <section className="bg-white overflow-hidden">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 pt-6 md:pt-16 pb-12 md:pb-20 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:pl-6">
+            <DeliveryTracker />
+          </div>
+          <div className="lg:col-span-6 lg:row-start-1">
+            <p className="text-dlt-muted font-medium">DLT Logistics, part of the Dasza group in Monterrey, México</p>
+            <h1 className="mt-3 font-display text-[3.1rem] leading-[0.92] sm:text-7xl lg:text-[5.4rem] font-extrabold tracking-tight">
               From our shelves to your customer’s door.
             </h1>
-            <p className="mt-6 text-lg md:text-xl leading-relaxed max-w-xl">
-              DLT stores, picks, packs and delivers for brands and manufacturers across the Monterrey metro area — same-day or next-day, with proof on every delivery.
+            <p className="mt-6 text-lg md:text-xl leading-relaxed max-w-xl text-dlt-muted">
+              We store, pick, pack and deliver for brands and manufacturers across the Monterrey metro area — same-day or next-day, with proof on every delivery.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/quote" className="inline-flex items-center h-12 px-6 rounded-md bg-dlt-ink text-white font-semibold hover:bg-black transition-colors">
+              <Link href="/quote" className="inline-flex items-center h-12 px-6 rounded-md bg-dlt-yellow text-dlt-ink font-semibold hover:bg-dlt-yellowDark transition-colors">
                 Get a quote
               </Link>
               <Link href="/services" className="inline-flex items-center h-12 px-6 rounded-md border-2 border-dlt-ink font-semibold hover:bg-dlt-ink hover:text-white transition-colors">
                 See our services
               </Link>
             </div>
-          </div>
-          <div className="lg:col-span-6 lg:pl-6">
-            <DeliveryTracker />
           </div>
         </div>
       </section>
@@ -41,7 +45,7 @@ export default function Home() {
           {KPIS.map((k) => (
             <div key={k.label} className="flex items-baseline gap-3">
               <dt className="sr-only">{k.label}</dt>
-              <dd className="font-display text-4xl md:text-5xl font-bold text-dlt-yellow tabular-nums whitespace-nowrap">{k.value}</dd>
+              <dd className="font-display text-4xl md:text-5xl font-bold text-dlt-yellow tabular-nums whitespace-nowrap">{k.count ? <CountUp value={k.value} /> : k.value}</dd>
               <dd className="text-white/75 leading-tight">{k.label}</dd>
             </div>
           ))}
@@ -74,20 +78,7 @@ export default function Home() {
       <section id="how-it-works" className="scroll-mt-20 bg-dlt-ink text-white">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 py-20 md:py-28">
           <h2 className="font-display text-5xl md:text-6xl font-bold leading-[0.95] max-w-2xl">How an order moves with DLT</h2>
-          <ol className="mt-14 grid gap-10 md:grid-cols-5 md:gap-6 relative">
-            <span className="hidden md:block absolute left-0 right-0 top-[22px] h-1 lane-dashes" aria-hidden />
-            {FLOW.map((f, i) => (
-              <li key={f.title} className="relative grid grid-cols-[3rem_1fr] md:block gap-4">
-                <span className="relative z-10 grid place-items-center h-12 w-12 rounded-full bg-dlt-yellow text-dlt-ink font-display text-2xl font-bold">
-                  {i + 1}
-                </span>
-                <span>
-                  <span className="block md:mt-6 font-display text-2xl font-bold">{f.title}</span>
-                  <span className="block mt-2 text-white/70 leading-relaxed">{f.text}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
+          <OrderFlow />
         </div>
       </section>
 
@@ -112,13 +103,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Where we deliver */}
+      <section className="bg-dlt-ink text-white">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 py-20 md:py-28 grid lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-4">
+            <h2 className="font-display text-5xl md:text-6xl font-bold leading-[0.95]">Out of Apodaca, across México</h2>
+            <p className="mt-5 text-lg text-white/75 leading-relaxed">
+              Our own fleet covers the Monterrey metro area every day. For the rest of the country, we coordinate courier and freight partners from the same warehouse.
+            </p>
+          </div>
+          <div className="lg:col-span-8">
+            <ExportMap />
+          </div>
+        </div>
+      </section>
+
       {/* Clients */}
-      <section className="mx-auto max-w-7xl px-5 sm:px-8 pb-20 md:pb-28">
-        <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
-          <h2 className="font-display text-4xl md:text-5xl font-bold leading-[0.95] max-w-2xl">Brands and manufacturers we work with</h2>
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 flex flex-wrap items-end justify-between gap-6 mb-8">
+          <h2 className="font-display text-4xl md:text-5xl font-bold leading-[0.95] max-w-2xl">Trusted by industry leaders</h2>
           <Link href="/about#clients" className="font-semibold underline decoration-dlt-yellow decoration-[3px] underline-offset-4">See all clients</Link>
         </div>
-        <ClientLogos limit={12} />
+        <LogoMarquee />
       </section>
 
       {/* Contact */}
