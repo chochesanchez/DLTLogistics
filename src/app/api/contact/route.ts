@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
 import { createClient } from '@supabase/supabase-js'
+import { locationFromHeaders } from '@/lib/geo'
 
 // Lazily configure Resend so builds (e.g. CI) don't fail when the API key is missing
 const resendApiKey = process.env.RESEND_API_KEY
@@ -15,7 +16,32 @@ const baseSchema = z.object({
   phone: z.string().optional(),
   message: z.string().optional(),
   website: z.string().optional(),
+  // Contact form fields
+  lastName: z.string().optional(),
+  postalCode: z.string().optional(),
+  title: z.string().optional(),
+  phoneCountry: z.string().optional(),
 })
+
+// Friendly labels for the notification email, in display order.
+const LABELS: Record<string, string> = {
+  name: 'Name',
+  lastName: 'Last name',
+  email: 'Email',
+  phone: 'Phone',
+  phoneCountry: 'Phone country',
+  location: 'Location (approx.)',
+  company: 'Company',
+  title: 'Title',
+  postalCode: 'Postal code',
+  address: 'Address',
+  solutions: 'Interested in',
+  message: 'Message',
+}
+
+function escapeHtml(s: string): string {
+  return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string)
+}
 
 const quoteSchema = baseSchema.extend({
   product: z.string().optional(),
@@ -61,39 +87,48 @@ export async function POST(request: Request) {
   try {
     const payload = await readBodyAsObject(request)
     if (!payload.formType) payload.formType = 'contact'
-    const parsed = quoteSchema.parse(payload)
+    const result = quoteSchema.safeParse(payload)
+    if (!result.success) {
+      console.error('Form validation failed:', result.error.flatten())
+      return NextResponse.json({ ok: false, error: 'Invalid form data' }, { status: 400 })
+    }
+    // Approximate location from the visitor's IP (set by Vercel), never from the client.
+    const parsed = { ...result.data, location: locationFromHeaders(request.headers) }
 
     // Honeypot: silently accept to avoid giving bots signal
     if (parsed.website) return NextResponse.json({ ok: true })
 
     const subject =
       parsed.formType === 'quote'
-        ? `New QUOTE request — ${parsed.company ?? parsed.name}`
-        : `New CONTACT message — ${parsed.name}`
+        ? `New quote request — ${parsed.company || parsed.name}`
+        : `New contact request — ${parsed.name}${parsed.company ? ` (${parsed.company})` : ''}`
 
-    const rows = Object.entries(parsed)
-      .filter(([key, value]) => Boolean(value) && !['website'].includes(key))
+    const label = (key: string) => LABELS[key] ?? key.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase())
+    const display = (value: unknown) => (Array.isArray(value) ? value.join(', ') : String(value))
+    const order = Object.keys(LABELS)
+    const fields = Object.entries(parsed)
+      .filter(([key, value]) => !['website', 'formType'].includes(key) && (Array.isArray(value) ? value.length > 0 : Boolean(value)))
+      .sort(([a], [b]) => (order.indexOf(a) === -1 ? 99 : order.indexOf(a)) - (order.indexOf(b) === -1 ? 99 : order.indexOf(b)))
+
+    const rows = fields
       .map(
         ([key, value]) =>
-          `<tr><td style="padding:6px 10px;border-bottom:1px solid #eee"><b>${key}</b></td><td style="padding:6px 10px;border-bottom:1px solid #eee">${String(
-            value,
-          )}</td></tr>`,
+          `<tr><td style="padding:6px 10px;border-bottom:1px solid #eee"><b>${escapeHtml(label(key))}</b></td><td style="padding:6px 10px;border-bottom:1px solid #eee">${escapeHtml(
+            display(value),
+          ).replace(/\n/g, '<br/>')}</td></tr>`,
       )
       .join('')
 
     const html = `
       <div style="font-family:Inter,Arial,sans-serif">
-        <h2 style="margin:0 0 10px">${subject}</h2>
+        <h2 style="margin:0 0 10px">${escapeHtml(subject)}</h2>
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">${rows}</table>
-        <p style="color:#666;font-size:12px">Source: ${request.headers.get('referer') ?? 'unknown'}</p>
+        <p style="color:#666;font-size:12px">Source: ${escapeHtml(request.headers.get('referer') ?? 'unknown')}</p>
       </div>
     `
 
     // Plain-text version (improves deliverability for providers like Outlook/Hotmail)
-    const text = Object.entries(parsed)
-      .filter(([key, value]) => Boolean(value) && !['website'].includes(key))
-      .map(([key, value]) => `${key}: ${String(value)}`)
-      .join('\n')
+    const text = [subject, '', ...fields.map(([key, value]) => `${label(key)}: ${display(value)}`)].join('\n')
 
     // Allow comma-separated multiple recipients in EMAIL_TO
     const recipients = (process.env.EMAIL_TO || '')
@@ -101,8 +136,12 @@ export async function POST(request: Request) {
       .map(r => r.trim())
       .filter(Boolean)
 
-    if (resend) {
-      await resend.emails.send({
+    if (!resend) {
+      console.error('RESEND_API_KEY is not configured; form submission not delivered.')
+      return NextResponse.json({ ok: false, error: 'Email not configured' }, { status: 500 })
+    }
+    {
+      const { error: sendError } = await resend.emails.send({
         from: process.env.EMAIL_FROM as string,
         to: (recipients.length ? recipients : (process.env.EMAIL_TO as string)) as any,
         subject,
@@ -110,8 +149,10 @@ export async function POST(request: Request) {
         text,
         reply_to: parsed.email,
       })
-    } else {
-      console.warn('Resend API key is not configured; skipping email send.')
+      if (sendError) {
+        console.error('Resend error:', sendError)
+        return NextResponse.json({ ok: false, error: 'Email failed' }, { status: 502 })
+      }
     }
 
     // Persist to Supabase if envs are present
@@ -120,17 +161,17 @@ export async function POST(request: Request) {
         process.env.NEXT_PUBLIC_SUPABASE_URL,
         process.env.SUPABASE_SERVICE_ROLE,
       )
-      await sb.from('web_form_submissions').insert({
+      const { error: dbError } = await sb.from('web_form_submissions').insert({
         form_type: parsed.formType,
         payload: parsed,
       })
+      // Email already went out; a storage failure should not fail the submission.
+      if (dbError) console.error('Supabase insert failed:', dbError)
     }
 
     return NextResponse.json({ ok: true })
-  } catch (error: any) {
-    return NextResponse.json(
-      { ok: false, error: error?.message ?? 'Invalid payload' },
-      { status: 400 },
-    )
+  } catch (error) {
+    console.error('Form submission failed:', error)
+    return NextResponse.json({ ok: false, error: 'Server error' }, { status: 500 })
   }
 }

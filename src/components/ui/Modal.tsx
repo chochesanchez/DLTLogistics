@@ -1,28 +1,40 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import { CheckCircleIcon } from '@heroicons/react/24/solid'
 
 interface ModalProps {
   open: boolean
   title?: string
   children?: React.ReactNode
   onClose: () => void
+  closeLabel?: string
 }
 
-export default function Modal({ open, title, children, onClose }: ModalProps) {
+export default function Modal({ open, title, children, onClose, closeLabel = 'Close' }: ModalProps) {
+  const closeRef = useRef<HTMLButtonElement | null>(null)
+  useEffect(() => {
+    if (!open) return
+    document.body.style.overflow = 'hidden'
+    closeRef.current?.focus()
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open, onClose])
+
   if (!open) return null
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6">
-        {title && <h3 className="text-xl font-semibold mb-3">{title}</h3>}
-        <div>{children}</div>
-        <div className="mt-6 flex justify-end">
-          <button onClick={onClose} className="btn-primary">OK</button>
-        </div>
+    <div className="fixed inset-0 z-[100] grid place-items-center p-4">
+      <div className="absolute inset-0 bg-dlt-ink/60" onClick={onClose} />
+      <div role="dialog" aria-modal="true" aria-labelledby="dlt-modal-title" className="relative bg-white rounded-lg shadow-2xl max-w-md w-full p-7">
+        <CheckCircleIcon className="h-9 w-9 text-dlt-ink" aria-hidden />
+        {title && <h2 id="dlt-modal-title" className="mt-4 font-display text-3xl font-bold">{title}</h2>}
+        <div className="mt-2 text-dlt-muted leading-relaxed">{children}</div>
+        <button ref={closeRef} onClick={onClose} className="mt-6 btn-primary">{closeLabel}</button>
       </div>
     </div>
   )
 }
-
-
