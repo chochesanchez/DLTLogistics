@@ -2,10 +2,12 @@
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { TruckIcon } from '@heroicons/react/24/solid'
-import { FLOW } from '@/content/site'
+import { useI18n } from '@/i18n/I18nProvider'
 
 // The truck drives along the lane as you scroll through the section; each step lights up as it passes.
 export default function OrderFlow() {
+  const { t } = useI18n()
+  const FLOW = t.flow
   const ref = useRef<HTMLOListElement | null>(null)
   const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.8', 'end 0.55'] })

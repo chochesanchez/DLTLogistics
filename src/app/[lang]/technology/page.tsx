@@ -1,4 +1,7 @@
 import React from 'react'
+import { getDictionary } from '@/i18n/dictionaries'
+import Link from 'next/link'
+import { isLang, localePath } from '@/i18n/config'
 import {
   DevicePhoneMobileIcon,
   MapIcon,
@@ -77,10 +80,15 @@ const features = [
   }
 ]
 
-export default function TechnologyPage() {
+// Hidden page (not in navigation, blocked in robots.txt). Its claims are unconfirmed, so it is
+// shown in English only; the Spanish version displays a notice above it.
+export default async function TechnologyPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
+  const notice = isLang(lang) && lang === 'es' ? getDictionary(lang).technology.notice : null
   return (
     <div className="py-12 bg-white">
       <div className="container mx-auto px-4">
+        {notice && <p className="mb-10 rounded-md bg-dlt-paper p-4 text-dlt-muted">{notice}</p>}
         {/* Hero Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h1 className="text-4xl font-bold mb-6">VeloxGo™ Platform</h1>
@@ -130,20 +138,9 @@ export default function TechnologyPage() {
               to integrate VeloxGo™ with your existing systems.
             </p>
             <div className="space-x-4">
-              <a
-                href="/api-docs"
-                className="btn-primary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                API Documentation
-              </a>
-              <a
-                href="/contact"
-                className="btn-secondary"
-              >
+              <Link href={localePath(isLang(lang) ? lang : 'en', '/contact')} className="btn-secondary">
                 Request API Access
-              </a>
+              </Link>
             </div>
           </div>
         </div>

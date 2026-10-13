@@ -1,25 +1,28 @@
+'use client'
 import { TruckIcon, CheckIcon } from '@heroicons/react/24/solid'
+import { useI18n } from '@/i18n/I18nProvider'
 
 // Illustrative order: plays once on load (CSS only), then rests on "Delivered".
 const STOPS = [
-  { label: 'Picked up', time: '09:12', at: 0 },
-  { label: 'In transit', time: '11:40', at: 1 / 3 },
-  { label: 'Out for delivery', time: '13:55', at: 2 / 3 },
-  { label: 'Delivered', time: '14:37', at: 1 },
+  { time: '09:12', at: 0 },
+  { time: '11:40', at: 1 / 3 },
+  { time: '13:55', at: 2 / 3 },
+  { time: '14:37', at: 1 },
 ]
 const START = 0.6
 const DURATION = 4.2
 
 export default function DeliveryTracker() {
+  const { t } = useI18n()
   return (
     <div
       className="rounded-lg bg-white text-dlt-ink shadow-[0_24px_50px_-24px_rgba(0,0,0,0.35)] border border-dlt-line overflow-hidden"
       role="img"
-      aria-label="Example delivery: picked up at 9:12, in transit, out for delivery, delivered at 14:37 with proof of delivery."
+      aria-label={t.tracker.aria}
     >
       <div className="flex items-center justify-between px-4 sm:px-5 py-2 sm:py-3 bg-dlt-ink text-white">
-        <span className="font-display text-base sm:text-lg font-bold tracking-wide">Order DLT-48213</span>
-        <span className="text-xs sm:text-sm text-white/70">Apodaca to San Pedro</span>
+        <span className="font-display text-base sm:text-lg font-bold tracking-wide">{t.tracker.order}</span>
+        <span className="text-xs sm:text-sm text-white/70">{t.tracker.route}</span>
       </div>
 
       <div className="px-4 sm:px-7 pt-7 sm:pt-10 pb-4 sm:pb-6">
@@ -33,15 +36,15 @@ export default function DeliveryTracker() {
         </div>
 
         <ol className="mt-6 sm:mt-8 grid grid-cols-4 gap-1 sm:gap-2" aria-hidden>
-          {STOPS.map((s) => (
-            <li key={s.label} className="text-center">
+          {STOPS.map((s, i) => (
+            <li key={s.time} className="text-center">
               <span
                 className="tracker-stop mx-auto grid place-items-center h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 text-sm font-bold"
                 style={{ animationDelay: `${START + DURATION * s.at}s` }}
               >
                 <CheckIcon className="h-4 w-4" />
               </span>
-              <span className="block mt-1.5 sm:mt-2 text-[11px] sm:text-sm font-semibold leading-tight">{s.label}</span>
+              <span className="block mt-1.5 sm:mt-2 text-[11px] sm:text-sm font-semibold leading-tight">{t.tracker.stops[i]}</span>
               <span className="block text-[10px] sm:text-xs text-dlt-muted tabular-nums">{s.time}</span>
             </li>
           ))}
@@ -53,8 +56,8 @@ export default function DeliveryTracker() {
           <CheckIcon className="h-5 w-5" />
         </span>
         <span className="text-sm leading-snug">
-          <span className="font-semibold block">Proof of delivery captured</span>
-          <span className="text-dlt-muted">Signature and photo sent to you at 14:37</span>
+          <span className="font-semibold block">{t.tracker.pod}</span>
+          <span className="text-dlt-muted">{t.tracker.podText}</span>
         </span>
       </div>
     </div>

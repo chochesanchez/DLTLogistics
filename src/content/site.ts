@@ -1,4 +1,5 @@
-// Single source of truth for DLT's public facts, services and client logos.
+// Structural data for DLT's public site: images, slugs, numbers and client logos.
+// All visible text lives in src/i18n/dictionaries/{en,es}.ts.
 // Review any change here with management before publishing.
 
 export const COMPANY = {
@@ -7,87 +8,25 @@ export const COMPANY = {
   phoneHref: 'tel:+528119161086',
   email: 'jmsanchez@dasza.com',
   whatsapp: 'https://wa.me/5218119161086',
-  address: 'Dasza CEDIS campus, Apodaca, N.L.',
   daszaUrl: 'https://www.dasza.com',
+  mapsUrl: 'https://maps.google.com/?q=QR53%2BXP+Apodaca,+Nuevo+Le%C3%B3n',
 }
 
-// These figures were on the previous site and have no source in the company documents — confirm before keeping.
-export const KPIS: { value: string; label: string; count?: boolean }[] = [
-  { value: '97.9%', label: 'on-time delivery', count: true },
-  { value: '4.8/5', label: 'customer rating', count: true },
-  { value: 'Same day', label: 'delivery in the Monterrey metro area' },
+// KPI values, in the same order as `kpis` in the dictionaries.
+// 97.9% and 4.8/5 were on the previous site and have no source in the company documents — confirm before keeping.
+export const KPI_VALUES: { value: string | null; count: boolean }[] = [
+  { value: '97.9%', count: true },
+  { value: '4.8/5', count: true },
+  { value: null, count: false }, // "Same day" text comes from the dictionary
 ]
 
-// The order flow, start to finish — a real sequence.
-export const FLOW = [
-  { title: 'We receive your stock', text: 'Every inbound load is inspected, counted and registered before it’s put away.' },
-  { title: 'We store it', text: 'Racks or floor space, organized by product type, lot and location.' },
-  { title: 'We pick and pack orders', text: 'Orders are prepared to your packaging and labeling requirements.' },
-  { title: 'We deliver', text: 'Our own fleet delivers to homes, offices, stores and plants across the metro area.' },
-  { title: 'You get proof', text: 'Every delivery is tracked and closed with proof of delivery.' },
-]
+export type ServiceSlug = 'last-mile' | 'storage' | 'fulfillment' | 'retail'
 
-export type Service = {
-  slug: string
-  name: string
-  summary: string
-  image: string
-  features: { title: string; text: string }[]
-}
-
-export const SERVICES: Service[] = [
-  {
-    slug: 'last-mile',
-    name: 'Last-mile delivery',
-    summary: 'Same-day and next-day delivery for parcels up to 100 kg across Monterrey and its metropolitan area.',
-    image: '/images/site/parcel-handoff.jpg',
-    features: [
-      { title: 'Our own fleet', text: 'Local deliveries in Monterrey and the metro area with trained drivers and planned routes.' },
-      { title: 'Flexible delivery points', text: 'Homes, offices, pickup points or commercial areas — routes adapt to your customers.' },
-      { title: 'Real-time tracking', text: 'Full traceability from our warehouse to the final delivery.' },
-      { title: 'Same-day delivery', text: 'Fast delivery for local orders so your customers get them sooner.' },
-      { title: 'Returns and exchanges', text: 'We collect products from your customers for a smooth after-sales experience.' },
-    ],
-  },
-  {
-    slug: 'storage',
-    name: 'Storage',
-    summary: 'Racked and open storage that grows with your volume, with inventory you can check any time.',
-    image: '/images/site/warehouse-forklift.jpg',
-    features: [
-      { title: 'Space that scales', text: 'From industrial racks to open areas for palletized or high-volume cargo.' },
-      { title: 'Real-time inventory', text: 'Receipts, shipments, stock, lots, expiration dates and locations, reported on demand.' },
-      { title: 'Scheduled operations', text: 'Inspected, counted receipts and deliveries by calendar or on demand.' },
-      { title: 'Organized by product type', text: 'Raw materials, e-commerce, retail, kits, promotional material or spare parts.' },
-      { title: '24/7 security', text: 'Surveillance, restricted access and alarms for sensitive or high-value goods.' },
-    ],
-  },
-  {
-    slug: 'fulfillment',
-    name: 'Fulfillment',
-    summary: 'We receive, store, pick, pack and ship your e-commerce and B2B orders, and handle returns.',
-    image: '/images/site/parcels.jpg',
-    features: [
-      { title: 'Receiving and inventory', text: 'Standard processes for accurate receipt and full traceability.' },
-      { title: 'Order preparation', text: 'Orders assembled with custom packaging and promotional inserts.' },
-      { title: 'Storage close to your customers', text: 'Inventory kept where delivery times are shortest.' },
-      { title: 'Shipping options', text: 'Our own deliveries plus courier coordination across Mexico.' },
-      { title: 'Returns', text: 'Returns and exchanges processed quickly.' },
-    ],
-  },
-  {
-    slug: 'retail',
-    name: 'Retail distribution',
-    summary: 'Store and distribution-center deliveries that meet each retailer’s windows, labeling and packaging rules.',
-    image: '/images/site/warehouse-yellow.jpg',
-    features: [
-      { title: 'Retail-ready storage', text: 'Inventory organized per client, with lot control, expiration dates and labeling.' },
-      { title: 'Store and DC delivery', text: 'Deliveries to retail chains within their windows and requirements.' },
-      { title: 'Packaging and displays', text: 'Promotional kits, cases, displays and retailer-specific barcode labeling.' },
-      { title: 'Order follow-up', text: 'Proactive monitoring so commercial commitments are met.' },
-      { title: 'Performance reporting', text: 'Delivery performance, inventory levels and compliance metrics.' },
-    ],
-  },
+export const SERVICES: { slug: ServiceSlug; image: string }[] = [
+  { slug: 'last-mile', image: '/images/site/parcel-handoff.jpg' },
+  { slug: 'storage', image: '/images/site/warehouse-forklift.jpg' },
+  { slug: 'fulfillment', image: '/images/site/parcels.jpg' },
+  { slug: 'retail', image: '/images/site/warehouse-yellow.jpg' },
 ]
 
 // Client logos — same list and order as the original site.

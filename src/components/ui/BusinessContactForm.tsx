@@ -3,17 +3,14 @@
 import React, { useState } from 'react'
 import Modal from './Modal'
 import { PHONE_COUNTRIES, WHATSAPP_NUMBER } from '@/lib/phoneCountries'
-
-const solutions = [
-  'Storage & Distribution',
-  'Last Mile',
-  'Fulfillment / E‑Commerce',
-  'Transportation',
-  'Cross-Border',
-  'Other',
-]
+import { COMPANY } from '@/content/site'
+import { useI18n } from '@/i18n/I18nProvider'
+import { fmt } from '@/i18n/dictionaries'
 
 export default function BusinessContactForm() {
+  const { t } = useI18n()
+  const f = t.form
+  const solutions = f.solutions
   const [open, setOpen] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [selected, setSelected] = useState<string[]>([])
@@ -65,10 +62,10 @@ export default function BusinessContactForm() {
       // Keep the form filled and give the visitor a one-click way to still reach us.
       setFailedMessage(
         [
-          `Hello DLT Logistics, I'm ${name}${company ? ` from ${company}` : ''}.`,
-          selected.length ? `Interested in: ${selected.join(', ')}.` : '',
+          `${f.waHello} ${name}${company ? ` ${f.waFrom} ${company}` : ''}.`,
+          selected.length ? `${f.waInterested} ${selected.join(', ')}.` : '',
           message,
-          `Email: ${email} · Phone: ${phone}`,
+          fmt(f.waContact, { email, phone }),
         ].filter(Boolean).join('\n'),
       )
     }
@@ -81,35 +78,35 @@ export default function BusinessContactForm() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="bc-name" className="block text-sm font-medium text-gray-700 mb-1">Full name *</label>
+            <label htmlFor="bc-name" className="block text-sm font-medium text-gray-700 mb-1">{f.name} *</label>
             <input id="bc-name" name="name" required minLength={2} autoComplete="name" className="input-field" />
           </div>
           <div>
-            <label htmlFor="bc-email" className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+            <label htmlFor="bc-email" className="block text-sm font-medium text-gray-700 mb-1">{f.email} *</label>
             <input id="bc-email" type="email" name="email" required autoComplete="email" className="input-field" />
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="bc-phone" className="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
+            <label htmlFor="bc-phone" className="block text-sm font-medium text-gray-700 mb-1">{f.phone} *</label>
             <div className="flex gap-2">
-              <select name="phoneCountry" aria-label="Country code" defaultValue="MX" className="border border-gray-300 rounded-lg px-2 bg-white focus:ring-2 focus:ring-[#FFCC00]">
+              <select name="phoneCountry" aria-label={f.countryCode} defaultValue="MX" className="border border-gray-300 rounded-lg px-2 bg-white focus:ring-2 focus:ring-[#FFCC00]">
                 {PHONE_COUNTRIES.map((c) => (
-                  <option key={c.code} value={c.code}>{c.code === 'OTHER' ? 'Other' : `${c.code} ${c.dial}`}</option>
+                  <option key={c.code} value={c.code}>{c.code === 'OTHER' ? f.other : `${c.code} ${c.dial}`}</option>
                 ))}
               </select>
-              <input id="bc-phone" type="tel" name="phone" required minLength={7} autoComplete="tel-national" placeholder="81 1234 5678" className="input-field flex-1 min-w-0" />
+              <input id="bc-phone" type="tel" name="phone" required minLength={7} autoComplete="tel-national" placeholder={f.phonePh} className="input-field flex-1 min-w-0" />
             </div>
           </div>
           <div>
-            <label htmlFor="bc-company" className="block text-sm font-medium text-gray-700 mb-1">Company</label>
+            <label htmlFor="bc-company" className="block text-sm font-medium text-gray-700 mb-1">{f.company}</label>
             <input id="bc-company" name="company" autoComplete="organization" className="input-field" />
           </div>
         </div>
 
         <fieldset>
-          <legend className="block text-sm font-medium text-gray-700 mb-2">What do you need?</legend>
+          <legend className="block text-sm font-medium text-gray-700 mb-2">{f.need}</legend>
           <div className="flex flex-wrap gap-2">
             {solutions.map((s) => {
               const on = selected.includes(s)
@@ -129,14 +126,14 @@ export default function BusinessContactForm() {
         </fieldset>
 
         <div>
-          <label htmlFor="bc-message" className="block text-sm font-medium text-gray-700 mb-1">Message (optional)</label>
-          <textarea id="bc-message" name="message" rows={3} className="input-field" placeholder="Tell us briefly about your needs" />
+          <label htmlFor="bc-message" className="block text-sm font-medium text-gray-700 mb-1">{f.message}</label>
+          <textarea id="bc-message" name="message" rows={3} className="input-field" placeholder={f.messagePh} />
         </div>
 
         {failedMessage && (
           <div role="alert" className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
-            <p className="font-medium">We couldn’t send your message right now.</p>
-            <p className="mt-1">Your details are still here. Send them to us directly so we don’t miss you:</p>
+            <p className="font-medium">{f.failTitle}</p>
+            <p className="mt-1">{f.failText}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(failedMessage)}`}
@@ -144,23 +141,23 @@ export default function BusinessContactForm() {
                 rel="noopener noreferrer"
                 className="px-4 py-2 rounded-lg bg-[#25D366] text-black font-medium hover:brightness-95"
               >
-                Send via WhatsApp
+                {f.viaWhatsapp}
               </a>
               <a
-                href={`mailto:jmsanchez@dasza.com?subject=${encodeURIComponent('DLT contact request')}&body=${encodeURIComponent(failedMessage)}`}
+                href={`mailto:${COMPANY.email}?subject=${encodeURIComponent(f.emailSubject)}&body=${encodeURIComponent(failedMessage)}`}
                 className="px-4 py-2 rounded-lg border border-red-300 text-red-800 hover:bg-red-100"
               >
-                Send by email
+                {f.viaEmail}
               </a>
             </div>
           </div>
         )}
 
-        <button type="submit" className="w-full btn-primary disabled:opacity-60" disabled={submitting}>{submitting ? 'Sending…' : 'Send message'}</button>
+        <button type="submit" className="w-full btn-primary disabled:opacity-60" disabled={submitting}>{submitting ? f.sending : f.send}</button>
       </form>
 
-      <Modal open={open} onClose={() => setOpen(false)} title="Thank you!">
-        <p>Your message was sent. We will get back to you within one business day.</p>
+      <Modal open={open} onClose={() => setOpen(false)} title={f.sentTitle} closeLabel={t.common.close}>
+        <p>{f.sentText}</p>
       </Modal>
     </>
   )

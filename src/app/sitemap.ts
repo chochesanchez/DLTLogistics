@@ -1,17 +1,15 @@
 import type { MetadataRoute } from 'next'
+import { SERVICES } from '@/content/site'
+import { localePath } from '@/i18n/config'
 
 const BASE = 'https://dltlogistics.com.mx'
+const PATHS = ['/', '/about', '/services', ...SERVICES.map((s) => `/services/${s.slug}`), '/quote', '/contact']
+const url = (p: string) => `${BASE}${p === '/' ? '' : p}`
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    '',
-    '/about',
-    '/services',
-    '/services/last-mile',
-    '/services/storage',
-    '/services/retail',
-    '/services/fulfillment',
-    '/quote',
-    '/contact',
-  ].map((p) => ({ url: `${BASE}${p}`, lastModified: new Date() }))
+  return PATHS.map((p) => ({
+    url: url(localePath('en', p)),
+    lastModified: new Date(),
+    alternates: { languages: { en: url(localePath('en', p)), es: url(localePath('es', p)) } },
+  }))
 }
