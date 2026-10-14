@@ -117,10 +117,15 @@
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: none; }
 }
-.tracker-truck { animation: truck-drive 4.2s cubic-bezier(.55,.05,.35,1) 0.6s both; }
-.tracker-fill { transform-origin: left; animation: lane-fill 4.2s cubic-bezier(.55,.05,.35,1) 0.6s both; }
-.tracker-stop { animation: stop-on 0.3s ease-out both; }
-.tracker-reveal { animation: fade-in 0.4s ease-out both; }
+/* Resting state until the tracker scrolls into view (.tracker-run is added by DeliveryTracker) */
+.tracker-truck { left: 0%; }
+.tracker-fill { transform-origin: left; transform: scaleX(0); }
+.tracker-stop { background-color: #fff; color: #9AA0AC; border-color: #E1E4EA; }
+.tracker-reveal { opacity: 0; }
+.tracker-run .tracker-truck { animation: truck-drive 4.2s cubic-bezier(.55,.05,.35,1) 0.6s both; }
+.tracker-run .tracker-fill { animation: lane-fill 4.2s cubic-bezier(.55,.05,.35,1) 0.6s both; }
+.tracker-run .tracker-stop { animation: stop-on 0.3s ease-out both; }
+.tracker-run .tracker-reveal { animation: fade-in 0.4s ease-out both; }
 
 /* Lane markings used as a divider motif */
 .lane-dashes {
@@ -131,6 +136,8 @@
   html { scroll-behavior: auto; }
   .tracker-truck, .tracker-fill, .tracker-stop, .tracker-reveal { animation: none !important; }
   .tracker-truck { left: 100%; }
+  .tracker-fill { transform: none; }
+  .tracker-reveal { opacity: 1; }
   .tracker-stop { background-color: #3D424A; color: #FFCC00; border-color: #3D424A; }
 }
 

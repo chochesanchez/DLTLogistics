@@ -52,6 +52,10 @@ export const es: Dict = {
     heroTitle: 'De nuestras bodegas a la puerta de tu cliente.',
     heroText:
       'Almacenamos, surtimos, empacamos y entregamos para marcas y manufactureras en el área metropolitana de Monterrey, el mismo día o al día siguiente, con prueba de cada entrega.',
+    videoLabel: 'Vista aérea de un camión cruzando un puente carretero',
+    scrollHint: 'Desliza',
+    trackerTitle: 'Cada entrega, rastreada hasta la puerta',
+    trackerText: 'Ves cada pedido avanzar desde la recolección hasta la prueba de entrega, con la hora de cada paso.',
     servicesTitle: 'Lo que hacemos',
     servicesText: 'Usa un servicio o los cuatro. Tu inventario, pedidos y entregas en un solo lugar.',
     flowTitle: 'Así se mueve un pedido con DLT',

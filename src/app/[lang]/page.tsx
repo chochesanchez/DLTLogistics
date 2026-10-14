@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import BusinessContactForm from '@/components/ui/BusinessContactForm'
 import TextButton from '@/components/ui/TextButton'
 import DeliveryTracker from '@/components/home/DeliveryTracker'
+import VideoHero from '@/components/home/VideoHero'
 import LogoMarquee from '@/components/home/LogoMarquee'
 import ExportMap from '@/components/home/ExportMap'
 import OrderFlow from '@/components/home/OrderFlow'
@@ -23,25 +24,37 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-white overflow-hidden">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 pt-6 md:pt-16 pb-12 md:pb-20 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <div className="lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:pl-6">
-            <DeliveryTracker />
-          </div>
-          <div className="lg:col-span-6 lg:row-start-1">
-            <p className="text-dlt-muted font-medium">{t.home.identity}</p>
-            <h1 className="mt-3 font-display text-[3.1rem] leading-[0.92] sm:text-7xl lg:text-[5.4rem] font-extrabold tracking-tight">{t.home.heroTitle}</h1>
-            <p className="mt-6 text-lg md:text-xl leading-relaxed max-w-xl text-dlt-muted">{t.home.heroText}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href={href('/quote')} className="inline-flex items-center h-12 px-6 rounded-md bg-dlt-yellow text-dlt-ink font-semibold hover:bg-dlt-yellowDark transition-colors">
-                {t.common.getQuote}
-              </Link>
-              <Link href={href('/services')} className="inline-flex items-center h-12 px-6 rounded-md border-2 border-dlt-ink font-semibold hover:bg-dlt-ink hover:text-white transition-colors">
-                {t.common.seeServices}
-              </Link>
-            </div>
-          </div>
+      {/* Hero: looping road video pinned under the header */}
+      <VideoHero
+        desktop={{ mp4: '/videos/dlt-road-1080.mp4', webm: '/videos/dlt-road-1080.webm' }}
+        mobile={{ mp4: '/videos/dlt-road-720.mp4', webm: '/videos/dlt-road-720.webm' }}
+        poster="/videos/dlt-road-poster.jpg"
+        label={t.home.videoLabel}
+        scrollHint={t.home.scrollHint}
+      >
+        <p className="text-white/80 font-medium">{t.home.identity}</p>
+        <h1 className="mt-3 font-display text-[3.2rem] leading-[0.92] sm:text-7xl lg:text-[6rem] font-extrabold tracking-tight max-w-4xl">{t.home.heroTitle}</h1>
+        <p className="mt-6 text-lg md:text-xl leading-relaxed max-w-2xl text-white/85">{t.home.heroText}</p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link href={href('/quote')} className="inline-flex items-center h-12 px-6 rounded-md bg-dlt-yellow text-dlt-ink font-semibold hover:bg-dlt-yellowDark transition-colors">
+            {t.common.getQuote}
+          </Link>
+          <Link href={href('/services')} className="inline-flex items-center h-12 px-6 rounded-md border-2 border-white/70 text-white font-semibold backdrop-blur-sm hover:bg-white hover:text-dlt-ink transition-colors">
+            {t.common.seeServices}
+          </Link>
+        </div>
+      </VideoHero>
+
+      {/* Content layer: slides up over the pinned video */}
+      <div className="relative z-10 -mt-6 rounded-t-[28px] overflow-clip bg-white shadow-[0_-24px_48px_-12px_rgba(0,0,0,0.35)]">
+      {/* Live delivery tracker */}
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 pt-16 md:pt-24 pb-14 md:pb-20 grid lg:grid-cols-12 gap-10 items-center">
+        <div className="lg:col-span-5">
+          <h2 className="font-display text-5xl md:text-6xl font-bold leading-[0.95]">{t.home.trackerTitle}</h2>
+          <p className="mt-5 text-lg text-dlt-muted leading-relaxed max-w-md">{t.home.trackerText}</p>
+        </div>
+        <div className="lg:col-span-7 lg:pl-6">
+          <DeliveryTracker />
         </div>
       </section>
 
@@ -163,6 +176,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
         </div>
       </section>
+      </div>
     </>
   )
 }
