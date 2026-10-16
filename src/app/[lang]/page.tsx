@@ -26,9 +26,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     <>
       {/* Hero: looping road video pinned under the header */}
       <VideoHero
-        desktop={{ mp4: '/videos/dlt-road-1080.mp4', webm: '/videos/dlt-road-1080.webm' }}
-        mobile={{ mp4: '/videos/dlt-road-720.mp4', webm: '/videos/dlt-road-720.webm' }}
-        poster="/videos/dlt-road-poster.jpg"
+        desktop={{ mp4: '/videos/dlt-van-1080.mp4', webm: '/videos/dlt-van-1080.webm' }}
+        mobile={{ mp4: '/videos/dlt-van-720.mp4', webm: '/videos/dlt-van-720.webm' }}
+        poster="/videos/dlt-van-poster.jpg"
         label={t.home.videoLabel}
         scrollHint={t.home.scrollHint}
       >

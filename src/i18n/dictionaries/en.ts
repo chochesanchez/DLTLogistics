@@ -50,7 +50,7 @@ export const en = {
     heroTitle: 'From our shelves to your customer’s door.',
     heroText:
       'We store, pick, pack and deliver for brands and manufacturers across the Monterrey metro area — same-day or next-day, with proof on every delivery.',
-    videoLabel: 'Aerial view of a truck crossing a highway bridge',
+    videoLabel: 'Delivery van parked outside a house while the driver delivers an order',
     scrollHint: 'Scroll',
     trackerTitle: 'Every delivery, tracked to the door',
     trackerText: 'You see each order move from pickup to proof of delivery, with the time of every step.',
