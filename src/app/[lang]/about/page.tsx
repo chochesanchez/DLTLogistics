@@ -27,7 +27,7 @@ export default async function AboutPage({ params }: Props) {
       <PageIntro
         title={a.title}
         lead={a.lead}
-        image="/images/site/dlt-warehouse.jpg"
+        image="/images/site/docks-aerial.jpg"
         imageAlt={a.heroAlt}
         crumbs={[{ href: localePath(lang, '/'), label: t.common.home }]}
         crumbLabel={t.common.breadcrumb}

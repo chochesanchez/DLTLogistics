@@ -1,8 +1,10 @@
 'use client'
 import { TruckIcon, CheckIcon } from '@heroicons/react/24/solid'
+import { useInView } from 'framer-motion'
+import { useRef } from 'react'
 import { useI18n } from '@/i18n/I18nProvider'
 
-// Illustrative order: plays once on load (CSS only), then rests on "Delivered".
+// Illustrative order: plays once when it scrolls into view (CSS animation), then rests on "Delivered".
 const STOPS = [
   { time: '09:12', at: 0 },
   { time: '11:40', at: 1 / 3 },
@@ -14,9 +16,12 @@ const DURATION = 4.2
 
 export default function DeliveryTracker() {
   const { t } = useI18n()
+  const ref = useRef<HTMLDivElement | null>(null)
+  const inView = useInView(ref, { once: true, amount: 0.5 })
   return (
     <div
-      className="rounded-lg bg-white text-dlt-ink shadow-[0_24px_50px_-24px_rgba(0,0,0,0.35)] border border-dlt-line overflow-hidden"
+      ref={ref}
+      className={`${inView ? 'tracker-run ' : ''}rounded-lg bg-white text-dlt-ink shadow-[0_24px_50px_-24px_rgba(0,0,0,0.35)] border border-dlt-line overflow-hidden`}
       role="img"
       aria-label={t.tracker.aria}
     >

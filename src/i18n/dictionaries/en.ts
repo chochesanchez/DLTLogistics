@@ -4,7 +4,7 @@ export const en = {
     title: 'DLT Logistics | Storage, fulfillment and last-mile delivery in Monterrey',
     description:
       'DLT Logistics stores, picks, packs and delivers for brands and manufacturers across the Monterrey metro area, with same-day or next-day delivery. Part of the Dasza group.',
-    ogAlt: 'DLT Logistics warehouse in Apodaca, Nuevo León',
+    ogAlt: 'Warehouse floor with racked inventory ready for distribution',
   },
   nav: {
     services: 'Services',
@@ -50,6 +50,10 @@ export const en = {
     heroTitle: 'From our shelves to your customer’s door.',
     heroText:
       'We store, pick, pack and deliver for brands and manufacturers across the Monterrey metro area — same-day or next-day, with proof on every delivery.',
+    videoLabel: 'Delivery van parked outside a house while the driver delivers an order',
+    scrollHint: 'Scroll',
+    trackerTitle: 'Every delivery, tracked to the door',
+    trackerText: 'You see each order move from pickup to proof of delivery, with the time of every step.',
     servicesTitle: 'What we do',
     servicesText: 'Use one service or all four. Your inventory, orders and deliveries stay in one place.',
     flowTitle: 'How an order moves with DLT',
@@ -156,7 +160,7 @@ export const en = {
     metaDescription: 'DLT Logistics is the storage, distribution and last-mile arm of the Dasza group, serving brands and manufacturers in Monterrey.',
     title: 'An extension of your team',
     lead: 'Brands, retailers and manufacturers in México rely on DLT to handle their products, their orders and the information behind them.',
-    heroAlt: 'DLT Logistics warehouse in Apodaca, Nuevo León',
+    heroAlt: 'Aerial view of distribution warehouse docks',
     p1: 'We offer storage, fulfillment, retail distribution and last-mile delivery that adapt to your business and your part numbers. Our teams handle the day-to-day execution while giving your leadership the visibility needed to make decisions.',
     p2: 'We work with your current systems and data structures, so starting with DLT doesn’t mean changing how your company operates.',
     groupTitle: 'Part of the Dasza group',
