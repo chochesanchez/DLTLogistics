@@ -35,9 +35,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       siteName: 'DLT Logistics',
       locale: lang === 'es' ? 'es_MX' : 'en_US',
       type: 'website',
-      images: [{ url: '/images/site/dlt-warehouse.jpg', width: 1920, height: 1080, alt: t.meta.ogAlt }],
+      images: [{ url: '/images/site/truck-road.jpg', width: 2000, height: 1333, alt: t.meta.ogAlt }],
     },
-    twitter: { card: 'summary_large_image', title: t.meta.title, description: t.meta.description, images: ['/images/site/dlt-warehouse.jpg'] },
+    twitter: { card: 'summary_large_image', title: t.meta.title, description: t.meta.description, images: ['/images/site/truck-road.jpg'] },
     icons: { icon: '/favicon.png' },
   }
 }
