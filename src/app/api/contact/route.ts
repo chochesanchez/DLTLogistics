@@ -3,10 +3,12 @@ import { Resend } from 'resend'
 import { z } from 'zod'
 import { createClient } from '@supabase/supabase-js'
 import { locationFromHeaders } from '@/lib/geo'
+import { checkSubmission, clientIp, createRateLimit } from '@/lib/spam'
 
 // Lazily configure Resend so builds (e.g. CI) don't fail when the API key is missing
 const resendApiKey = process.env.RESEND_API_KEY
 const resend = resendApiKey ? new Resend(resendApiKey) : null
+const rateLimit = createRateLimit(10)
 
 const baseSchema = z.object({
   formType: z.enum(['contact', 'quote']),
@@ -16,6 +18,7 @@ const baseSchema = z.object({
   phone: z.string().optional(),
   message: z.string().optional(),
   website: z.string().optional(),
+  startedAt: z.union([z.number(), z.string()]).optional(),
   // Contact form fields
   lastName: z.string().optional(),
   postalCode: z.string().optional(),
@@ -84,8 +87,13 @@ async function readBodyAsObject(request: Request): Promise<Record<string, unknow
 }
 
 export async function POST(request: Request) {
+  if (!rateLimit(clientIp(request.headers))) return NextResponse.json({ ok: false, error: 'Too many requests' }, { status: 429 })
   try {
     const payload = await readBodyAsObject(request)
+    // Bots get a quiet success so they don't retry.
+    const check = checkSubmission(payload)
+    if (check === 'bot') return NextResponse.json({ ok: true })
+    if (check === 'invalid') return NextResponse.json({ ok: false, error: 'Invalid form data' }, { status: 400 })
     if (!payload.formType) payload.formType = 'contact'
     const result = quoteSchema.safeParse(payload)
     if (!result.success) {
@@ -94,9 +102,6 @@ export async function POST(request: Request) {
     }
     // Approximate location from the visitor's IP (set by Vercel), never from the client.
     const parsed = { ...result.data, location: locationFromHeaders(request.headers) }
-
-    // Honeypot: silently accept to avoid giving bots signal
-    if (parsed.website) return NextResponse.json({ ok: true })
 
     const subject =
       parsed.formType === 'quote'
@@ -107,7 +112,7 @@ export async function POST(request: Request) {
     const display = (value: unknown) => (Array.isArray(value) ? value.join(', ') : String(value))
     const order = Object.keys(LABELS)
     const fields = Object.entries(parsed)
-      .filter(([key, value]) => !['website', 'formType'].includes(key) && (Array.isArray(value) ? value.length > 0 : Boolean(value)))
+      .filter(([key, value]) => !['website', 'startedAt', 'formType'].includes(key) && (Array.isArray(value) ? value.length > 0 : Boolean(value)))
       .sort(([a], [b]) => (order.indexOf(a) === -1 ? 99 : order.indexOf(a)) - (order.indexOf(b) === -1 ? 99 : order.indexOf(b)))
 
     const rows = fields

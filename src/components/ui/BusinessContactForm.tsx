@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Modal from './Modal'
 import { PHONE_COUNTRIES, WHATSAPP_NUMBER } from '@/lib/phoneCountries'
 import { COMPANY } from '@/content/site'
@@ -15,6 +15,10 @@ export default function BusinessContactForm() {
   const [submitting, setSubmitting] = useState(false)
   const [selected, setSelected] = useState<string[]>([])
   const [failedMessage, setFailedMessage] = useState<string | null>(null)
+  const startedAt = useRef(0)
+  useEffect(() => {
+    startedAt.current = Date.now()
+  }, [])
   const toggle = (s: string) => setSelected((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]))
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -45,6 +49,8 @@ export default function BusinessContactForm() {
           company: company || undefined,
           message: message || undefined,
           solutions: selected,
+          website: String(fd.get('website') || ''),
+          startedAt: startedAt.current,
         }),
       })
       sent = res.ok
