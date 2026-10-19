@@ -1,127 +1,65 @@
 ![DLT Logistics Logo](public/images/DLT%20Logistics%20LOGO.png)
 
-# DLT Logistics Website
+# DLT Logistics — dltlogistics.com.mx
 
-**Live:** [dltlogistics.com.mx](http://dltlogistics.com.mx/)
-**Preview:** dltlogistics.vercel.app  
-**Hosting:** Vercel (Common Org scope)
+Website for **DLT Logistics**, the warehousing, fulfillment and last-mile delivery company of the Dasza group in Monterrey, México.
 
----
+Live at **https://dltlogistics.com.mx** (English) and **https://dltlogistics.com.mx/es** (Spanish).
 
-## Overview
+## Stack
 
-DLT Logistics’ public website serves as a marketing and lead capture platform, enabling users to:
+- [Next.js 15](https://nextjs.org) App Router, React 18, TypeScript
+- Tailwind CSS 3, Framer Motion
+- [Resend](https://resend.com) for form emails, [Zod](https://zod.dev) for validation
+- Hosted on Vercel; every push to `main` deploys production, other branches get preview URLs
 
-- Explore services (Last Mile, Storage, Retail, Fulfillment)
-- View trusted partners and industry leaders
-- Submit “Contact Us” or “Get Quote” forms
-- Reach support via WhatsApp
-
----
-
-## Features
-
-- **Sticky Navigation:** Prominent “Contact Us” button
-- **Hero Section:** Bottom-anchored image, KPIs (97.9%, 4.8/5, +20,000)
-- **Responsive Services Grid:** With cards for each service
-- **Trusted by Industry Leaders:** Seamless CSS marquee with partner logos
-- **WhatsApp Button:** Floating, direct link ([wa.link/5trkad](https://wa.link/5trkad))
-- **Accessible & SEO-Ready:** Semantic headings, alt text, OpenGraph/Twitter metadata
-
----
-
-## Pages
-
-- **Home:** `src/app/page.tsx`
-- **About:** `src/app/about/page.tsx`
-- **Services:** `src/app/services/`
-- **Quote:** `src/app/quote/page.tsx`, `src/app/quote/thank-you/page.tsx`
-- **Contact:** `src/app/contact/page.tsx`
-- **API (Email):** `src/app/api/contact/route.ts`
-
----
-
-## Forms & Email Pipeline
-
-- **Forms:** Contact & Quote forms submit to `/api/contact` (JSON)
-- **Validation:** Zod, honeypot field for spam
-- **Email:** Sent via Resend (HTML + text, reply-to submitter)
-- **Optional:** Persists to Supabase if envs present
-
----
-
-## Tech Stack
-
-- **Framework:** Next.js (App Router), React 18, TypeScript
-- **Styling:** Tailwind CSS
-- **Email:** Resend
-- **Persistence:** Supabase (optional)
-- **Tooling:** ESLint, Jest, ts-node
-- **CI/CD:** Vercel, GitHub Actions
-
----
-
-## Repository Structure
-
-- `src/app/` — Main pages, API routes, layout, global styles
-- `src/components/` — Shared UI (Header, Footer, Modal, BusinessContactForm, etc.)
-- `public/images/` — Web assets and partner logos
-- `.github/workflows/` — CI/CD workflows
-
----
-
-## Environment Variables
-
-Set these in Vercel Project Settings:
-
-- `RESEND_API_KEY` — Resend API key
-- `EMAIL_FROM` — Verified sender (e.g., forms@dltlogistics.com.mx)
-- `EMAIL_TO` — Destination email(s)
-- `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE` — (Optional) Supabase
-- `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` — (Optional) Google Maps
-
----
-
-## Development
+## Getting started
 
 ```bash
 npm install
-npm run dev         # Local dev server (http://localhost:3001)
-
-npm start
+npm run dev      # http://localhost:3001
 npm run lint
+npm run build
 ```
 
-**Deploy:**
+Node 20 or newer.
 
-```bash
-vercel --prod --yes --scope commonorg
+## Environment variables
+
+Set in Vercel → Project → Settings → Environment Variables (or `.env.local` for development). Without them the site still runs; forms answer with an error and show the WhatsApp / email fallback.
+
+| Variable | Used for |
+|---|---|
+| `RESEND_API_KEY` | Sending contact and quote emails |
+| `EMAIL_FROM` | Sender address (domain verified in Resend) |
+| `EMAIL_TO` | Comma-separated lead recipients |
+| `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE` | Optional: also store each submission in Supabase (`web_form_submissions`) |
+
+## Structure
+
+```
+src/
+  app/
+    [lang]/            pages; English has no prefix, Spanish lives under /es
+      quote/           quote form + thank-you page
+      services/[slug]/ one page per service
+    api/contact/       contact and quote form handler
+    robots.ts, sitemap.ts
+  components/          home sections, shared header/footer, UI
+  content/site.ts      company facts, KPIs, services, client logos
+  i18n/                locale config and EN/ES dictionaries (es is type-checked against en)
+  lib/                 bot filtering, location, phone countries
+  middleware.ts        locale routing (/en/* → /, everything else → English)
+public/
+  images/site/         page photography
+  images/partners/     client logos
+  videos/              home hero video
 ```
 
-Or use the [Vercel dashboard](https://vercel.com/docs/projects/project-dashboard).
+## Content
 
----
+Company facts, KPIs, services and client logos live in `src/content/site.ts`. Page copy lives in `src/i18n/dictionaries/en.ts` and `es.ts`. Any key added to `en.ts` has to be added to `es.ts` too, or the build fails.
 
-## Operations & Notes
+## Contributing
 
-- **Logs & Deploys:** Managed via Vercel dashboard
-- **Accessibility:** Color contrast, alt text, semantic HTML
-- **Security:** SPF/DKIM/DMARC required for email; honeypot for bots
-- **Footer “Technology” link:** Hidden until content is ready
-
----
-
-## Assets
-
-- Logos and images: `public/images/`
-- Partner logos: `public/images/partners/`
-
----
-
-## License
-
-This project is proprietary and not open source.
-
----
-
-For questions or support, use the Contact form or WhatsApp button on the site. - GitHub workflow .github/workflows/deploy.yml supports token-based “vercel deploy --prod”
+One issue per change, a `feat/…` / `fix/…` / `chore/…` branch, [conventional commits](https://www.conventionalcommits.org), and a pull request to `dev`. `dev` is reviewed before it is merged into `main`.
