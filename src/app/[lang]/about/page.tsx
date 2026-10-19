@@ -5,8 +5,9 @@ import PageIntro from '@/components/ui/PageIntro'
 import TextButton from '@/components/ui/TextButton'
 import ClientLogos from '@/components/home/ClientLogos'
 import { COMPANY } from '@/content/site'
-import { isLang, localePath, alternatesFor } from '@/i18n/config'
+import { isLang, localePath } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
+import { pageMetadata } from '@/lib/metadata'
 
 type Props = { params: Promise<{ lang: string }> }
 
@@ -14,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params
   if (!isLang(lang)) return {}
   const t = getDictionary(lang)
-  return { title: t.nav.about, description: t.about.metaDescription, alternates: alternatesFor(lang, '/about') }
+  return pageMetadata(lang, '/about', { title: t.nav.about, description: t.about.metaDescription })
 }
 
 export default async function AboutPage({ params }: Props) {

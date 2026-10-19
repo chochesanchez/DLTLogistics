@@ -3,8 +3,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import PageIntro from '@/components/ui/PageIntro'
 import { SERVICES } from '@/content/site'
-import { LOCALES, isLang, localePath, alternatesFor } from '@/i18n/config'
+import { LOCALES, isLang, localePath } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
+import { pageMetadata } from '@/lib/metadata'
 
 type Props = { params: Promise<{ lang: string; slug: string }> }
 
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = SERVICES.find((s) => s.slug === slug)
   if (!isLang(lang) || !service) return {}
   const copy = getDictionary(lang).services[service.slug]
-  return { title: copy.name, description: copy.summary, alternates: alternatesFor(lang, `/services/${service.slug}`), openGraph: { images: [{ url: service.image }] } }
+  return pageMetadata(lang, `/services/${service.slug}`, { title: copy.name, description: copy.summary, image: service.image })
 }
 
 export default async function ServicePage({ params }: Props) {
