@@ -3,8 +3,9 @@ import { notFound } from 'next/navigation'
 import PageIntro from '@/components/ui/PageIntro'
 import BusinessContactForm from '@/components/ui/BusinessContactForm'
 import { COMPANY } from '@/content/site'
-import { isLang, localePath, alternatesFor } from '@/i18n/config'
+import { isLang, localePath } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
+import { pageMetadata } from '@/lib/metadata'
 
 type Props = { params: Promise<{ lang: string }> }
 
@@ -12,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params
   if (!isLang(lang)) return {}
   const t = getDictionary(lang)
-  return { title: t.nav.contact, description: t.contactPage.description, alternates: alternatesFor(lang, '/contact') }
+  return pageMetadata(lang, '/contact', { title: t.nav.contact, description: t.contactPage.description })
 }
 
 export default async function ContactPage({ params }: Props) {

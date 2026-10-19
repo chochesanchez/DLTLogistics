@@ -5,9 +5,10 @@ import { Barlow, Barlow_Condensed } from 'next/font/google'
 import { Header } from '@/components/shared/Header'
 import { Footer } from '@/components/shared/Footer'
 import '../globals.css'
-import { LOCALES, isLang, alternatesFor } from '@/i18n/config'
+import { LOCALES, isLang } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 import { I18nProvider } from '@/i18n/I18nProvider'
+import { pageMetadata } from '@/lib/metadata'
 import { COMPANY } from '@/content/site'
 
 const barlow = Barlow({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-barlow', display: 'swap' })
@@ -24,20 +25,14 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params
   if (!isLang(lang)) return {}
   const t = getDictionary(lang)
+  const home = pageMetadata(lang, '/', { description: t.meta.description })
   return {
     metadataBase: new URL(SITE_URL),
     title: { default: t.meta.title, template: '%s | DLT Logistics' },
     description: t.meta.description,
-    alternates: alternatesFor(lang, '/'),
-    openGraph: {
-      title: t.meta.title,
-      description: t.meta.description,
-      siteName: 'DLT Logistics',
-      locale: lang === 'es' ? 'es_MX' : 'en_US',
-      type: 'website',
-      images: [{ url: '/images/site/truck-road.jpg', width: 2000, height: 1333, alt: t.meta.ogAlt }],
-    },
-    twitter: { card: 'summary_large_image', title: t.meta.title, description: t.meta.description, images: ['/images/site/truck-road.jpg'] },
+    alternates: home.alternates,
+    openGraph: { ...home.openGraph, title: t.meta.title, images: [{ url: '/images/site/truck-road.jpg', width: 2000, height: 1333, alt: t.meta.ogAlt }] },
+    twitter: { ...home.twitter, title: t.meta.title },
     icons: { icon: '/favicon.png' },
   }
 }

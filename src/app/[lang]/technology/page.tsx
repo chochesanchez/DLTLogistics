@@ -1,4 +1,6 @@
 import React from 'react'
+import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/metadata'
 import { getDictionary } from '@/i18n/dictionaries'
 import Link from 'next/link'
 import { isLang, localePath } from '@/i18n/config'
@@ -80,7 +82,14 @@ const features = [
   }
 ]
 
-// Hidden page (not in navigation, blocked in robots.txt). Its claims are unconfirmed, so it is
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  if (!isLang(lang)) return {}
+  // Its claims are unconfirmed: keep it out of search results until they are.
+  return { ...pageMetadata(lang, '/technology', { title: 'Technology' }), robots: { index: false, follow: false } }
+}
+
+// Hidden page (not in navigation, noindex). Its claims are unconfirmed, so it is
 // shown in English only; the Spanish version displays a notice above it.
 export default async function TechnologyPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params

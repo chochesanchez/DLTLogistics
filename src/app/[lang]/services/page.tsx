@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import PageIntro from '@/components/ui/PageIntro'
 import { SERVICES } from '@/content/site'
-import { isLang, localePath, alternatesFor } from '@/i18n/config'
+import { isLang, localePath } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
+import { pageMetadata } from '@/lib/metadata'
 
 type Props = { params: Promise<{ lang: string }> }
 
@@ -13,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params
   if (!isLang(lang)) return {}
   const t = getDictionary(lang)
-  return { title: t.servicesPage.title, description: t.servicesPage.description, alternates: alternatesFor(lang, '/services') }
+  return pageMetadata(lang, '/services', { title: t.servicesPage.title, description: t.servicesPage.description })
 }
 
 export default async function ServicesPage({ params }: Props) {
