@@ -5,7 +5,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline'
 
 type Sources = { mp4: string; webm: string }
 
-// Full-screen looping video that stays pinned under the header while the page content
+// Full-screen looping video that stays pinned (the home header fades in over it) while the page content
 // (rendered after this component, with a higher z-index) slides up over it.
 export default function VideoHero({
   desktop,
@@ -51,7 +51,7 @@ export default function VideoHero({
   }, [reduce])
 
   return (
-    <div ref={frame} className="sticky top-16 md:top-[72px] z-0 h-[calc(100svh-4rem)] md:h-[calc(100svh-72px)] overflow-hidden bg-dlt-ink">
+    <div ref={frame} className="sticky top-0 z-0 h-[100svh] overflow-hidden bg-dlt-ink">
       <video
         ref={video}
         className="absolute inset-0 h-full w-full object-cover"

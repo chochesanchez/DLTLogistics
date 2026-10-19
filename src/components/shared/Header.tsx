@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -15,6 +16,10 @@ export function Header() {
   const current = basePath(pathname)
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  // Home opens full screen on the video: the header fades in as you scroll and fades out back at the top.
+  const overlay = current === '/'
+  const [faded, setFaded] = useState(overlay)
+  const [focused, setFocused] = useState(false)
 
   const NAV = [
     { path: '/services', label: t.nav.services },
@@ -23,12 +28,20 @@ export function Header() {
     { path: '/contact', label: t.nav.contact },
   ]
 
+  const { scrollY } = useScroll()
+  const fade = useTransform(scrollY, [80, 280], [0, 1])
+  const drift = useTransform(scrollY, [80, 280], [-12, 0])
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    setScrolled(y > 8)
+    setFaded(overlay && y < 100)
+  })
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    setScrolled(window.scrollY > 8)
+    setFaded(overlay && window.scrollY < 100)
+  }, [overlay])
+
+  // The menu or keyboard focus always shows the header in full.
+  const forced = !overlay || open || focused
 
   useEffect(() => setOpen(false), [pathname])
 
@@ -42,7 +55,12 @@ export function Header() {
   const isActive = (p: string) => !p.includes('#') && current.startsWith(p)
 
   return (
-    <header className={`sticky top-0 z-50 bg-white transition-shadow ${scrolled ? 'shadow-[0_1px_0_#E1E4EA]' : ''}`}>
+    <motion.header
+      onFocus={() => setFocused(true)}
+      onBlur={(e) => !e.currentTarget.contains(e.relatedTarget as Node) && setFocused(false)}
+      style={forced ? undefined : { opacity: fade, y: drift }}
+      className={`${overlay ? 'fixed inset-x-0' : 'sticky'} top-0 z-50 bg-white ${faded && !forced ? 'pointer-events-none' : ''} ${scrolled ? 'shadow-[0_1px_0_#E1E4EA]' : ''}`}
+    >
       <div className="mx-auto max-w-7xl px-5 sm:px-8 h-16 md:h-[72px] flex items-center justify-between gap-6">
         <Link href={href('/')} className="flex items-center gap-2 shrink-0" aria-label={t.nav.home}>
           <Image src="/images/DLT Logistics LOGO.png" alt="" width={34} height={34} className="h-8 w-8 object-contain" priority />
@@ -96,6 +114,6 @@ export function Header() {
           </div>
         </nav>
       </div>
-    </header>
+    </motion.header>
   )
 }
