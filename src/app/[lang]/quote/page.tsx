@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useI18n } from '@/i18n/I18nProvider'
 
@@ -29,6 +29,10 @@ export default function QuotePage() {
   const q = t.quote
   const router = useRouter()
   const [sending, setSending] = useState(false)
+  const startedAt = useRef(0)
+  useEffect(() => {
+    startedAt.current = Date.now()
+  }, [])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -49,6 +53,8 @@ export default function QuotePage() {
       storage: fd.get('storage'),
       transportConditions: fd.getAll('transportConditions'),
       additionalServices: fd.getAll('additionalServices'),
+      website: String(fd.get('website') || ''),
+      startedAt: startedAt.current,
     }
     setSending(true)
     try {
@@ -74,6 +80,8 @@ export default function QuotePage() {
           <p className="text-dlt-muted text-lg mb-10 max-w-2xl">{q.lead}</p>
 
           <form onSubmit={handleSubmit} className="space-y-10">
+            {/* Honeypot — hidden from people, filled by bots */}
+            <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden />
             <div className="space-y-5">
               <Section title={q.sections.basic} />
               <Field id="name" label={q.name} required />
