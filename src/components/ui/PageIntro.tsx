@@ -20,10 +20,12 @@ export default function PageIntro({
   imageAlt?: string
   children?: React.ReactNode
 }) {
+  // Phones: title, then photo, then lead text. Desktop: title and lead on the left, photo on the right.
+  const col = image ? 'lg:col-span-6' : 'max-w-3xl'
   return (
     <section className="bg-white">
-      <div className={`mx-auto max-w-7xl px-5 sm:px-8 py-12 md:py-16 grid gap-10 items-center ${image ? 'lg:grid-cols-12' : ''}`}>
-        <div className={image ? 'lg:col-span-6' : 'max-w-3xl'}>
+      <div className={`mx-auto max-w-7xl px-5 sm:px-8 py-12 md:py-16 grid gap-y-8 ${image ? 'lg:grid-cols-12 lg:gap-x-10 lg:gap-y-5' : ''}`}>
+        <div className={`${col} ${image ? 'lg:self-end' : ''}`}>
           {crumbs && (
             <nav aria-label={crumbLabel} className="mb-5 text-sm text-dlt-muted">
               <ol className="flex flex-wrap gap-2">
@@ -37,12 +39,16 @@ export default function PageIntro({
             </nav>
           )}
           <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.92] tracking-tight">{title}</h1>
-          {lead && <p className="mt-5 text-lg md:text-xl leading-relaxed max-w-xl text-dlt-muted">{lead}</p>}
-          {children}
         </div>
         {image && (
-          <div className="lg:col-span-6 relative aspect-[16/10] rounded-lg overflow-hidden">
+          <div className="lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:row-span-2 lg:self-center relative aspect-[16/10] rounded-lg overflow-hidden">
             <Image src={image} alt={imageAlt} fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          </div>
+        )}
+        {(lead || children) && (
+          <div className={`${col} ${image ? 'lg:self-start' : ''} -mt-3 lg:mt-0`}>
+            {lead && <p className="text-lg md:text-xl leading-relaxed max-w-xl text-dlt-muted">{lead}</p>}
+            {children}
           </div>
         )}
       </div>

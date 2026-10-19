@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Modal from './Modal'
+import PhoneCountrySelect from './PhoneCountrySelect'
 import { PHONE_COUNTRIES, WHATSAPP_NUMBER } from '@/lib/phoneCountries'
 import { COMPANY } from '@/content/site'
 import { useI18n } from '@/i18n/I18nProvider'
@@ -97,11 +98,7 @@ export default function BusinessContactForm() {
           <div>
             <label htmlFor="bc-phone" className="block text-sm font-medium text-gray-700 mb-1">{f.phone} *</label>
             <div className="flex gap-2">
-              <select name="phoneCountry" aria-label={f.countryCode} defaultValue="MX" className="border border-gray-300 rounded-lg px-2 bg-white focus:ring-2 focus:ring-[#FFCC00]">
-                {PHONE_COUNTRIES.map((c) => (
-                  <option key={c.code} value={c.code}>{c.code === 'OTHER' ? f.other : `${c.code} ${c.dial}`}</option>
-                ))}
-              </select>
+              <PhoneCountrySelect name="phoneCountry" defaultValue="MX" label={f.countryCode} otherLabel={f.other} />
               <input id="bc-phone" type="tel" name="phone" required minLength={7} autoComplete="tel-national" placeholder={f.phonePh} className="input-field flex-1 min-w-0" />
             </div>
           </div>
